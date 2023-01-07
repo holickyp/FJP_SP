@@ -1,5 +1,7 @@
 package constructions;
 
+import constructions.method.Method;
+
 import java.util.List;
 
 public class Block {

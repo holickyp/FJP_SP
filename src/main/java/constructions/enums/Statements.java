@@ -9,5 +9,6 @@ public enum Statements {
     SWITCH,
     ASSIGNMENT,
     EXPRESSION,
-    METHOD_CALL;
+    METHOD_CALL,
+    DECLARATION
 }
