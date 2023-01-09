@@ -2,8 +2,9 @@ package constructions.statements;
 
 import constructions.Block;
 import constructions.Expression;
+import constructions.Statement;
 
-public class WhileStatement {
+public class WhileStatement extends Statement {
     private final Expression expression;
     private final Block body;
 

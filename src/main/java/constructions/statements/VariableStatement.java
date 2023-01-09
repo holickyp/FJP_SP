@@ -1,11 +1,15 @@
 package constructions.statements;
 
+import constructions.Statement;
 import constructions.Variable;
+import constructions.enums.Statements;
 
-public class DeclarationStatement {
+public class VariableStatement extends Statement {
+
     private final Variable variable;
 
-    public DeclarationStatement(Variable variable) {
+    public VariableStatement(Variable variable) {
+        super(Statements.DECLARATION);
         this.variable = variable;
     }
 

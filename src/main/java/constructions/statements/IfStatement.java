@@ -2,8 +2,9 @@ package constructions.statements;
 
 import constructions.Block;
 import constructions.Expression;
+import constructions.Statement;
 
-public class IfStatement {
+public class IfStatement extends Statement {
     private final Expression expression;
     private final Block bodyIf;
     private final Block bodyElse;

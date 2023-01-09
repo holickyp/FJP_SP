@@ -19,4 +19,36 @@ public class Expression {
         this.operators = operators;
         this.returnType = returnType;
     }
+
+    public ExpressionTypes getType() {
+        return type;
+    }
+
+    public void setType(ExpressionTypes type) {
+        this.type = type;
+    }
+
+    public VariableValues getValues() {
+        return values;
+    }
+
+    public void setValues(VariableValues values) {
+        this.values = values;
+    }
+
+    public List<Operators> getOperators() {
+        return operators;
+    }
+
+    public void setOperators(List<Operators> operators) {
+        this.operators = operators;
+    }
+
+    public VariableTypes getReturnType() {
+        return returnType;
+    }
+
+    public void setReturnType(VariableTypes returnType) {
+        this.returnType = returnType;
+    }
 }
