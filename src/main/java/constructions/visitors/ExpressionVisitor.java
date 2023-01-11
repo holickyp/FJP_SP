@@ -12,8 +12,7 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
      * @return
      */
     @Override
-    //TODO right method from GentleJAvaParser
-    public Expression visitExpressionList(GentleJavaParser.ExpressionContext ctx)
+    public Expression visitParExpression(GentleJavaParser.ParExpressionContext ctx)
     {
         //        Expression expression = new ExpressionBodyVisitor().visit(ctx.expressionBody());
         Expression expression = new ExpressionBodyVisitor().visit(ctx);

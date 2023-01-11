@@ -24,9 +24,9 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     @Override
     public IfStatement visitIfStatement(GentleJavaParser.IfStatementContext ctx)
     {
-        // TODO exception
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
        // Exception exception = new E
+
         expression.setReturnType(VariableType.BOOLEAN);
 
         Statement statementIf = ctx.braceStatement(0).statement() != null ? new StatementVisitor().visit(ctx.braceStatement(0).statement()) : null;
@@ -89,7 +89,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new DoWhileStatement(ctx.start.getLine(), body, expression);
     }
 
-    //TODO
+    /*TODO switch List <SwitchBlockStatementGroupContext> ma list<BlockStatementContext>
     @Override
     public SwitchStatement visitSwitchStatement(GentleJavaParser.SwitchStatementContext ctx)
     {
@@ -125,7 +125,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         }
 
         return new StatementSwitch(expression, switchBlockHashMap, defaultBlock, ctx.start.getLine());
-    }
+    } */
 
     /**
      * Visitor for StatementRepeat()

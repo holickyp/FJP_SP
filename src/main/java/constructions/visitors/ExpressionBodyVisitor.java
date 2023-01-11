@@ -2,6 +2,7 @@ package constructions.visitors;
 
 
 import com.sun.tools.javac.jvm.Gen;
+import com.sun.tools.javac.resources.ct;
 import constructions.enums.Operator;
 import constructions.enums.PostfixType;
 import constructions.enums.VariableType;
@@ -9,6 +10,8 @@ import constructions.expressions.*;
 import constructions.method.MethodCall;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
+
+import java.util.List;
 
 
 public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
@@ -82,7 +85,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
         if (ctx.possibleValues().NUMBER() != null)
         {
             int dimension = 1;
-            if (ctx.possibleValues(). != null && ctx.possibleValues().decimalSymbol().getText().equals("-"))
+            // TODO not sure if this gonna work
+            if (ctx.possibleValues().NUMBER() != null && ctx.possibleValues().NUMBER().getText().equals("-"))
             {
                 dimension = -1;
             }
@@ -135,13 +139,16 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
      * @return Expression
      */
     @Override
-    public Expression visitMethodCallExpression(GentleJavaParser.MethodCallExpressionContext ctx)
+    public Expression visitMethodCall(GentleJavaParser.MethodCallContext ctx)
     {
-        MethodCall methodCall = new MethodCallVisitor().visit(ctx.methodCall());
 
-        return new MethodCallExpression( ctx.start.getLine(), methodCall);
+        // TODO should there be method like in methodvisitor?
+        List<Expression> expressions = (List<Expression>) ctx.expressionList();
+
+        return new MethodCallExpression( ctx.start.getLine(), ctx.identifier().getText(), expressions);
     }
 
+   /* TODO not sure if they are needed
     @Override
     public Expression visitPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) {
 
@@ -151,6 +158,7 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
         return new PostfixExpression(ctx.start.getLine(), ex, type);
     }
 
+    @Override
     public Expression visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) {
 
 
@@ -159,6 +167,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
         PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
         return new PrefixExpression(ctx.start.getLine(),);
     }
+    */
+
 
 
 }

@@ -1,21 +1,22 @@
 package constructions.statements;
 
 import constructions.enums.StatementType;
+import constructions.expressions.Expression;
 
 public class IfStatement extends Statement{
-    private Exception exception;
+    private Expression expression;
     private Statement ifStatement;
     private Statement elseStatement;
 
-    public IfStatement(Exception exception, Statement ifStatement, Statement elseStatement, int line) {
+    public IfStatement(Expression expression, Statement ifStatement, Statement elseStatement, int line) {
         super(StatementType.IF, line);
-        this.exception = exception;
+        this.expression = expression;
         this.ifStatement = ifStatement;
         this.elseStatement = elseStatement;
     }
 
-    public Exception getException() {
-        return exception;
+    public Expression getExpression() {
+        return expression;
     }
 
     public Statement getIfStatement() {
