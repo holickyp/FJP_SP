@@ -25,8 +25,7 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     {
         Expression left = this.visit(ctx.expression(0));
         Expression right = this.visit(ctx.expression(1));
-        //TODO get plus or minus operator
-        Operator operator = Operator.valueOf(ctx..getText());
+        Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new PlusMinusExpression(ctx.start.getLine(),left, operator, right);
     }
@@ -52,8 +51,7 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     {
         Expression left = this.visit(ctx.expression(0));
         Expression right = this.visit(ctx.expression(1));
-        //TODO find operator
-        Operator operator = Operator.valueOf(ctx.op.getText());
+        Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new RelationalExpression(ctx.start.getLine(), left, operator, right);
     }
@@ -111,8 +109,7 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     {
         Expression left = this.visit(ctx.expression(0));
         Expression right = this.visit(ctx.expression(1));
-        //TODO
-        Operator operator = Operator.getSymbol(ctx.op.getText());
+        Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new LogicalExpression( ctx.start.getLine(),left, operator,right);
     }
@@ -127,8 +124,7 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     {
         Expression left = this.visit(ctx.expression(0));
         Expression right = this.visit(ctx.expression(1));
-        //TODO
-        Operator operator = Operator.valueOf(ctx.op.getText());
+        Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new MulDivModExpression(ctx.start.getLine(), left,  operator, right);
     }
@@ -149,13 +145,18 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     @Override
     public Expression visitPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) {
 
-        Expression ex = ctx.expression();
-        PostfixType type = ctx.postfix.getType();
-        return new PostfixExpression(ctx.start.getLine(), );
+        //TODO
+        Expression ex = ExpressionVisitor.visit(ctx.expression());
+        PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
+        return new PostfixExpression(ctx.start.getLine(), ex, type);
     }
 
     public Expression visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) {
 
+
+        //TODO
+       Expression ex = ExpressionVisitor.visit(ctx.expression());
+        PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
         return new PrefixExpression(ctx.start.getLine(),);
     }
 

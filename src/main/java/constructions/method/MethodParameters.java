@@ -5,19 +5,19 @@ import constructions.enums.VariableType;
 import java.util.List;
 
 public class MethodParameters {
-    private List<VariableType> type;
-    private List<String> name;
+    private VariableType type;
+    private String name;
 
-    public MethodParameters(List<VariableType> type, List<String> name) {
+    public MethodParameters(VariableType type, String name) {
         this.type = type;
         this.name = name;
     }
 
-    public List<VariableType> getType() {
+    public VariableType getType() {
         return type;
     }
 
-    public List<String> getName() {
+    public String getName() {
         return name;
     }
 }

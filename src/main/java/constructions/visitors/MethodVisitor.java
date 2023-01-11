@@ -3,6 +3,7 @@ package constructions.visitors;
 
 import constructions.BlockStatement;
 import constructions.enums.ReturnType;
+import constructions.enums.VariableType;
 import constructions.expressions.Expression;
 import constructions.method.Method;
 import constructions.method.MethodParameters;
@@ -32,7 +33,7 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 
         String identifier = ctx.identifier().getText() + this.METHOD_SYMBOL;
 
-        List<MethodParameters> parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList());
+        List<MethodParameters> parameters = this.parseMethodParameters(ctx);
 
         BlockStatement body = ctx.methodBody().blockBody() != null ? new BlockBodyVisitor().visit(ctx.methodBody().blockBody()) : null;
 
@@ -52,18 +53,18 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
      * @param methodParameterContext list of parameters context
      * @return
      */
-    private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.Meth> methodParameterContext)
+    private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.MethodDeclarationContext> methodParameterContext)
     {
-        List<MethodDeclarationParameter> methodDeclarationParameters = new ArrayList<>();
-        MethodDeclarationParameter methodDeclarationParameter;
+        List<MethodParameters> methodDeclarationParameters = new ArrayList<>();
+        MethodParameters methodDeclarationParameter;
 
-        for (SimpleJavaParser.MethodParameterContext method : methodParameterContext)
+        for (GentleJavaParser.MethodDeclarationContext method : methodParameterContext)
         {
-            EVariableType type = EVariableType.valueOf(method.possibleTypes().getText().toUpperCase());
+            VariableType type = VariableType.valueOf(method.typeTypeOrVoid().getText().toUpperCase());
 
             String identifier = method.identifier().getText();
 
-            methodDeclarationParameter = new MethodDeclarationParameter(type,identifier);
+            methodDeclarationParameter = new MethodParameters(type,identifier);
 
             methodDeclarationParameters.add(methodDeclarationParameter);
         }

@@ -3,13 +3,18 @@ package constructions.visitors;
 import compilator.object.expression.Expression;
 import compilator.object.method.MethodCall;
 import compilator.object.method.MethodCallParameter;
+import constructions.method.MethodCall;
+import constructions.method.MethodCallParameter;
+import constructions.method.MethodParameters;
 import generate.SimpleJavaBaseVisitor;
 import generate.SimpleJavaParser;
+import generated.GentleJavaBaseVisitor;
+import generated.GentleJavaParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodCallVisitor extends SimpleJavaBaseVisitor<MethodCall>
+public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
 {
     /**
      * Indication of method
@@ -22,10 +27,10 @@ public class MethodCallVisitor extends SimpleJavaBaseVisitor<MethodCall>
      * @return
      */
     @Override
-    public MethodCall visitMethodCall(SimpleJavaParser.MethodCallContext ctx)
+    public MethodCall visitMethodCall(GentleJavaParser.MethodCallContext ctx)
     {
         String identifier = ctx.identifier().getText() + this.METHOD_SYMBOL;
-        List<MethodCallParameter> methodCallParameters = this.parseMethodCallParameters(ctx.methodCallParameter());
+        List<MethodParameters> methodCallParameters = this.parseMethodCallParameters(ctx.);
 
         return new MethodCall(identifier, methodCallParameters, ctx.start.getLine());
     }
@@ -35,7 +40,8 @@ public class MethodCallVisitor extends SimpleJavaBaseVisitor<MethodCall>
      * @param methodCallParameterContextsList methodCallParameterContext
      * @return
      */
-    private List<MethodCallParameter> parseMethodCallParameters(List<SimpleJavaParser.MethodCallParameterContext> methodCallParameterContextsList)
+    //TODO je v gentlejavaparser nejaky parametercontext nebo je misot nej expressionlist?
+    private List<MethodCallParameter> parseMethodCallParameters(List<GentleJavaParser.CALL> methodCallParameterContextsList)
     {
         List<MethodCallParameter> methodCallParameters = new ArrayList<>();
         MethodCallParameter methodCallParameter;
