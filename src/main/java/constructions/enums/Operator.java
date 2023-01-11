@@ -1,21 +1,22 @@
 package constructions.enums;
 
 public enum Operator {
-    MULTIPLICATION("*"),
-    DIVISION("/"),
-    MODULO("%"),
-    PLUS("+"),
-    MINUS("-"),
-    LOWER_EQUAL_THAN("<="),
-    GRATER_EQUAL_THAN(">="),
-    LOWER_THAN("<"),
-    GRATER_THAN(">"),
-    EQUALS("=="),
-    NOT_EQUALS("!="),
-    AND("&&"),
-    OR("||");
+    MULTIPLICATION("*", 1),
+    DIVISION("/", 2),
+    MODULO("%", 3),
+    PLUS("+", 4),
+    MINUS("-", 5 ),
+    LOWER_EQUAL_THAN("<=", 6),
+    GRATER_EQUAL_THAN(">=", 7),
+    LOWER_THAN("<", 8),
+    GRATER_THAN(">", 9),
+    EQUALS("==", 10),
+    NOT_EQUALS("!=", 11),
+    AND("&&", 12),
+    OR("||", 13);
 
     private String op;
+    private int code;
 
     Operator(String op)
     {
@@ -30,5 +31,18 @@ public enum Operator {
             }
         }
         return null;
+    }
+
+    Operator(String op, int code) {
+        this.op = op;
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

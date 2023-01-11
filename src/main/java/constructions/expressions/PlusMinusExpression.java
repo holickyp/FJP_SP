@@ -26,4 +26,17 @@ public class PlusMinusExpression extends Expression{
     public Expression getRightExpression() {
         return rightExpression;
     }
+
+    public int getOperatorCode()
+    {
+        switch (this.getOperator())
+        {
+            case PLUS:
+                return Operator.PLUS.getCode();
+            case MINUS:
+                return Operator.MINUS.getCode();
+        }
+
+        return -1;
+    }
 }

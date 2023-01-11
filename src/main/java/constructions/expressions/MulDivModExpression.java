@@ -23,6 +23,21 @@ public class MulDivModExpression extends Expression {
         return operator;
     }
 
+    public int getOperatorCode()
+    {
+        switch (this.getOperator())
+        {
+            case MULTIPLICATION:
+                return Operator.MULTIPLICATION.getCode();
+            case DIVISION:
+                return Operator.DIVISION.getCode();
+            case MODULO:
+                return Operator.MODULO.getCode();
+        }
+
+        return -1;
+    }
+
     public Expression getRightExpression() {
         return rightExpression;
     }
