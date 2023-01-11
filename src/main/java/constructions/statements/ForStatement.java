@@ -1,28 +1,23 @@
 package constructions.statements;
 
-import constructions.Block;
-import constructions.Expression;
-import constructions.Statement;
+import constructions.enums.StatementType;
+import constructions.forControl.ControlFor;
 
 public class ForStatement extends Statement {
-    private final String controlVariable;
-    private final Expression condition;
-    private final Expression action;
+    private ControlFor controlFor;
+    private Statement statement;
 
-    private  Block body;
-
-    public ForStatement(String controlVariable, Expression condition, Expression action, Block body) {
-        this.controlVariable = controlVariable;
-        this.condition = condition;
-        this.action = action;
-        this.body = body;
+    public ForStatement(int line, ControlFor controlFor, Statement statement) {
+        super(StatementType.FOR, line);
+        this.controlFor = controlFor;
+        this.statement = statement;
     }
 
-    public Block getBody() {
-        return body;
+    public ControlFor getControlFor() {
+        return controlFor;
     }
 
-    public void setBody(Block body) {
-        this.body = body;
+    public Statement getStatement() {
+        return statement;
     }
 }

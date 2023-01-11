@@ -3,12 +3,12 @@ package constructions.statements;
 import constructions.enums.StatementType;
 import constructions.expressions.Expression;
 
-public class RepeatStatement extends Statement {
+public class DoWhileStatement extends Statement {
     private Statement statement;
     private Expression expression;
 
-    public RepeatStatement(int line, Statement statement, Expression expression) {
-        super(StatementType.REPEAT, line);
+    public DoWhileStatement(int line, Statement statement, Expression expression) {
+        super(StatementType.DO_WHILE, line);
         this.statement = statement;
         this.expression = expression;
     }

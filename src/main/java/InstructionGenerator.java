@@ -1,7 +1,5 @@
 import constructions.Program;
 
-import java.util.List;
-
 public class InstructionGenerator {
     private Program program;
 

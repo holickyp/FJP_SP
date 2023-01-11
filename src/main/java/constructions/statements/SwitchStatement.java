@@ -1,17 +1,32 @@
 package constructions.statements;
 
-import constructions.Block;
-import constructions.Expression;
+import constructions.enums.StatementType;
+import constructions.expressions.Expression;
 
-public class SwitchStatement {
-    private final Expression expression;
+import java.util.HashMap;
 
-    private final int identifier;
-    private final Block body;
+public class SwitchStatement extends Statement {
+    private Expression expression;
 
-    public SwitchStatement(Expression expression, int identifier, Block body) {
+    private HashMap<Integer, SwitchBlock> cases;
+    private SwitchBlock defaultCase;
+
+    public SwitchStatement(int line, Expression expression, HashMap<Integer, SwitchBlock> cases, SwitchBlock defaultCase) {
+        super(StatementType.SWITCH, line);
         this.expression = expression;
-        this.identifier = identifier;
-        this.body = body;
+        this.cases = cases;
+        this.defaultCase = defaultCase;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
+    public HashMap<Integer, SwitchBlock> getCases() {
+        return cases;
+    }
+
+    public SwitchBlock getDefaultCase() {
+        return defaultCase;
     }
 }

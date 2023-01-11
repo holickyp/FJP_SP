@@ -1,15 +1,23 @@
 package constructions.statements;
 
-import constructions.Block;
-import constructions.Expression;
-import constructions.Statement;
+import constructions.enums.StatementType;
+import constructions.expressions.Expression;
 
-public class WhileStatement extends Statement {
-    private final Expression expression;
-    private final Block body;
+public class WhileStatement extends Statement{
+    private Expression expression;
+    private Statement statement;
 
-    public WhileStatement(Expression expression, Block body) {
+    public WhileStatement(int line, Expression expression, Statement statement) {
+        super(StatementType.WHILE, line);
         this.expression = expression;
-        this.body = body;
+        this.statement = statement;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
+    public Statement getStatement() {
+        return statement;
     }
 }

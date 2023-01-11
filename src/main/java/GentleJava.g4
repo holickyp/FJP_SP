@@ -34,7 +34,9 @@ MULTIPLICATION  : '*' ;
 DIVISION   : '/' ;
 MODULO   : '%' ;
 PLUS  : '+' ;
+INCREMENT : '++' ;
 MINUS : '-' ;
+DECREMENT : '--' ;
 GRATER_THAN    : '>' ;
 GRATER_EQUAL_THAN    : '>=' ;
 LOWER_THAN    : '<' ;
@@ -60,165 +62,160 @@ COMMA:                  ',';
 
 /* ------ Literals ------ */
 
-fragment DIGIT : [0-9]+ ;
-fragment LOWECASE : [a-z] ;
-fragment UPPERCASE : [A-Z] ;
-WORD  : (LOWECASE | UPPERCASE | '_')+ ;
-NUMBER : DIGIT;
+fragment DIGIT : [0-9] ;
+fragment LETTER
+    : [a-zA-Z$_] // these are the "java letters" below 0x7F
+    | ~[\u0000-\u007F\uD800-\uDBFF] // covers all characters above 0x7F which are not a surrogate
+    | [\uD800-\uDBFF] [\uDC00-\uDFFF] // covers UTF-16 surrogate pairs encodings for U+10000 to U+10FFFF
+    ;
+fragment LETTER_OR_DIGIT
+    : LETTER
+    | DIGIT
+    ;
+NUMBER : DIGIT+;
+IDENTIFIER : LETTER LETTER_OR_DIGIT*;
 WHITESPACE : [ \r\t\n]+ -> skip ;
 LINE_COMMENT : '//' ~[\r\n]* -> skip;
 
+
 /* -------------- parser rules -------------- */
-methodReturnType
-  : INT
-  | BOOLEAN
-  | VOID
-  ;
+identifier
+    : IDENTIFIER
+    ;
+
+typeTypeOrVoid
+    : typeType
+    | VOID
+    ;
+
+typeType
+    : INT
+    | BOOLEAN
+    ;
 
 booleanValue
   : TRUE
   | FALSE
   ;
 
-possibleTypes
-  : INT
-  | BOOLEAN
-  ;
-
-numberTypeSymbol
-  : PLUS
-  | MINUS
-  ;
-
-identifier
-  : WORD (WORD | NUMBER)*
-  ;
-
 possibleValues
-  : numberTypeSymbol? NUMBER
+  : (PLUS | MINUS)? NUMBER
   | booleanValue
   ;
 
-numberVariable
-  : VARIABLE_KEYWORD INT identifier (paralelDeclaration)* ASSIGN numberTypeSymbol? numberValue
-  ;
-
-
-numberValue
-  : numberTypeSymbol? NUMBER
-  | methodCall
-  | identifier
-  | expressionBody
-  ;
-
-boolVariable
-  : VARIABLE_KEYWORD BOOLEAN identifier (paralelDeclaration)* ASSIGN boolValue
-  ;
-
-boolValue
-  : booleanValue
-  | methodCall
-  | identifier
-  | expressionBody
-  ;
-
-localVariableDeclaration
-  : (numberVariable | boolVariable) SEMICOLON
-  ;
-
-constVariableDeclaration
-  : CONST localVariableDeclaration
-  ;
-
-variableDeclaration
-  : (localVariableDeclaration | constVariableDeclaration)
-  ;
-
-paralelDeclaration
-  : ASSIGN identifier
-  ;
-
-
-variableAssigment
-  : identifier ASSIGN expressionBody SEMICOLON
-  ;
+variableModifier
+    : CONST
+    ;
 
 program
   : block
   ;
 
 block
-  : LEFT_BRACE blockStatement? RIGHT_BRACE
-  ;
-
-body
-  : LEFT_BRACE blockBody? RIGHT_BRACE
-  ;
+    : LEFT_BRACE blockStatement* RIGHT_BRACE
+    ;
 
 blockStatement
-  : (statement
-  | methodDeclaration)+
-  ;
+    : localVariableDeclaration SEMICOLON
+    | methodDeclaration
+    | statement
+    ;
 
-blockBody
-  : (statement)+
-  ;
-
-statement
-  : IF expression body (ELSE body)?                                 #statementIf
-  | FOR forControl body                                             #statementFor
-  | WHILE expression body                                           #statementWhile
-  | DO body WHILE expression                                        #statementDo
-  | SWITCH expression LEFT_BRACE switchBlockStatement* RIGHT_BRACE  #statementSwitch
-  | REPEAT body UNTIL expression                                    #statementRepeat
-  | methodCall SEMICOLON                                            #statementMethodCall
-  | variableAssigment                                               #statementAssigment
-  | variableDeclaration                                             #statementVariableDeclaration
-  ;
-
-expression
-  : LEFT_PARENTHESES expressionBody RIGHT_PARENTHESES
-  ;
-
-expressionBody
-  : possibleValues                                                          #exprPossibleValue
-  | identifier                                                              #exprIdentifier
-  | methodCall                                                              #exprMethodCall
-  | expressionBody op=(MULTIPLICATION | DIVISION | MODULO) expressionBody                     #exprMultipli
-  | expressionBody op=(PLUS | MINUS) expressionBody                         #exprAdditive
-  | expressionBody op=(GRATER_THAN | GRATER_EQUAL_THAN | LOWER_THAN | LOWER_EQUAL_THAN | EQUALS | NOT_EQUALS) expressionBody    #exprRelational
-  | expressionBody op=(AND | OR) expressionBody                             #exprLogical
-  | LEFT_PARENTHESES expressionBody RIGHT_PARENTHESES                                            #exprPar
-  | NEGATION expressionBody                                                 #exprNeg
-  | MINUS expressionBody                                                    #exprMinus
-  | PLUS expressionBody                                                     #exprPlus
-  ;
-
-forControl
-  : LEFT_PARENTHESES identifier ASSIGN numberTypeSymbol? expressionBody '...' numberTypeSymbol? expressionBody RIGHT_PARENTHESES
-  ;
-
-switchBlockStatement
-  : CASE NUMBER COLON body
-  | DEFAULT COLON body
-  ;
+localVariableDeclaration
+    : variableModifier? typeType (identifier (ASSIGN identifier)* ASSIGN expression | variableDeclarators)
+    ;
 
 methodDeclaration
-  : FUNCTION_KEYWORD methodReturnType identifier LEFT_PARENTHESES (methodParameter (COMMA methodParameter)*)? RIGHT_PARENTHESES methodBody
-  ;
+    : typeTypeOrVoid identifier formalParameters methodBody
+    ;
 
-methodParameter
-  : possibleTypes identifier
-  ;
+formalParameters
+    : LEFT_PARENTHESES formalParameterList RIGHT_PARENTHESES
+    ;
+
+formalParameterList
+    : formalParameter (COMMA formalParameter)*
+    ;
+
+formalParameter
+    : typeType variableDeclaratorId
+    ;
+
+variableDeclarators
+    : variableDeclarator
+    ;
+
+variableDeclarator
+    : variableDeclaratorId (ASSIGN variableInitializer)?
+    ;
+
+variableDeclaratorId
+    : identifier
+    ;
+
+variableInitializer
+    : expression
+    ;
 
 methodBody
-  : LEFT_BRACE blockBody? (RETURN expressionBody SEMICOLON)? RIGHT_BRACE
-  ;
+    : block
+    | SEMICOLON
+    ;
+
+statement
+    : blockLabel=block                                                                      #blockLabelStatement
+    | IF parExpression braceStatement (ELSE braceStatement)?                                #ifStatement
+    | FOR LEFT_PARENTHESES forControl RIGHT_PARENTHESES braceStatement                      #forStatement
+    | WHILE parExpression braceStatement                                                    #whileStatement
+    | DO braceStatement WHILE parExpression SEMICOLON                                       #doWhileStatement
+    | SWITCH parExpression LEFT_BRACE switchBlockStatementGroup* switchLabel* RIGHT_BRACE   #switchStatement
+    | REPEAT braceStatement UNTIL parExpression SEMICOLON                                   #repeatStatement
+    ;
+
+braceStatement
+    : LEFT_BRACE statement RIGHT_BRACE
+    ;
+
+parExpression
+    : LEFT_PARENTHESES expression RIGHT_PARENTHESES
+    ;
+
+expressionList
+    : expression (COMMA expression)*
+    ;
+
+expression
+    : possibleValues                                                                                #possibleValueExpression
+    | identifier                                                                                    #identifierExpression
+    | methodCall                                                                                    #methodCallExpression
+    | expression postfix=(INCREMENT | DECREMENT)                                                    #postfixExpression
+    | prefix=(NEGATION|PLUS|MINUS|INCREMENT|DECREMENT) expression                                   #prefixExpression
+    | expression bop=(MULTIPLICATION|DIVISION|MODULO) expression                                    #mulDivModExpression
+    | expression bop=(PLUS|MINUS) expression                                                        #plusMinusExpression
+    | expression bop=(LOWER_EQUAL_THAN| GRATER_EQUAL_THAN | LOWER_THAN | GRATER_THAN) expression    #relationalExpression
+    | expression bop=(EQUALS | NOT_EQUALS) expression                                               #compareExpression
+    | expression bop=(AND | OR) expression                                                          #logicalExpression
+    | LEFT_PARENTHESES expression RIGHT_PARENTHESES                                                 #parenthesesExpression
+    ;
+
+forControl
+    : forInit? SEMICOLON expression? SEMICOLON forUpdate=expressionList?
+    ;
+
+forInit
+    : localVariableDeclaration
+    | expressionList
+    ;
+
+switchBlockStatementGroup
+    : switchLabel+ blockStatement+
+    ;
+
+switchLabel
+    : CASE NUMBER COLON
+    | DEFAULT COLON
+    ;
 
 methodCall
-  : identifier LEFT_PARENTHESES (methodCallParameter (COMMA methodCallParameter)*)? RIGHT_PARENTHESES
-  ;
-
-methodCallParameter
-  : expressionBody
-  ;
+    : identifier LEFT_PARENTHESES expressionList? RIGHT_PARENTHESES
+    ;

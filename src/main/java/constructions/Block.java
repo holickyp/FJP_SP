@@ -1,15 +1,15 @@
 package constructions;
 
-import constructions.method.Method;
-
 import java.util.List;
 
 public class Block {
+    private List<BlockStatement> blockStatements;
 
-    private List<Statement> statements;
-    // names of declared variables
-    private List<String> statementNames;
-    private List<Method> methods;
+    public Block(List<BlockStatement> blockStatements) {
+        this.blockStatements = blockStatements;
+    }
 
-
+    public List<BlockStatement> getBlockStatements() {
+        return blockStatements;
+    }
 }

@@ -1,67 +1,42 @@
 package constructions.method;
 
 import constructions.Block;
-import constructions.Expression;
-import constructions.enums.MethodReturnTypes;
-
-import java.util.List;
+import constructions.enums.ReturnType;
 
 public class Method {
-    private  String methodName;
-    private  MethodReturnTypes returnType;
-    private  List<MethodParameters> methodParameters;
-    private  Block methodBody;
-    private  Expression returnValue;
+    private ReturnType returnType;
+    private String name;
+    private MethodParameters methodParameters;
+    private Block block;
 
-    public Method(String methodName) {
-        this.methodName = methodName;
-    }
+    /** line of method head */
+    private int line;
 
-    public Method(String methodName, MethodReturnTypes returnType, List<MethodParameters> methodParameters, Block methodBody, Expression returnValue) {
-        this.methodName = methodName;
+    public Method(ReturnType returnType, String name, MethodParameters methodParameters, Block block, int line) {
         this.returnType = returnType;
+        this.name = name;
         this.methodParameters = methodParameters;
-        this.methodBody = methodBody;
-        this.returnValue = returnValue;
+        this.block = block;
+        this.line = line;
     }
 
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public MethodReturnTypes getReturnType() {
+    public ReturnType getReturnType() {
         return returnType;
     }
 
-    public void setReturnType(MethodReturnTypes returnType) {
-        this.returnType = returnType;
+    public String getName() {
+        return name;
     }
 
-    public List<MethodParameters> getMethodParameters() {
+    public MethodParameters getMethodParameters() {
         return methodParameters;
     }
 
-    public void setMethodParameters(List<MethodParameters> methodParameters) {
-        this.methodParameters = methodParameters;
+    public Block getBlock() {
+        return block;
     }
 
-    public Block getMethodBody() {
-        return methodBody;
-    }
-
-    public void setMethodBody(Block methodBody) {
-        this.methodBody = methodBody;
-    }
-
-    public Expression getReturnValue() {
-        return returnValue;
-    }
-
-    public void setReturnValue(Expression returnValue) {
-        this.returnValue = returnValue;
+    public int getLine() {
+        return line;
     }
 }

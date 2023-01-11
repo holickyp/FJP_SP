@@ -1,54 +1,31 @@
 package constructions.method;
 
-import constructions.enums.MethodReturnTypes;
+import constructions.expressions.Expression;
+import constructions.statements.Statement;
 
 import java.util.List;
 
 public class MethodCall {
+    private String identifier;
+    private List<Expression> parameters;
 
-    private  String methodName;
-    private MethodReturnTypes returnType;
-    private List<MethodCallParameters> methodParameters;
+    private int line;
 
-    public MethodCall(String identifier)
-    {
-        this.methodName = identifier;
+    public MethodCall(String identifier, List<Expression> parameters, int line) {
+        this.identifier = identifier;
+        this.parameters = parameters;
+        this.line = line;
     }
 
-    public MethodCall(String identifier, List<MethodCallParameters> parameters)
-    {
-        this.methodName = identifier;
-        this.methodParameters = parameters;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public MethodCall(String identifier, MethodReturnTypes expectedReturnType)
-    {
-        this.methodName = identifier;
-        this.returnType = expectedReturnType;
-
+    public List<Expression> getParameters() {
+        return parameters;
     }
 
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public MethodReturnTypes getReturnType() {
-        return returnType;
-    }
-
-    public void setReturnType(MethodReturnTypes returnType) {
-        this.returnType = returnType;
-    }
-
-    public List<MethodCallParameters> getMethodParameters() {
-        return methodParameters;
-    }
-
-    public void setMethodParameters(List<MethodCallParameters> methodParameters) {
-        this.methodParameters = methodParameters;
+    public int getLine() {
+        return line;
     }
 }
