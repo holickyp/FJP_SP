@@ -13,7 +13,7 @@ public enum Operator {
     EQUALS("=="),
     NOT_EQUALS("!="),
     AND("&&"),
-    OR("||")
+    OR("||");
 
     private String op;
 

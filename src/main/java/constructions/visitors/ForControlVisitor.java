@@ -1,9 +1,15 @@
 package constructions.visitors;
 
 
+import constructions.enums.ReturnType;
+import constructions.enums.VariableType;
+import constructions.expressions.Expression;
 import constructions.forControl.ControlFor;
+import constructions.forControl.InitFor;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
+
+import java.util.List;
 
 public class ForControlVisitor extends GentleJavaBaseVisitor<ControlFor>
 {
@@ -12,17 +18,21 @@ public class ForControlVisitor extends GentleJavaBaseVisitor<ControlFor>
      * @param ctx forControl context
      * @return
      */
+    //TODO check forControl
     @Override
     public ControlFor visitForControl(GentleJavaParser.ForControlContext ctx)
     {
-        String identifier = ctx.identifier().getText();
+        // TODO for what is initFor coudlnt be identifier enough?
 
-        Expression from = new ExpressionBodyVisitor().visit(ctx.expressionBody(0));
-        from.setExpectedReturnType(EVariableType.INT);
+       // InitFor initFor = new InitFor(ctx.forInit().localVariableDeclaration());
+        InitFor initFor = new InitFor();
 
-        Expression to = new ExpressionBodyVisitor().visit(ctx.expressionBody(1));
-        to.setExpectedReturnType(EVariableType.INT);
+        List<Expression> updateFor = (List<Expression>) ctx.expressionList();
 
-        return new ControlFor(identifier, from, to);
+
+        Expression expression = new ExpressionBodyVisitor().visit(ctx.expression());
+        expression.setReturnType(VariableType.INT);
+
+        return new ControlFor(initFor, expression, updateFor);
     }
 }

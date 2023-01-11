@@ -1,6 +1,7 @@
 package constructions.visitors;
 
 
+import constructions.Block;
 import constructions.BlockStatement;
 import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
@@ -28,24 +29,25 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
     @Override
     public Method visitMethodDeclaration(GentleJavaParser.MethodDeclarationContext ctx)
     {
-        //TODO
-        ReturnType returnType = ctx.typeTypeOrVoid();
+
+        ReturnType returnType = ReturnType.valueOf(ctx.typeTypeOrVoid().getText().toUpperCase());
 
         String identifier = ctx.identifier().getText() + this.METHOD_SYMBOL;
 
-        List<MethodParameters> parameters = this.parseMethodParameters(ctx);
+        List<MethodParameters> parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
 
-        BlockStatement body = ctx.methodBody().blockBody() != null ? new BlockBodyVisitor().visit(ctx.methodBody().blockBody()) : null;
+        Block body = ctx.methodBody().block() != null ? new BlockVisitor().visit(ctx.methodBody().block()) : null;
 
         Expression returnValue =  null;
 
-        if (ctx.methodBody().expressionBody() != null)
+        // TODO we dont need to know return value?
+       /* if (ctx.methodBody().expressionBody() != null)
         {
             returnValue = new ExpressionBodyVisitor().visit(ctx.methodBody().expressionBody());
             returnValue.setExpectedReturnType(returnType == EMethodReturnType.INT ? EVariableType.INT : EVariableType.BOOLEAN);
-        }
+        }*/
 
-        return new Method(returnType, identifier, parameters, body, returnValue, ctx.start.getLine());
+        return new Method(returnType, identifier, parameters, body, ctx.start.getLine());
     }
 
     /**
@@ -53,16 +55,16 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
      * @param methodParameterContext list of parameters context
      * @return
      */
-    private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.MethodDeclarationContext> methodParameterContext)
+    private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.FormalParameterContext> methodParameterContext)
     {
         List<MethodParameters> methodDeclarationParameters = new ArrayList<>();
         MethodParameters methodDeclarationParameter;
 
-        for (GentleJavaParser.MethodDeclarationContext method : methodParameterContext)
+        for (GentleJavaParser.FormalParameterContext method : methodParameterContext)
         {
-            VariableType type = VariableType.valueOf(method.typeTypeOrVoid().getText().toUpperCase());
+            VariableType type = VariableType.valueOf(method.typeType().getText().toUpperCase());
 
-            String identifier = method.identifier().getText();
+            String identifier = method.variableDeclaratorId().identifier().getText();
 
             methodDeclarationParameter = new MethodParameters(type,identifier);
 

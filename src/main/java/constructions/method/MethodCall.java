@@ -8,11 +8,11 @@ import java.util.List;
 
 public class MethodCall {
     private String identifier;
-    private List<Expression> parameters;
+    private List<MethodCallParameter> parameters;
     private ReturnType returnType;
     private int line;
 
-    public MethodCall(String identifier, List<Expression> parameters, int line) {
+    public MethodCall(String identifier, List<MethodCallParameter> parameters, int line) {
         this.identifier = identifier;
         this.parameters = parameters;
         this.line = line;
@@ -30,7 +30,7 @@ public class MethodCall {
         return identifier;
     }
 
-    public List<Expression> getParameters() {
+    public List<MethodCallParameter> getParameters() {
         return parameters;
     }
 

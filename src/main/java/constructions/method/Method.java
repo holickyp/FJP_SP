@@ -3,16 +3,18 @@ package constructions.method;
 import constructions.Block;
 import constructions.enums.ReturnType;
 
+import java.util.List;
+
 public class Method {
     private ReturnType returnType;
     private String name;
-    private MethodParameters methodParameters;
+    private List<MethodParameters> methodParameters;
     private Block block;
 
     /** line of method head */
     private int line;
 
-    public Method(ReturnType returnType, String name, MethodParameters methodParameters, Block block, int line) {
+    public Method(ReturnType returnType, String name, List<MethodParameters> methodParameters, Block block, int line) {
         this.returnType = returnType;
         this.name = name;
         this.methodParameters = methodParameters;
@@ -28,7 +30,7 @@ public class Method {
         return name;
     }
 
-    public MethodParameters getMethodParameters() {
+    public List<MethodParameters> getMethodParameters() {
         return methodParameters;
     }
 
