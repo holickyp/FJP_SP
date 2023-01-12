@@ -12,10 +12,6 @@ import java.util.List;
 
 public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
 {
-    /**
-     * Indication of method
-     */
-    private final String METHOD_SYMBOL = "()";
 
     /**
      * Visitor for MethodCall()
@@ -23,9 +19,12 @@ public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
      * @return
      */
     @Override
-    public MethodCall visitMethodCall(GentleJavaParser.MethodCallContext ctx)
-    {
-        String identifier = ctx.identifier().getText() + this.METHOD_SYMBOL;
+    public MethodCall visitMethodCall(GentleJavaParser.MethodCallContext ctx) {
+        /**
+         * Indication of method
+         */
+        String METHOD_SYMBOL = "()";
+        String identifier = ctx.identifier().getText() + METHOD_SYMBOL;
         List<MethodCallParameter> methodCallParameters = this.parseMethodCallParameters(ctx.expressionList().expression());
 
         return new MethodCall(identifier, methodCallParameters, ctx.start.getLine());
@@ -36,8 +35,7 @@ public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
      * @param methodCallParameterContextsList methodCallParameterContext
      * @return
      */
-    private List<MethodCallParameter> parseMethodCallParameters(List<GentleJavaParser.ExpressionContext> methodCallParameterContextsList)
-    {
+    private List<MethodCallParameter> parseMethodCallParameters(List<GentleJavaParser.ExpressionContext> methodCallParameterContextsList) {
         List<MethodCallParameter> methodCallParameters = new ArrayList<>();
         MethodCallParameter methodCallParameter;
 
@@ -53,6 +51,4 @@ public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
 
         return methodCallParameters;
     }
-
-
 }

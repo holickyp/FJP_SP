@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 public class SwitchStatement extends Statement {
     private Expression expression;
-
     private HashMap<Integer, SwitchBlock> cases;
     private SwitchBlock defaultCase;
 

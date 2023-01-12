@@ -15,8 +15,7 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
     public Expression visitParExpression(GentleJavaParser.ParExpressionContext ctx)
     {
         //        Expression expression = new ExpressionBodyVisitor().visit(ctx.expressionBody());
-        Expression expression = new ExpressionBodyVisitor().visit(ctx);
 
-        return expression;
+        return new ExpressionBodyVisitor().visit(ctx);
     }
 }

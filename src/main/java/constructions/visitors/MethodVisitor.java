@@ -16,10 +16,6 @@ import java.util.List;
 
 public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 {
-    /**
-     * Indication of method
-     */
-    private final String METHOD_SYMBOL = "()";
 
     /**
      * Visitor for MethodDeclaration()
@@ -27,12 +23,15 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
      * @return
      */
     @Override
-    public Method visitMethodDeclaration(GentleJavaParser.MethodDeclarationContext ctx)
-    {
+    public Method visitMethodDeclaration(GentleJavaParser.MethodDeclarationContext ctx) {
 
         ReturnType returnType = ReturnType.valueOf(ctx.typeTypeOrVoid().getText().toUpperCase());
 
-        String identifier = ctx.identifier().getText() + this.METHOD_SYMBOL;
+        /**
+         * Indication of method
+         */
+        String METHOD_SYMBOL = "()";
+        String identifier = ctx.identifier().getText() + METHOD_SYMBOL;
 
         List<MethodParameters> parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
 
@@ -40,7 +39,7 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 
         Expression returnValue =  null;
 
-        // TODO we dont need to know return value?
+        //TODO we dont need to know return value?
        /* if (ctx.methodBody().expressionBody() != null)
         {
             returnValue = new ExpressionBodyVisitor().visit(ctx.methodBody().expressionBody());
@@ -55,8 +54,7 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
      * @param methodParameterContext list of parameters context
      * @return
      */
-    private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.FormalParameterContext> methodParameterContext)
-    {
+    private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.FormalParameterContext> methodParameterContext) {
         List<MethodParameters> methodDeclarationParameters = new ArrayList<>();
         MethodParameters methodDeclarationParameter;
 

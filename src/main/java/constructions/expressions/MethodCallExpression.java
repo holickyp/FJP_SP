@@ -2,25 +2,20 @@ package constructions.expressions;
 
 import constructions.enums.ExpressionType;
 import constructions.enums.ReturnType;
+import constructions.method.MethodCall;
 import constructions.method.MethodParameters;
 
 import java.util.List;
 
 public class MethodCallExpression extends Expression {
-    private String identifier;
-    private List<Expression> expressions;
+    private MethodCall methodCall;
 
-    public MethodCallExpression(int line, String identifier, List<Expression> expressions) {
+    public MethodCallExpression(int line, MethodCall methodCall) {
         super(ExpressionType.METHOD_CALL, line);
-        this.identifier = identifier;
-        this.expressions = expressions;
+        this.methodCall = methodCall;
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public List<Expression> getExpressions() {
-        return expressions;
+    public MethodCall getMethodCall() {
+        return methodCall;
     }
 }

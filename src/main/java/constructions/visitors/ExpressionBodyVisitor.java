@@ -5,6 +5,7 @@ import com.sun.tools.javac.jvm.Gen;
 import com.sun.tools.javac.resources.ct;
 import constructions.enums.Operator;
 import constructions.enums.PostfixType;
+import constructions.enums.PrefixType;
 import constructions.enums.VariableType;
 import constructions.expressions.*;
 import constructions.method.MethodCall;
@@ -17,6 +18,14 @@ import java.util.List;
 public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
 {
 
+    @Override
+    public Expression visitCompareExpression(GentleJavaParser.CompareExpressionContext ctx) {
+        Expression left = this.visit(ctx.expression(0));
+        Expression right = this.visit(ctx.expression(1));
+        Operator operator = Operator.getOp(ctx.bop.getText());
+
+        return new CompareExpression(ctx.start.getLine(), left, operator, right);
+    }
 
     /**
      * Visitor for ExprAdditive()
@@ -139,21 +148,19 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
      * @return Expression
      */
     @Override
-    public Expression visitMethodCall(GentleJavaParser.MethodCallContext ctx)
+    public Expression visitMethodCallExpression(GentleJavaParser.MethodCallExpressionContext ctx)
     {
 
-        // TODO should there be method like in methodvisitor?
-        List<Expression> expressions = (List<Expression>) ctx.expressionList();
+        MethodCall methodCall = new MethodCallVisitor().visit(ctx.methodCall());
 
-        return new MethodCallExpression( ctx.start.getLine(), ctx.identifier().getText(), expressions);
+        return new MethodCallExpression( ctx.start.getLine(), methodCall);
     }
 
-   /* TODO not sure if they are needed
+
     @Override
     public Expression visitPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) {
 
-        //TODO
-        Expression ex = ExpressionVisitor.visit(ctx.expression());
+        Expression ex = this.visit(ctx.expression());
         PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
         return new PostfixExpression(ctx.start.getLine(), ex, type);
     }
@@ -161,13 +168,11 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     @Override
     public Expression visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) {
 
-
-        //TODO
-       Expression ex = ExpressionVisitor.visit(ctx.expression());
-        PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
-        return new PrefixExpression(ctx.start.getLine(),);
+       Expression ex = this.visit(ctx.expression());
+       PrefixType type = PrefixType.valueOf(ctx.prefix.getText());
+       return new PrefixExpression(ctx.start.getLine(), type, ex);
     }
-    */
+
 
 
 

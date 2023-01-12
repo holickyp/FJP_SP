@@ -2,7 +2,6 @@ package constructions.visitors;
 
 import constructions.Variable;
 import constructions.enums.VariableType;
-import constructions.expressions.Expression;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 

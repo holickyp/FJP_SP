@@ -1,5 +1,7 @@
 package constructions.statements;
 
+import constructions.BlockStatement;
+
 public class SwitchBlock {
 
     private int identifier;

@@ -7,9 +7,6 @@ import constructions.statements.Statement;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BlockStatementVisitor extends GentleJavaBaseVisitor<BlockStatement> {
 
     @Override
