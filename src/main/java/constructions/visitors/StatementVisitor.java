@@ -3,6 +3,7 @@ package constructions.visitors;
 
 import constructions.Block;
 import constructions.BlockStatement;
+import constructions.ErrorHandler;
 import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
 import constructions.expressions.Expression;

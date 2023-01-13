@@ -1,4 +1,5 @@
-package generated;// Generated from java-escape by ANTLR 4.11.1
+package generated;
+// Generated from GentleJava.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -57,6 +58,12 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBlock(GentleJavaParser.BlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GentleJavaParser#methodBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethodBlock(GentleJavaParser.MethodBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#blockStatement}.
 	 * @param ctx the parse tree
