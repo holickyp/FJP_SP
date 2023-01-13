@@ -4,6 +4,7 @@ import constructions.ErrorHandler;
 import constructions.PL0.Instruction;
 import constructions.enums.PL0Instructions;
 import constructions.enums.ReturnType;
+import constructions.method.MethodCall;
 import constructions.symbolTable.SymbolTable;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class BaseCompiler {
 
     public void addInstruction(PL0Instructions instruction, int level, int address) {
         instructions.add(new Instruction(instruction, instructionCounter, level, address));
+        instructionCounter++;
+    }
+
+    public void addMethodCallInstruction(PL0Instructions instruction, int level, MethodCall methodCall) {
+        instructions.add(new Instruction(instruction, instructionCounter, level, methodCall));
         instructionCounter++;
     }
 

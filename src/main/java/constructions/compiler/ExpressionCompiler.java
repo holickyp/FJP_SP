@@ -30,13 +30,14 @@ public class ExpressionCompiler extends BaseCompiler {
         this.level = level;
     }
 
-    public void run() {
+    public VariableType run() {
         VariableType type = processExpression(expression);
         if(variableType != null && type != null) {
             if(type != variableType) {
                 //TODO error
             }
         }
+        return type;
     }
 
     private VariableType processExpression(Expression expression) {
