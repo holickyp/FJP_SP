@@ -3,9 +3,11 @@ package constructions.compiler;
 import constructions.ErrorHandler;
 import constructions.PL0.Instruction;
 import constructions.enums.PL0Instructions;
+import constructions.enums.ReturnType;
 import constructions.symbolTable.SymbolTable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BaseCompiler {
     ArrayList<Instruction> instructions = new ArrayList<>();
@@ -14,7 +16,8 @@ public class BaseCompiler {
     final int DEFAULT_METHOD_SIZE = 3;
     int stackPointer = 3;
     final int DEFAULT_STACK_POINTER = 3;
-    //method prototyp?
+    //method prototype?
+    private HashMap<String, ReturnType> methodReturnTypes;
     //errors
     ErrorHandler errorHandler = ErrorHandler.getInstance();
 
@@ -49,6 +52,14 @@ public class BaseCompiler {
 
     public void increaseStackPointer() {
         this.stackPointer++;
+    }
+
+    public void addMethodReturnType(String name, ReturnType type) {
+        methodReturnTypes.put(name, type);
+    }
+
+    public HashMap<String, ReturnType> getMethodReturnTypes() {
+        return methodReturnTypes;
     }
 
     public ErrorHandler getErrorHandler() {

@@ -1,7 +1,6 @@
 package constructions.expressions;
 
 import constructions.enums.ExpressionType;
-import constructions.enums.InstructionType;
 import constructions.enums.Operator;
 
 public class RelationalExpression extends Expression {
@@ -24,22 +23,12 @@ public class RelationalExpression extends Expression {
         return operator;
     }
 
-    public int getOperatorCode()
-    {
-        switch (this.getOperator())
-        {
-            case EQUALS:
-                return Operator.EQUALS.getCode();
-            case NOT_EQUALS:
-                return Operator.NOT_EQUALS.getCode();
-            case LOWER_THAN:
-                return Operator.LOWER_THAN.getCode();
-            case LOWER_EQUAL_THAN:
-                return Operator.LOWER_EQUAL_THAN.getCode();
-            case GRATER_EQUAL_THAN:
-                return Operator.GRATER_EQUAL_THAN.getCode();
-            case GRATER_THAN:
-                return Operator.GRATER_THAN.getCode();
+    public int getOperatorCode()  {
+        switch (this.getOperator()) {
+            case LOWER_THAN: return Operator.LOWER_THAN.getCode();
+            case LOWER_EQUAL_THAN: return Operator.LOWER_EQUAL_THAN.getCode();
+            case GRATER_EQUAL_THAN: return Operator.GRATER_EQUAL_THAN.getCode();
+            case GRATER_THAN: return Operator.GRATER_THAN.getCode();
         }
 
         return -1;

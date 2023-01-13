@@ -23,6 +23,15 @@ public class CompareExpression extends Expression {
         return operator;
     }
 
+    public int getOperatorCode()  {
+        switch (this.getOperator()) {
+            case EQUALS: return Operator.EQUALS.getCode();
+            case NOT_EQUALS: return Operator.NOT_EQUALS.getCode();
+        }
+
+        return -1;
+    }
+
     public Expression getRightExpression() {
         return rightExpression;
     }
