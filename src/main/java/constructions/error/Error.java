@@ -12,6 +12,7 @@ public class Error
         this.message = message;
         this.line = line;
         this.errorCode = errorCode;
+
     }
 
     public int getErrorCode()

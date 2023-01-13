@@ -14,16 +14,27 @@ public enum ErrorTypes {
     ERROR_UNKNOWN(10, "Assigned variable not exists."),
     ERROR_INVALID_USE(11, "Assigned variable not exists."),
     ERROR_INVALID_OUTPUT_FILE(12, "Assigned variable not exists."),
-    ERROR_ARITHMETIC(13, "Assigned variable not exists.");
+    ERROR_ARITHMETIC(13, "Assigned variable not exists."),
+    ERROR_METHOD_ALREADY_EXISTS(14, "AA"),
+    ERROR_METHOD_NOT_EXISTS(15, "AA"),
+    ERROR_MISMATCH_METHOD_AND_CALL_PARAMETER_RETURN_TYPE(16, "AA"),
+    ERROR_MISMATCH_METHOD_CALL_RETURN(17, "AA"),
+    ERROR_SWITCH_MULTIPLE_DEFAULT_BLOCK(18, "AA"),
+    ERROR_VOID_METHOD_EXPRESSION(19, "AA");
 
-    private int code;
-    private String description;
+
+
+
+    private final int code;
+    private final String description;
 
 
     ErrorTypes(int code, String description) {
         this.code = code;
         this.description = description;
     }
+
+
 
     public String getDescription() {
         return description;
