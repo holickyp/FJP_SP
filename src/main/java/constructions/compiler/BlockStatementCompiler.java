@@ -73,6 +73,7 @@ public class BlockStatementCompiler extends BaseCompiler {
             case DO_WHILE: doWhileInstructions((DoWhileStatement) statement);break;
             case SWITCH: switchInstructions((SwitchStatement) statement);break;
             case REPEAT: repeatInstructions((RepeatStatement) statement);break;
+            case EXPRESSION: expressionInstructions((ExpressionStatement) statement);break;
         }
     }
 
@@ -193,6 +194,11 @@ public class BlockStatementCompiler extends BaseCompiler {
 
         new ExpressionCompiler(repeatStatement.getExpression(), VariableType.BOOLEAN, level).run();
         addInstruction(PL0Instructions.JMC, 0, startAddress);
+    }
+
+    private void expressionInstructions(ExpressionStatement expressionStatement) {
+        new ExpressionCompiler(expressionStatement.getExpression(), VariableType.INT, level).run();
+
     }
 
     private void initializeMethods() {

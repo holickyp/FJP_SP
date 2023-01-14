@@ -29,8 +29,7 @@ public class Main {
             instructionGenerator.generate(output);
 
         } catch (Exception e) {
-            System.out.println("File not found " + input);
-
+            System.err.println(e);
         }
     }
 }

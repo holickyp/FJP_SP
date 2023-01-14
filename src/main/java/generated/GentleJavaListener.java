@@ -292,6 +292,18 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitRepeatStatement(GentleJavaParser.RepeatStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code expressionStatement}
+	 * labeled alternative in {@link GentleJavaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expressionStatement}
+	 * labeled alternative in {@link GentleJavaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#braceStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -393,6 +405,18 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRelationalExpression(GentleJavaParser.RelationalExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code assignExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignExpression(GentleJavaParser.AssignExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignExpression(GentleJavaParser.AssignExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code identifierExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.

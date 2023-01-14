@@ -180,6 +180,13 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRepeatStatement(GentleJavaParser.RepeatStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code expressionStatement}
+	 * labeled alternative in {@link GentleJavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#braceStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -239,6 +246,13 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRelationalExpression(GentleJavaParser.RelationalExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code assignExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignExpression(GentleJavaParser.AssignExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code identifierExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.

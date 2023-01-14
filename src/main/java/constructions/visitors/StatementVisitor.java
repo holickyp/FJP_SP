@@ -1,15 +1,9 @@
 package constructions.visitors;
 
-
-import constructions.Block;
 import constructions.BlockStatement;
-import constructions.ErrorHandler;
-import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
 import constructions.expressions.Expression;
 import constructions.forControl.ControlFor;
-import constructions.method.MethodCall;
-
 import constructions.statements.*;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
@@ -151,4 +145,10 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new BlockLabelStatement(ctx.start.getLine(), body);
     }
 
+    @Override
+    public ExpressionStatement visitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx) {
+        Expression expression = new ExpressionVisitor().visit(ctx.expression());
+
+        return new ExpressionStatement(ctx.start.getLine(), expression);
+    }
 }

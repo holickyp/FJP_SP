@@ -340,6 +340,18 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBraceStatement(GentleJavaParser.BraceStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -443,6 +455,18 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRelationalExpression(GentleJavaParser.RelationalExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignExpression(GentleJavaParser.AssignExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignExpression(GentleJavaParser.AssignExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

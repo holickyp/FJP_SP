@@ -7,5 +7,6 @@ public enum StatementType {
     WHILE,
     DO_WHILE,
     SWITCH,
-    REPEAT
+    REPEAT,
+    EXPRESSION
 }
