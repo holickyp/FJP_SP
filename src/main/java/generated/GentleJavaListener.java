@@ -1,4 +1,5 @@
-package generated;// Generated from java-escape by ANTLR 4.11.1
+package generated;
+// Generated from GentleJava.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -86,6 +87,16 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBlock(GentleJavaParser.BlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GentleJavaParser#methodBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodBlock(GentleJavaParser.MethodBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GentleJavaParser#methodBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodBlock(GentleJavaParser.MethodBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#blockStatement}.
 	 * @param ctx the parse tree

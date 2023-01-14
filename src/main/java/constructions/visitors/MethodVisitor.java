@@ -35,18 +35,18 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 
         List<MethodParameters> parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
 
-        Block body = ctx.methodBody().block() != null ? new BlockVisitor().visit(ctx.methodBody().block()) : null;
+        Block body = ctx.methodBody().methodBlock() != null ? new BlockVisitor().visit(ctx.methodBody().methodBlock()) : null;
 
         Expression returnValue =  null;
 
-        //TODO we dont need to know return value?
-       /* if (ctx.methodBody().expressionBody() != null)
-        {
-            returnValue = new ExpressionBodyVisitor().visit(ctx.methodBody().expressionBody());
-            returnValue.setExpectedReturnType(returnType == EMethodReturnType.INT ? EVariableType.INT : EVariableType.BOOLEAN);
-        }*/
 
-        return new Method(returnType, identifier, parameters, body, ctx.start.getLine());
+       if (ctx.methodBody().expression() != null)
+        {
+            returnValue = new ExpressionBodyVisitor().visit(ctx.methodBody().expression());
+            returnValue.setReturnType(returnType == ReturnType.INT ? VariableType.INT : VariableType.BOOLEAN);
+        }
+
+        return new Method(returnType, identifier, parameters, body, returnValue, ctx.start.getLine());
     }
 
     /**

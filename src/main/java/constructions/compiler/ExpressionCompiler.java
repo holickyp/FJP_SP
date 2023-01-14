@@ -1,228 +1,176 @@
 package constructions.compiler;
 
-
 import constructions.enums.Operator;
 import constructions.enums.PL0Instructions;
 import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
-import constructions.error.*;
 import constructions.expressions.*;
 import constructions.symbolTable.SymbolTableItem;
 
-public class ExpressionCompiler extends BaseCompiler
-{
-    /**
-     * Expression to process
-     */
-    private final Expression expression;
+public class ExpressionCompiler extends BaseCompiler {
+    private Expression expression;
+    private int level;
+    private ReturnType returnType;
+    private VariableType variableType;
 
-    /**
-     * Level of expression
-     */
-    private final int level;
-
-    /**
-     * Method return type
-     */
-    private ReturnType methodReturnType;
-
-    /**
-     * Exprexted return type
-     */
-    private VariableType resultType;
-
-    public ExpressionCompiler(Expression expression, int level)
-    {
+    public ExpressionCompiler(Expression expression, int level) {
         this.expression = expression;
         this.level = level;
     }
 
-    public ExpressionCompiler(Expression expression, VariableType resultType, int level)
-    {
+    public ExpressionCompiler(Expression expression, ReturnType returnType, int level) {
         this.expression = expression;
-        this.resultType = resultType;
+        this.returnType = returnType;
         this.level = level;
     }
 
-    public ExpressionCompiler(Expression expression, ReturnType methodReturnType, int level)
-    {
-
+    public ExpressionCompiler(Expression expression, VariableType variableType, int level) {
         this.expression = expression;
-        this.methodReturnType = methodReturnType;
+        this.variableType = variableType;
         this.level = level;
     }
 
-    public VariableType runReturnType()
-    {
-        return this.processExpression(this.expression);
-    }
-
-    /**
-     * Processes expression into instruction
-     */
-    public void run()
-    {
-        VariableType type = this.processExpression(this.expression);
-
-        if (this.resultType != null && type != null)
-        {
-            // if expected return type not match with result type
-            if (type != this.resultType)
-            {
-                getErrorHandler().throwError(new ErrorMismatchExpressionResult(this.resultType.toString(), type.toString(), this.expression.getLine()));
+    public VariableType run() {
+        VariableType type = processExpression(expression);
+        if(variableType != null && type != null) {
+            if(type != variableType) {
+                //TODO error
             }
         }
-    }
-
-    /**
-     * Expression processing, called recursively
-     * @param expression
-     * @return
-     */
-    private VariableType processExpression(Expression expression)
-    {
-        VariableType type = null;
-
-        switch (expression.getType())
-        {
-            case IDENTIFIER:
-                type = this.generateIdentifierInstructions((IdentifierExpression) expression);
-                break;
-            case VALUE:
-                type = this.generateValueInstructions((ValueExpression) expression);
-                break;
-            case MUL_DIV_MOD:
-                type = this.generateMultiplicationInstructions((MulDivModExpression) expression);
-                break;
-            /*case ADDITIVE:
-                type = this.generateAdditiveInstructions((ExpressionAdditive) expression);
-                break;*/
-            case RELATIONAL:
-                type = this.generateRelationalInstructions((RelationalExpression) expression);
-                break;
-            case LOGICAL:
-                type = this.generateLogicalInstructions((LogicalExpression) expression);
-                break;
-            /*case NEGATION:
-                type = this.generateNegationInstructions((ExpressionNegation) expression);
-                break;*/
-            case PARENTHESES:
-                type = this.generateParInstructions((ParenthesesExpression) expression);
-                break;
-            case METHOD_CALL:
-                type = this.generateMethodCallInstructions((MethodCallExpression) expression);
-                break;
-            case PLUS_MINUS:
-                type = this.generateMinusInstructions((PlusMinusExpression) expression);
-                break;
-
-        }
-
         return type;
     }
 
-    /**
-     * Identifier expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateIdentifierInstructions(IdentifierExpression expression)
-    {
-        String identifier = expression.getValue().toString();
+    private VariableType processExpression(Expression expression) {
+        VariableType type = null;
 
-        if (this.isInSymbolTable(identifier))
-        {
-            SymbolTableItem item = this.getSymbolTable().getItem(identifier);
-            this.addInstruction(PL0Instructions.LOD, this.level - item.getLevel(), item.getAddress());
-
-            return item.getVariableType();
+        switch (expression.getType()) {
+            case VALUE: type = valueInstructions((ValueExpression) expression);break;
+            case IDENTIFIER: type = identifierInstructions((IdentifierExpression) expression);break;
+            case METHOD_CALL: type = methodCallInstructions((MethodCallExpression) expression);break;
+            case POSTFIX:break;//TODO
+            case PREFIX:break;//TODO
+            case MUL_DIV_MOD: type = mulDivModInstructions((MulDivModExpression) expression);break;
+            case PLUS_MINUS: type = plusMinusInstructions((PlusMinusExpression) expression);break;
+            case RELATIONAL: type = relationalInstructions((RelationalExpression) expression);break;
+            case COMPARE: type = compareInstructions((CompareExpression) expression);break;
+            case LOGICAL: type = logicalInstructions((LogicalExpression) expression);break;
+            case PARENTHESES: type = parenthesesInstructions((ParenthesesExpression) expression);break;
         }
-        else
-        {
-            this.getErrorHandler().throwError(new ErrorVariableNotExists(identifier, expression.getLine()));
-        }
-
-        return null;
+        return type;
     }
 
-    /**
-     * Specific value expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateValueInstructions(ValueExpression expression)
-    {
-        Object value = expression.getValue();
+    private VariableType valueInstructions(ValueExpression valueExpression) {
+        Object value = valueExpression.getValue();
 
-        if (expression.getVariableType() == VariableType.INT)
-        {
-            this.addInstruction(PL0Instructions.LIT, 0, (Integer)value);
+        if(valueExpression.getVariableType() == VariableType.INT) {
+            addInstruction(PL0Instructions.LIT, 0, Integer.parseInt(value.toString()));
             return VariableType.INT;
         }
-        else if (expression.getVariableType() == VariableType.BOOLEAN)
-        {
-            this.addInstruction(PL0Instructions.LIT, 0, Boolean.parseBoolean(value.toString()) ? 1 : 0);
+        else if(valueExpression.getVariableType() == VariableType.BOOLEAN) {
+            addInstruction(PL0Instructions.LIT, 0, Boolean.parseBoolean(value.toString()) ? 1 : 0);
             return VariableType.BOOLEAN;
         }
-
         return null;
     }
 
-    /**
-     * Multiplication expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateMultiplicationInstructions(MulDivModExpression expression)
-    {
-        VariableType leftExpression = this.processExpression(expression.getLeftExpression());
-        VariableType rightExpression = this.processExpression(expression.getRightExpression());
-
-        checkVariableTypes(leftExpression, rightExpression, VariableType.INT);
-
-        this.addInstruction(PL0Instructions.OPR, 0, expression.getOperatorCode());
-
-        return  VariableType.INT;
+    private VariableType identifierInstructions(IdentifierExpression identifierExpression) {
+        String identifier = identifierExpression.getValue().toString();
+        if(isInSymbolTable(identifier)) {
+            SymbolTableItem symbolTableItem = getSymbolTable().getItem(identifier);
+            addInstruction(PL0Instructions.LOD, level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
+            return symbolTableItem.getVariableType();
+        }
+        else {
+            //TODO error
+        }
+        return null;
     }
 
-   
+    private VariableType methodCallInstructions(MethodCallExpression methodCallExpression) {
+        if(methodCallExpression.getMethodCall().getReturnType() == ReturnType.VOID) {
+            //TODO error
+        }
+        //TODO method prototype???
 
-    /**
-     * Relational Expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateRelationalInstructions(RelationalExpression expression)
-    {
-        VariableType leftExpression = this.processExpression(expression.getLeftExpression());
-        VariableType rightExpression = this.processExpression(expression.getRightExpression());
-
-        checkVariableTypes(leftExpression, rightExpression, VariableType.INT);
-
-        this.addInstruction(PL0Instructions.OPR, 0, expression.getOperatorCode());
-
-        return  VariableType.BOOLEAN;
+        methodCallExpression.getMethodCall().setReturnType(getMethodReturnTypes().get(methodCallExpression.getMethodCall().getIdentifier()));
+        //TODO MethodCallCompiler
+        switch (getMethodReturnTypes().get(methodCallExpression.getMethodCall().getIdentifier())) {
+            case INT: return VariableType.INT;
+            case BOOLEAN: return VariableType.BOOLEAN;
+            default: return null;
+        }
     }
 
-    /**
-     * Logical expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateLogicalInstructions(LogicalExpression expression)
-    {
-        VariableType leftExpression = this.processExpression(expression.getLeftExpression());
-        VariableType rightExpression = this.processExpression(expression.getRightExpression());
+    //TODO postfix
 
-        checkVariableTypes(leftExpression, rightExpression, VariableType.BOOLEAN);
-        if (expression.getOperator() == Operator.AND)
-        {
+    //TODO prefix - includes negation
+
+    private VariableType mulDivModInstructions(MulDivModExpression mulDivModExpression) {
+        VariableType left = processExpression(mulDivModExpression.getLeftExpression());
+        VariableType right = processExpression(mulDivModExpression.getRightExpression());
+
+        if(left != VariableType.INT || right != VariableType.INT) {
+            //TODO error
+        }
+
+        addInstruction(PL0Instructions.OPR, 0, mulDivModExpression.getOperatorCode());
+
+        return VariableType.INT;
+    }
+
+    private VariableType plusMinusInstructions(PlusMinusExpression plusMinusExpression) {
+        VariableType left = processExpression(plusMinusExpression.getLeftExpression());
+        VariableType right = processExpression(plusMinusExpression.getRightExpression());
+
+        if(left != VariableType.INT || right != VariableType.INT) {
+            //TODO error
+        }
+
+        addInstruction(PL0Instructions.OPR, 0, plusMinusExpression.getOperatorCode());
+
+        return VariableType.INT;
+    }
+
+    private VariableType relationalInstructions(RelationalExpression relationalExpression) {
+        VariableType left = processExpression(relationalExpression.getLeftExpression());
+        VariableType right = processExpression(relationalExpression.getRightExpression());
+
+        if(left != VariableType.INT || right != VariableType.INT) {
+            //TODO error
+        }
+
+        addInstruction(PL0Instructions.OPR, 0, relationalExpression.getOperatorCode());
+
+        return VariableType.BOOLEAN;
+    }
+
+    private VariableType compareInstructions(CompareExpression compareExpression) {
+        VariableType left = processExpression(compareExpression.getLeftExpression());
+        VariableType right = processExpression(compareExpression.getRightExpression());
+
+        if(left != VariableType.INT || right != VariableType.INT) {
+            //TODO error
+        }
+
+        addInstruction(PL0Instructions.OPR, 0, compareExpression.getOperatorCode());
+
+        return VariableType.BOOLEAN;
+    }
+
+    private VariableType logicalInstructions(LogicalExpression logicalExpression)  {
+        VariableType left = processExpression(logicalExpression.getLeftExpression());
+        VariableType right = processExpression(logicalExpression.getRightExpression());
+
+        if(left != VariableType.BOOLEAN || right != VariableType.BOOLEAN) {
+            //TODO error
+        }
+
+        if (logicalExpression.getOperator() == Operator.AND) {
             this.addInstruction(PL0Instructions.OPR, 0, Operator.MULTIPLICATION.getCode());
             this.addInstruction(PL0Instructions.LIT, 0, 1);
             this.addInstruction(PL0Instructions.OPR, 0, Operator.EQUALS.getCode());
         }
-        else
-        {
+        else {
             this.addInstruction(PL0Instructions.OPR, 0, Operator.PLUS.getCode());
             this.addInstruction(PL0Instructions.LIT, 0, 0);
             this.addInstruction(PL0Instructions.OPR, 0, Operator.GRATER_THAN.getCode());
@@ -231,121 +179,7 @@ public class ExpressionCompiler extends BaseCompiler
         return  VariableType.BOOLEAN;
     }
 
-    /**
-     * Negation expression
-     * @param expression
-     * @return
-     *
-    private VariableType generateNegationInstructions(ExpressionNegation expression)
-    {
-        // multiple logical negation
-        if (expression.getType() == expression.getExpression().getType())
-        {
-            this.getErrorHandler().throwError(new ErrorArithmetic(EOperatorLogical.NEGATION.toString(), expression.getExpression().getLine()));
-        }
-
-        VariableType expressionType = this.processExpression(expression.getExpression());
-
-        this.checkVariableType(expressionType, VariableType.BOOLEAN);
-
-        this.addInstruction(PL0Instructions.LIT, 0,0);
-        this.addInstruction(PL0Instructions.OPR, 0, EInstructionOperation.EQ.getCode());
-
-        return VariableType.BOOLEAN;
-    } */
-
-    /**
-     * Negation expression
-     * @param expression
-     * @return
-     */
-    //TODO not sure
-    private VariableType generateMinusInstructions(PlusMinusExpression expression)
-    {
-        VariableType leftExpression = this.processExpression(expression.getLeftExpression());
-        VariableType rightExpression = this.processExpression(expression.getRightExpression());
-
-        checkVariableTypes(leftExpression, rightExpression, VariableType.INT);
-
-        //this.checkVariableType(expressionType, VariableType.INT);
-
-        this.addInstruction(PL0Instructions.LIT, 0,-1);
-        this.addInstruction(PL0Instructions.OPR, 0, Operator.MULTIPLICATION.getCode());
-
-        return VariableType.INT;
-    }
-
-    /**
-     * Par expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateParInstructions(ParenthesesExpression expression)
-    {
-        return this.processExpression(expression.getExpression());
-    }
-
-    /**
-     * Method call expression
-     * @param expression
-     * @return
-     */
-    private VariableType generateMethodCallInstructions(MethodCallExpression expression)
-    {
-        if (expression.getMethodCall().getReturnType() == ReturnType.VOID)
-        {
-            getErrorHandler().throwError(new ErrorVoidMethodExpression(expression.getMethodCall().getIdentifier(), expression.getLine()));
-        }
-
-        // check if method exists in prototypes
-        if (!this.getMethodPrototypes().containsKey(expression.getMethodCall().getIdentifier()))
-        {
-            getErrorHandler().throwError(new ErrorMethodNotExists(expression.getMethodCall().getIdentifier(), expression.getMethodCall().getLine()));
-        }
-
-        // set up return type of method call from method prototypes
-        expression.getMethodCall().setReturnType(this.getMethodPrototypes().get(expression.getMethodCall().getIdentifier()).getMethodReturnType());
-
-        // compile method call
-        new MethodCallCompiler(expression.getMethodCall(), this.level).run();
-
-        return getMethodPrototype().get(expression.getMethodCall().getIdentifier()).convertReturnTypeToVariableType();
-    }
-
-    /**
-     * Checks if return types are same
-     * @param type1
-     * @param type2
-     * @param expected
-     */
-    private void checkVariableTypes(VariableType type1, VariableType type2, VariableType expected)
-    {
-        if (type1 != expected || type2 != expected)
-        {
-            getErrorHandler().throwError(new ErrorMismatchTypesExpression(expected.toString(), type1.toString(), type2.toString(), this.expression.getLine()));
-        }
-    }
-
-    /**
-     * Check if type is equal to expected
-     * @param type
-     * @param expected
-     */
-    private void checkVariableType(VariableType type, VariableType expected)
-    {
-        if (type != expected)
-        {
-            getErrorHandler().throwError(new ErrorMismatchExpressionResult(expected.toString(), type.toString(), this.expression.getLine()));
-        }
-    }
-
-    public ReturnType getMethodReturnType()
-    {
-        return methodReturnType;
-    }
-
-    public void setMethodReturnType(ReturnType methodReturnType)
-    {
-        this.methodReturnType = methodReturnType;
+    private VariableType parenthesesInstructions(ParenthesesExpression parenthesesExpression) {
+        return processExpression(parenthesesExpression.getExpression());
     }
 }

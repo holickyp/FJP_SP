@@ -115,6 +115,10 @@ block
     : LEFT_BRACE blockStatement* RIGHT_BRACE
     ;
 
+methodBlock
+    : (statement)+
+    ;
+
 blockStatement
     : localVariableDeclaration SEMICOLON
     | methodDeclaration
@@ -158,7 +162,7 @@ variableInitializer
     ;
 
 methodBody
-    : block
+    : LEFT_BRACE methodBlock? (RETURN expression SEMICOLON)? RIGHT_BRACE
     | SEMICOLON
     ;
 

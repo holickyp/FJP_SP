@@ -2,6 +2,7 @@ package constructions.method;
 
 import constructions.Block;
 import constructions.enums.ReturnType;
+import constructions.expressions.Expression;
 
 import java.util.List;
 
@@ -11,14 +12,17 @@ public class Method {
     private List<MethodParameters> methodParameters;
     private Block block;
 
+    private final Expression returnValue;
+
     /** line of method head */
     private int line;
 
-    public Method(ReturnType returnType, String name, List<MethodParameters> methodParameters, Block block, int line) {
+    public Method(ReturnType returnType, String name, List<MethodParameters> methodParameters, Block block, Expression returnValue, int line) {
         this.returnType = returnType;
         this.name = name;
         this.methodParameters = methodParameters;
         this.block = block;
+        this.returnValue = returnValue;
         this.line = line;
     }
 
@@ -36,6 +40,10 @@ public class Method {
 
     public Block getBlock() {
         return block;
+    }
+
+    public Expression getReturnValue() {
+        return returnValue;
     }
 
     public int getLine() {

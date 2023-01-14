@@ -1,19 +1,19 @@
 package constructions.enums;
 
 public enum Operator {
-    MULTIPLICATION("*", 1),
-    DIVISION("/", 2),
-    MODULO("%", 3),
-    PLUS("+", 4),
-    MINUS("-", 5 ),
-    LOWER_EQUAL_THAN("<=", 6),
-    GRATER_EQUAL_THAN(">=", 7),
-    LOWER_THAN("<", 8),
-    GRATER_THAN(">", 9),
-    EQUALS("==", 10),
-    NOT_EQUALS("!=", 11),
-    AND("&&", 12),
-    OR("||", 13);
+    PLUS("+", 2),
+    MINUS("-", 3 ),
+    MULTIPLICATION("*", 4),
+    DIVISION("/", 5),
+    MODULO("%", 6),
+    EQUALS("==", 8),
+    NOT_EQUALS("!=", 9),
+    LOWER_THAN("<", 10),
+    GRATER_EQUAL_THAN(">=", 11),
+    GRATER_THAN(">", 12),
+    LOWER_EQUAL_THAN("<=", 13),
+    AND("&&", 2),
+    OR("||", 4);
 
     private String op;
     private int code;
