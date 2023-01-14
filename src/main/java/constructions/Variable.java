@@ -19,4 +19,24 @@ public class Variable {
         this.parallelArray = parallelArray;
         this.expression = expression;
     }
+
+    public boolean isConstant() {
+        return isConstant;
+    }
+
+    public VariableType getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getParallelArray() {
+        return parallelArray;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
 }

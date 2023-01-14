@@ -105,10 +105,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
             for(int i = 0; i<switchBlockStatement.switchLabel().size(); i++) {
                 // case block
                 if(switchBlockStatement.switchLabel(i).CASE() != null) {
-                    int idetifier = Integer.parseInt(switchBlockStatement.switchLabel(i).getText());
+                    int identifier = Integer.parseInt(switchBlockStatement.switchLabel(i).getText());
                     BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
-                    SwitchBlock switchBlock = new SwitchBlock(idetifier, body);
-                    switchBlockHashMap.put(idetifier, switchBlock);
+                    BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);
+                    SwitchBlock switchBlock = new SwitchBlock(identifier, blockLabelStatement);
+                    switchBlockHashMap.put(identifier, switchBlock);
                 }
                 // default block
                 else {
@@ -119,7 +120,8 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
                         //ErrorHandler.getInstance().throwError(new ErrorSwitchMultipleDefaultBlock(switchBlockStatement.start.getLine()));
                     }
                     BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
-                    defaultBlock = new SwitchBlock(body, switchBlockStatement.blockStatement(i).statement().start.getLine());
+                    BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);
+                    defaultBlock = new SwitchBlock(blockLabelStatement, switchBlockStatement.blockStatement(i).statement().start.getLine());
 
                 }
 

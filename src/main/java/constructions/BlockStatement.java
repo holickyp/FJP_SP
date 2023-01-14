@@ -8,12 +8,12 @@ import java.util.List;
 public class BlockStatement {
     private Statement statement;
     private Variable variable;
-    private Method methods;
+    private Method method;
 
     public BlockStatement(Statement statement, Variable variable, Method methods) {
         this.statement = statement;
         this.variable = variable;
-        this.methods = methods;
+        this.method = methods;
     }
 
     public Statement getStatement() {
@@ -24,7 +24,7 @@ public class BlockStatement {
         return variable;
     }
 
-    public Method getMethods() {
-        return methods;
+    public Method getMethod() {
+        return method;
     }
 }

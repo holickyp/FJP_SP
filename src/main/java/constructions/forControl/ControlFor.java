@@ -15,4 +15,16 @@ public class ControlFor {
         this.expression = expression;
         this.updateFor = updateFor;
     }
+
+    public InitFor getInitFor() {
+        return initFor;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
+    public List<Expression> getUpdateFor() {
+        return updateFor;
+    }
 }
