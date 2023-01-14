@@ -66,13 +66,13 @@ public class BlockStatementCompiler extends BaseCompiler {
     private void statementInstructions() {
         Statement statement = blockStatement.getStatement();
         switch (statement.getType()) {
-            case BLOCK:break;
-            case IF:break;
-            case FOR:break;
-            case WHILE:break;
-            case DO_WHILE:break;
-            case SWITCH:break;
-            case REPEAT:break;
+            case BLOCK: blockInstructions((BlockLabelStatement) statement);break;
+            case IF: ifInstructions((IfStatement) statement);break;
+            case FOR: forInstructions((ForStatement) statement);break;
+            case WHILE: whileInstructions((WhileStatement) statement);break;
+            case DO_WHILE: doWhileInstructions((DoWhileStatement) statement);break;
+            case SWITCH: switchInstructions((SwitchStatement) statement);break;
+            case REPEAT: repeatInstructions((RepeatStatement) statement);break;
         }
     }
 
