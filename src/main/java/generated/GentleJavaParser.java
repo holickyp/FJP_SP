@@ -1,5 +1,4 @@
-package generated;
-// Generated from GentleJava.g4 by ANTLR 4.7.2
+package generated;// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,9 +8,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class GentleJavaParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -109,7 +108,7 @@ public class GentleJavaParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "GentleJava.g4"; }
+	public String getGrammarFileName() { return "java-escape"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -124,6 +123,8 @@ public class GentleJavaParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+
+	@SuppressWarnings("CheckReturnValue")
 	public static class IdentifierContext extends ParserRuleContext {
 		public TerminalNode IDENTIFIER() { return getToken(GentleJavaParser.IDENTIFIER, 0); }
 		public IdentifierContext(ParserRuleContext parent, int invokingState) {
@@ -166,6 +167,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class TypeTypeOrVoidContext extends ParserRuleContext {
 		public TypeTypeContext typeType() {
 			return getRuleContext(TypeTypeContext.class,0);
@@ -227,6 +229,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class TypeTypeContext extends ParserRuleContext {
 		public TerminalNode INT() { return getToken(GentleJavaParser.INT, 0); }
 		public TerminalNode BOOLEAN() { return getToken(GentleJavaParser.BOOLEAN, 0); }
@@ -279,6 +282,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BooleanValueContext extends ParserRuleContext {
 		public TerminalNode TRUE() { return getToken(GentleJavaParser.TRUE, 0); }
 		public TerminalNode FALSE() { return getToken(GentleJavaParser.FALSE, 0); }
@@ -331,6 +335,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class PossibleValuesContext extends ParserRuleContext {
 		public TerminalNode NUMBER() { return getToken(GentleJavaParser.NUMBER, 0); }
 		public TerminalNode PLUS() { return getToken(GentleJavaParser.PLUS, 0); }
@@ -415,6 +420,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class VariableModifierContext extends ParserRuleContext {
 		public TerminalNode CONST() { return getToken(GentleJavaParser.CONST, 0); }
 		public VariableModifierContext(ParserRuleContext parent, int invokingState) {
@@ -457,6 +463,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
@@ -501,6 +508,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BlockContext extends ParserRuleContext {
 		public TerminalNode LEFT_BRACE() { return getToken(GentleJavaParser.LEFT_BRACE, 0); }
 		public TerminalNode RIGHT_BRACE() { return getToken(GentleJavaParser.RIGHT_BRACE, 0); }
@@ -541,7 +549,7 @@ public class GentleJavaParser extends Parser {
 			setState(85);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << INT) | (1L << IF) | (1L << SWITCH) | (1L << FOR) | (1L << WHILE) | (1L << DO) | (1L << REPEAT) | (1L << VOID) | (1L << CONST) | (1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << LEFT_BRACE) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0)) {
+			while (((_la) & ~0x3f) == 0 && ((1L << _la) & 425236248702766L) != 0) {
 				{
 				{
 				setState(82);
@@ -567,6 +575,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class MethodBlockContext extends ParserRuleContext {
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
@@ -613,7 +622,7 @@ public class GentleJavaParser extends Parser {
 				setState(93); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << SWITCH) | (1L << FOR) | (1L << WHILE) | (1L << DO) | (1L << REPEAT) | (1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << LEFT_BRACE) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0) );
+			} while ( ((_la) & ~0x3f) == 0 && ((1L << _la) & 425236248661800L) != 0 );
 			}
 		}
 		catch (RecognitionException re) {
@@ -627,6 +636,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BlockStatementContext extends ParserRuleContext {
 		public LocalVariableDeclarationContext localVariableDeclaration() {
 			return getRuleContext(LocalVariableDeclarationContext.class,0);
@@ -700,6 +710,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class LocalVariableDeclarationContext extends ParserRuleContext {
 		public TypeTypeContext typeType() {
 			return getRuleContext(TypeTypeContext.class,0);
@@ -716,9 +727,6 @@ public class GentleJavaParser extends Parser {
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
-		}
-		public VariableDeclaratorsContext variableDeclarators() {
-			return getRuleContext(VariableDeclaratorsContext.class,0);
 		}
 		public VariableModifierContext variableModifier() {
 			return getRuleContext(VariableModifierContext.class,0);
@@ -762,9 +770,9 @@ public class GentleJavaParser extends Parser {
 
 			setState(105);
 			typeType();
-			setState(118);
+			setState(122);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				{
 				setState(106);
@@ -796,7 +804,19 @@ public class GentleJavaParser extends Parser {
 			case 2:
 				{
 				setState(117);
-				variableDeclarators();
+				identifier();
+				setState(120);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==ASSIGN) {
+					{
+					setState(118);
+					match(ASSIGN);
+					setState(119);
+					expression(0);
+					}
+				}
+
 				}
 				break;
 			}
@@ -813,6 +833,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class MethodDeclarationContext extends ParserRuleContext {
 		public TypeTypeOrVoidContext typeTypeOrVoid() {
 			return getRuleContext(TypeTypeOrVoidContext.class,0);
@@ -851,13 +872,13 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(120);
+			setState(124);
 			typeTypeOrVoid();
-			setState(121);
+			setState(125);
 			identifier();
-			setState(122);
+			setState(126);
 			formalParameters();
-			setState(123);
+			setState(127);
 			methodBody();
 			}
 		}
@@ -872,6 +893,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class FormalParametersContext extends ParserRuleContext {
 		public TerminalNode LEFT_PARENTHESES() { return getToken(GentleJavaParser.LEFT_PARENTHESES, 0); }
 		public FormalParameterListContext formalParameterList() {
@@ -903,11 +925,11 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
+			setState(129);
 			match(LEFT_PARENTHESES);
-			setState(126);
+			setState(130);
 			formalParameterList();
-			setState(127);
+			setState(131);
 			match(RIGHT_PARENTHESES);
 			}
 		}
@@ -922,6 +944,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class FormalParameterListContext extends ParserRuleContext {
 		public List<FormalParameterContext> formalParameter() {
 			return getRuleContexts(FormalParameterContext.class);
@@ -959,21 +982,21 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(129);
+			setState(133);
 			formalParameter();
-			setState(134);
+			setState(138);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(130);
+				setState(134);
 				match(COMMA);
-				setState(131);
+				setState(135);
 				formalParameter();
 				}
 				}
-				setState(136);
+				setState(140);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -990,6 +1013,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class FormalParameterContext extends ParserRuleContext {
 		public TypeTypeContext typeType() {
 			return getRuleContext(TypeTypeContext.class,0);
@@ -1022,9 +1046,9 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(137);
+			setState(141);
 			typeType();
-			setState(138);
+			setState(142);
 			variableDeclaratorId();
 			}
 		}
@@ -1039,6 +1063,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class VariableDeclaratorsContext extends ParserRuleContext {
 		public VariableDeclaratorContext variableDeclarator() {
 			return getRuleContext(VariableDeclaratorContext.class,0);
@@ -1068,7 +1093,7 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(140);
+			setState(144);
 			variableDeclarator();
 			}
 		}
@@ -1083,6 +1108,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class VariableDeclaratorContext extends ParserRuleContext {
 		public VariableDeclaratorIdContext variableDeclaratorId() {
 			return getRuleContext(VariableDeclaratorIdContext.class,0);
@@ -1117,16 +1143,16 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(142);
+			setState(146);
 			variableDeclaratorId();
-			setState(145);
+			setState(149);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ASSIGN) {
 				{
-				setState(143);
+				setState(147);
 				match(ASSIGN);
-				setState(144);
+				setState(148);
 				variableInitializer();
 				}
 			}
@@ -1144,6 +1170,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class VariableDeclaratorIdContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -1173,7 +1200,7 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
+			setState(151);
 			identifier();
 			}
 		}
@@ -1188,6 +1215,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class VariableInitializerContext extends ParserRuleContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -1217,7 +1245,7 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(149);
+			setState(153);
 			expression(0);
 			}
 		}
@@ -1232,6 +1260,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class MethodBodyContext extends ParserRuleContext {
 		public TerminalNode LEFT_BRACE() { return getToken(GentleJavaParser.LEFT_BRACE, 0); }
 		public TerminalNode RIGHT_BRACE() { return getToken(GentleJavaParser.RIGHT_BRACE, 0); }
@@ -1267,46 +1296,46 @@ public class GentleJavaParser extends Parser {
 		enterRule(_localctx, 38, RULE_methodBody);
 		int _la;
 		try {
-			setState(163);
+			setState(167);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LEFT_BRACE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(151);
+				setState(155);
 				match(LEFT_BRACE);
-				setState(153);
+				setState(157);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << SWITCH) | (1L << FOR) | (1L << WHILE) | (1L << DO) | (1L << REPEAT) | (1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << LEFT_BRACE) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0)) {
+				if (((_la) & ~0x3f) == 0 && ((1L << _la) & 425236248661800L) != 0) {
 					{
-					setState(152);
+					setState(156);
 					methodBlock();
 					}
 				}
 
-				setState(159);
+				setState(163);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==RETURN) {
 					{
-					setState(155);
+					setState(159);
 					match(RETURN);
-					setState(156);
+					setState(160);
 					expression(0);
-					setState(157);
+					setState(161);
 					match(SEMICOLON);
 					}
 				}
 
-				setState(161);
+				setState(165);
 				match(RIGHT_BRACE);
 				}
 				break;
 			case SEMICOLON:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(162);
+				setState(166);
 				match(SEMICOLON);
 				}
 				break;
@@ -1325,6 +1354,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementContext extends ParserRuleContext {
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1336,6 +1366,7 @@ public class GentleJavaParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class BlockLabelStatementContext extends StatementContext {
 		public BlockContext blockLabel;
 		public BlockContext block() {
@@ -1356,6 +1387,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class WhileStatementContext extends StatementContext {
 		public TerminalNode WHILE() { return getToken(GentleJavaParser.WHILE, 0); }
 		public ParExpressionContext parExpression() {
@@ -1379,6 +1411,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class RepeatStatementContext extends StatementContext {
 		public TerminalNode REPEAT() { return getToken(GentleJavaParser.REPEAT, 0); }
 		public BraceStatementContext braceStatement() {
@@ -1404,6 +1437,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ForStatementContext extends StatementContext {
 		public TerminalNode FOR() { return getToken(GentleJavaParser.FOR, 0); }
 		public TerminalNode LEFT_PARENTHESES() { return getToken(GentleJavaParser.LEFT_PARENTHESES, 0); }
@@ -1429,6 +1463,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class DoWhileStatementContext extends StatementContext {
 		public TerminalNode DO() { return getToken(GentleJavaParser.DO, 0); }
 		public BraceStatementContext braceStatement() {
@@ -1454,6 +1489,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionStatementContext extends StatementContext {
 		public ExpressionContext statementExpression;
 		public TerminalNode SEMICOLON() { return getToken(GentleJavaParser.SEMICOLON, 0); }
@@ -1475,6 +1511,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class IfStatementContext extends StatementContext {
 		public TerminalNode IF() { return getToken(GentleJavaParser.IF, 0); }
 		public ParExpressionContext parExpression() {
@@ -1502,6 +1539,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class SwitchStatementContext extends StatementContext {
 		public TerminalNode SWITCH() { return getToken(GentleJavaParser.SWITCH, 0); }
 		public ParExpressionContext parExpression() {
@@ -1543,14 +1581,14 @@ public class GentleJavaParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			setState(215);
+			setState(219);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LEFT_BRACE:
 				_localctx = new BlockLabelStatementContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(165);
+				setState(169);
 				((BlockLabelStatementContext)_localctx).blockLabel = block();
 				}
 				break;
@@ -1558,20 +1596,20 @@ public class GentleJavaParser extends Parser {
 				_localctx = new IfStatementContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(166);
+				setState(170);
 				match(IF);
-				setState(167);
-				parExpression();
-				setState(168);
-				braceStatement();
 				setState(171);
+				parExpression();
+				setState(172);
+				braceStatement();
+				setState(175);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ELSE) {
 					{
-					setState(169);
+					setState(173);
 					match(ELSE);
-					setState(170);
+					setState(174);
 					braceStatement();
 					}
 				}
@@ -1582,15 +1620,15 @@ public class GentleJavaParser extends Parser {
 				_localctx = new ForStatementContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(173);
-				match(FOR);
-				setState(174);
-				match(LEFT_PARENTHESES);
-				setState(175);
-				forControl();
-				setState(176);
-				match(RIGHT_PARENTHESES);
 				setState(177);
+				match(FOR);
+				setState(178);
+				match(LEFT_PARENTHESES);
+				setState(179);
+				forControl();
+				setState(180);
+				match(RIGHT_PARENTHESES);
+				setState(181);
 				braceStatement();
 				}
 				break;
@@ -1598,11 +1636,11 @@ public class GentleJavaParser extends Parser {
 				_localctx = new WhileStatementContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(179);
+				setState(183);
 				match(WHILE);
-				setState(180);
+				setState(184);
 				parExpression();
-				setState(181);
+				setState(185);
 				braceStatement();
 				}
 				break;
@@ -1610,15 +1648,15 @@ public class GentleJavaParser extends Parser {
 				_localctx = new DoWhileStatementContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(183);
-				match(DO);
-				setState(184);
-				braceStatement();
-				setState(185);
-				match(WHILE);
-				setState(186);
-				parExpression();
 				setState(187);
+				match(DO);
+				setState(188);
+				braceStatement();
+				setState(189);
+				match(WHILE);
+				setState(190);
+				parExpression();
+				setState(191);
 				match(SEMICOLON);
 				}
 				break;
@@ -1626,43 +1664,43 @@ public class GentleJavaParser extends Parser {
 				_localctx = new SwitchStatementContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(189);
+				setState(193);
 				match(SWITCH);
-				setState(190);
+				setState(194);
 				parExpression();
-				setState(191);
-				match(LEFT_BRACE);
 				setState(195);
+				match(LEFT_BRACE);
+				setState(199);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(192);
+						setState(196);
 						switchBlockStatementGroup();
 						}
 						} 
 					}
-					setState(197);
+					setState(201);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
 				}
-				setState(201);
+				setState(205);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==CASE || _la==DEFAULT) {
 					{
 					{
-					setState(198);
+					setState(202);
 					switchLabel();
 					}
 					}
-					setState(203);
+					setState(207);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(204);
+				setState(208);
 				match(RIGHT_BRACE);
 				}
 				break;
@@ -1670,15 +1708,15 @@ public class GentleJavaParser extends Parser {
 				_localctx = new RepeatStatementContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(206);
-				match(REPEAT);
-				setState(207);
-				braceStatement();
-				setState(208);
-				match(UNTIL);
-				setState(209);
-				parExpression();
 				setState(210);
+				match(REPEAT);
+				setState(211);
+				braceStatement();
+				setState(212);
+				match(UNTIL);
+				setState(213);
+				parExpression();
+				setState(214);
 				match(SEMICOLON);
 				}
 				break;
@@ -1695,9 +1733,9 @@ public class GentleJavaParser extends Parser {
 				_localctx = new ExpressionStatementContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(212);
+				setState(216);
 				((ExpressionStatementContext)_localctx).statementExpression = expression(0);
-				setState(213);
+				setState(217);
 				match(SEMICOLON);
 				}
 				break;
@@ -1716,6 +1754,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BraceStatementContext extends ParserRuleContext {
 		public TerminalNode LEFT_BRACE() { return getToken(GentleJavaParser.LEFT_BRACE, 0); }
 		public StatementContext statement() {
@@ -1747,11 +1786,11 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(217);
+			setState(221);
 			match(LEFT_BRACE);
-			setState(218);
+			setState(222);
 			statement();
-			setState(219);
+			setState(223);
 			match(RIGHT_BRACE);
 			}
 		}
@@ -1766,6 +1805,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ParExpressionContext extends ParserRuleContext {
 		public TerminalNode LEFT_PARENTHESES() { return getToken(GentleJavaParser.LEFT_PARENTHESES, 0); }
 		public ExpressionContext expression() {
@@ -1797,11 +1837,11 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(221);
+			setState(225);
 			match(LEFT_PARENTHESES);
-			setState(222);
+			setState(226);
 			expression(0);
-			setState(223);
+			setState(227);
 			match(RIGHT_PARENTHESES);
 			}
 		}
@@ -1816,6 +1856,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionListContext extends ParserRuleContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -1853,21 +1894,21 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(225);
+			setState(229);
 			expression(0);
-			setState(230);
+			setState(234);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(226);
+				setState(230);
 				match(COMMA);
-				setState(227);
+				setState(231);
 				expression(0);
 				}
 				}
-				setState(232);
+				setState(236);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1884,6 +1925,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionContext extends ParserRuleContext {
 		public ExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1895,6 +1937,7 @@ public class GentleJavaParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class CompareExpressionContext extends ExpressionContext {
 		public Token bop;
 		public List<ExpressionContext> expression() {
@@ -1920,6 +1963,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class MulDivModExpressionContext extends ExpressionContext {
 		public Token bop;
 		public List<ExpressionContext> expression() {
@@ -1946,6 +1990,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ParenthesesExpressionContext extends ExpressionContext {
 		public TerminalNode LEFT_PARENTHESES() { return getToken(GentleJavaParser.LEFT_PARENTHESES, 0); }
 		public ExpressionContext expression() {
@@ -1967,6 +2012,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PrefixExpressionContext extends ExpressionContext {
 		public Token prefix;
 		public ExpressionContext expression() {
@@ -1992,6 +2038,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PlusMinusExpressionContext extends ExpressionContext {
 		public Token bop;
 		public List<ExpressionContext> expression() {
@@ -2017,6 +2064,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class RelationalExpressionContext extends ExpressionContext {
 		public Token bop;
 		public List<ExpressionContext> expression() {
@@ -2044,6 +2092,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class AssignExpressionContext extends ExpressionContext {
 		public Token bop;
 		public List<ExpressionContext> expression() {
@@ -2068,6 +2117,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class IdentifierExpressionContext extends ExpressionContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -2087,6 +2137,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class MethodCallExpressionContext extends ExpressionContext {
 		public MethodCallContext methodCall() {
 			return getRuleContext(MethodCallContext.class,0);
@@ -2106,6 +2157,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class LogicalExpressionContext extends ExpressionContext {
 		public Token bop;
 		public List<ExpressionContext> expression() {
@@ -2131,6 +2183,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PostfixExpressionContext extends ExpressionContext {
 		public Token postfix;
 		public ExpressionContext expression() {
@@ -2153,6 +2206,7 @@ public class GentleJavaParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PossibleValueExpressionContext extends ExpressionContext {
 		public PossibleValuesContext possibleValues() {
 			return getRuleContext(PossibleValuesContext.class,0);
@@ -2189,16 +2243,16 @@ public class GentleJavaParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(243);
+			setState(247);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
 			case 1:
 				{
 				_localctx = new PossibleValueExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(234);
+				setState(238);
 				possibleValues();
 				}
 				break;
@@ -2207,7 +2261,7 @@ public class GentleJavaParser extends Parser {
 				_localctx = new IdentifierExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(235);
+				setState(239);
 				identifier();
 				}
 				break;
@@ -2216,7 +2270,7 @@ public class GentleJavaParser extends Parser {
 				_localctx = new MethodCallExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(236);
+				setState(240);
 				methodCall();
 				}
 				break;
@@ -2225,10 +2279,10 @@ public class GentleJavaParser extends Parser {
 				_localctx = new PrefixExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(237);
+				setState(241);
 				((PrefixExpressionContext)_localctx).prefix = _input.LT(1);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION))) != 0)) ) {
+				if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 275003736064L) != 0) ) {
 					((PrefixExpressionContext)_localctx).prefix = (Token)_errHandler.recoverInline(this);
 				}
 				else {
@@ -2236,7 +2290,7 @@ public class GentleJavaParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(238);
+				setState(242);
 				expression(8);
 				}
 				break;
@@ -2245,37 +2299,37 @@ public class GentleJavaParser extends Parser {
 				_localctx = new ParenthesesExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(239);
+				setState(243);
 				match(LEFT_PARENTHESES);
-				setState(240);
+				setState(244);
 				expression(0);
-				setState(241);
+				setState(245);
 				match(RIGHT_PARENTHESES);
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(267);
+			setState(271);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,21,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(265);
+					setState(269);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MulDivModExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(245);
+						setState(249);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(246);
+						setState(250);
 						((MulDivModExpressionContext)_localctx).bop = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MULTIPLICATION) | (1L << DIVISION) | (1L << MODULO))) != 0)) ) {
+						if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 7340032L) != 0) ) {
 							((MulDivModExpressionContext)_localctx).bop = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -2283,7 +2337,7 @@ public class GentleJavaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(247);
+						setState(251);
 						expression(8);
 						}
 						break;
@@ -2291,9 +2345,9 @@ public class GentleJavaParser extends Parser {
 						{
 						_localctx = new PlusMinusExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(248);
+						setState(252);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(249);
+						setState(253);
 						((PlusMinusExpressionContext)_localctx).bop = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==PLUS || _la==MINUS) ) {
@@ -2304,7 +2358,7 @@ public class GentleJavaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(250);
+						setState(254);
 						expression(7);
 						}
 						break;
@@ -2312,12 +2366,12 @@ public class GentleJavaParser extends Parser {
 						{
 						_localctx = new RelationalExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(251);
+						setState(255);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(252);
+						setState(256);
 						((RelationalExpressionContext)_localctx).bop = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GRATER_THAN) | (1L << GRATER_EQUAL_THAN) | (1L << LOWER_THAN) | (1L << LOWER_EQUAL_THAN))) != 0)) ) {
+						if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 2013265920L) != 0) ) {
 							((RelationalExpressionContext)_localctx).bop = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -2325,7 +2379,7 @@ public class GentleJavaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(253);
+						setState(257);
 						expression(6);
 						}
 						break;
@@ -2333,9 +2387,9 @@ public class GentleJavaParser extends Parser {
 						{
 						_localctx = new CompareExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(254);
+						setState(258);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(255);
+						setState(259);
 						((CompareExpressionContext)_localctx).bop = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==EQUALS || _la==NOT_EQUALS) ) {
@@ -2346,7 +2400,7 @@ public class GentleJavaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(256);
+						setState(260);
 						expression(5);
 						}
 						break;
@@ -2354,9 +2408,9 @@ public class GentleJavaParser extends Parser {
 						{
 						_localctx = new LogicalExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(257);
+						setState(261);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(258);
+						setState(262);
 						((LogicalExpressionContext)_localctx).bop = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==AND || _la==OR) ) {
@@ -2367,7 +2421,7 @@ public class GentleJavaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(259);
+						setState(263);
 						expression(4);
 						}
 						break;
@@ -2375,11 +2429,11 @@ public class GentleJavaParser extends Parser {
 						{
 						_localctx = new AssignExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(260);
+						setState(264);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(261);
+						setState(265);
 						((AssignExpressionContext)_localctx).bop = match(ASSIGN);
-						setState(262);
+						setState(266);
 						expression(1);
 						}
 						break;
@@ -2387,9 +2441,9 @@ public class GentleJavaParser extends Parser {
 						{
 						_localctx = new PostfixExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(263);
+						setState(267);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(264);
+						setState(268);
 						((PostfixExpressionContext)_localctx).postfix = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==INCREMENT || _la==DECREMENT) ) {
@@ -2405,9 +2459,9 @@ public class GentleJavaParser extends Parser {
 					}
 					} 
 				}
-				setState(269);
+				setState(273);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,21,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
 			}
 			}
 		}
@@ -2422,6 +2476,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ForControlContext extends ParserRuleContext {
 		public ExpressionListContext forUpdate;
 		public List<TerminalNode> SEMICOLON() { return getTokens(GentleJavaParser.SEMICOLON); }
@@ -2463,25 +2518,13 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(271);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << INT) | (1L << CONST) | (1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0)) {
-				{
-				setState(270);
-				forInit();
-				}
-			}
-
-			setState(273);
-			match(SEMICOLON);
 			setState(275);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0)) {
+			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 423037225435142L) != 0) {
 				{
 				setState(274);
-				expression(0);
+				forInit();
 				}
 			}
 
@@ -2490,9 +2533,21 @@ public class GentleJavaParser extends Parser {
 			setState(279);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0)) {
+			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 423037225402368L) != 0) {
 				{
 				setState(278);
+				expression(0);
+				}
+			}
+
+			setState(281);
+			match(SEMICOLON);
+			setState(283);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 423037225402368L) != 0) {
+				{
+				setState(282);
 				((ForControlContext)_localctx).forUpdate = expressionList();
 				}
 			}
@@ -2510,6 +2565,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ForInitContext extends ParserRuleContext {
 		public LocalVariableDeclarationContext localVariableDeclaration() {
 			return getRuleContext(LocalVariableDeclarationContext.class,0);
@@ -2540,7 +2596,7 @@ public class GentleJavaParser extends Parser {
 		ForInitContext _localctx = new ForInitContext(_ctx, getState());
 		enterRule(_localctx, 52, RULE_forInit);
 		try {
-			setState(283);
+			setState(287);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BOOLEAN:
@@ -2548,7 +2604,7 @@ public class GentleJavaParser extends Parser {
 			case CONST:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(281);
+				setState(285);
 				localVariableDeclaration();
 				}
 				break;
@@ -2564,7 +2620,7 @@ public class GentleJavaParser extends Parser {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(282);
+				setState(286);
 				expressionList();
 				}
 				break;
@@ -2583,6 +2639,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class SwitchBlockStatementGroupContext extends ParserRuleContext {
 		public List<SwitchLabelContext> switchLabel() {
 			return getRuleContexts(SwitchLabelContext.class);
@@ -2622,34 +2679,34 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(286); 
+			setState(290); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(285);
+				setState(289);
 				switchLabel();
 				}
 				}
-				setState(288); 
+				setState(292); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==CASE || _la==DEFAULT );
-			setState(291); 
+			setState(295); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(290);
+				setState(294);
 				blockStatement();
 				}
 				}
-				setState(293); 
+				setState(297); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << INT) | (1L << IF) | (1L << SWITCH) | (1L << FOR) | (1L << WHILE) | (1L << DO) | (1L << REPEAT) | (1L << VOID) | (1L << CONST) | (1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << LEFT_BRACE) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0) );
+			} while ( ((_la) & ~0x3f) == 0 && ((1L << _la) & 425236248702766L) != 0 );
 			}
 		}
 		catch (RecognitionException re) {
@@ -2663,6 +2720,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class SwitchLabelContext extends ParserRuleContext {
 		public TerminalNode CASE() { return getToken(GentleJavaParser.CASE, 0); }
 		public TerminalNode NUMBER() { return getToken(GentleJavaParser.NUMBER, 0); }
@@ -2691,26 +2749,26 @@ public class GentleJavaParser extends Parser {
 		SwitchLabelContext _localctx = new SwitchLabelContext(_ctx, getState());
 		enterRule(_localctx, 56, RULE_switchLabel);
 		try {
-			setState(300);
+			setState(304);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CASE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(295);
+				setState(299);
 				match(CASE);
-				setState(296);
+				setState(300);
 				match(NUMBER);
-				setState(297);
+				setState(301);
 				match(COLON);
 				}
 				break;
 			case DEFAULT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(298);
+				setState(302);
 				match(DEFAULT);
-				setState(299);
+				setState(303);
 				match(COLON);
 				}
 				break;
@@ -2729,6 +2787,7 @@ public class GentleJavaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class MethodCallContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -2764,21 +2823,21 @@ public class GentleJavaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(302);
+			setState(306);
 			identifier();
-			setState(303);
+			setState(307);
 			match(LEFT_PARENTHESES);
-			setState(305);
+			setState(309);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TRUE) | (1L << FALSE) | (1L << PLUS) | (1L << INCREMENT) | (1L << MINUS) | (1L << DECREMENT) | (1L << NEGATION) | (1L << LEFT_PARENTHESES) | (1L << NUMBER) | (1L << IDENTIFIER))) != 0)) {
+			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 423037225402368L) != 0) {
 				{
-				setState(304);
+				setState(308);
 				expressionList();
 				}
 			}
 
-			setState(307);
+			setState(311);
 			match(RIGHT_PARENTHESES);
 			}
 		}
@@ -2821,114 +2880,207 @@ public class GentleJavaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\64\u0138\4\2\t\2"+
-		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
-		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
-		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\3\2\3\2\3"+
-		"\3\3\3\5\3C\n\3\3\4\3\4\3\5\3\5\3\6\5\6J\n\6\3\6\3\6\5\6N\n\6\3\7\3\7"+
-		"\3\b\3\b\3\t\3\t\7\tV\n\t\f\t\16\tY\13\t\3\t\3\t\3\n\6\n^\n\n\r\n\16\n"+
-		"_\3\13\3\13\3\13\3\13\3\13\5\13g\n\13\3\f\5\fj\n\f\3\f\3\f\3\f\3\f\7\f"+
-		"p\n\f\f\f\16\fs\13\f\3\f\3\f\3\f\3\f\5\fy\n\f\3\r\3\r\3\r\3\r\3\r\3\16"+
-		"\3\16\3\16\3\16\3\17\3\17\3\17\7\17\u0087\n\17\f\17\16\17\u008a\13\17"+
-		"\3\20\3\20\3\20\3\21\3\21\3\22\3\22\3\22\5\22\u0094\n\22\3\23\3\23\3\24"+
-		"\3\24\3\25\3\25\5\25\u009c\n\25\3\25\3\25\3\25\3\25\5\25\u00a2\n\25\3"+
-		"\25\3\25\5\25\u00a6\n\25\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u00ae\n\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\7\26\u00c4\n\26\f\26\16\26\u00c7\13\26"+
-		"\3\26\7\26\u00ca\n\26\f\26\16\26\u00cd\13\26\3\26\3\26\3\26\3\26\3\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u00da\n\26\3\27\3\27\3\27\3\27\3\30"+
-		"\3\30\3\30\3\30\3\31\3\31\3\31\7\31\u00e7\n\31\f\31\16\31\u00ea\13\31"+
-		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u00f6\n\32\3\32"+
-		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32"+
-		"\3\32\3\32\3\32\3\32\3\32\7\32\u010c\n\32\f\32\16\32\u010f\13\32\3\33"+
-		"\5\33\u0112\n\33\3\33\3\33\5\33\u0116\n\33\3\33\3\33\5\33\u011a\n\33\3"+
-		"\34\3\34\5\34\u011e\n\34\3\35\6\35\u0121\n\35\r\35\16\35\u0122\3\35\6"+
-		"\35\u0126\n\35\r\35\16\35\u0127\3\36\3\36\3\36\3\36\3\36\5\36\u012f\n"+
-		"\36\3\37\3\37\3\37\5\37\u0134\n\37\3\37\3\37\3\37\2\3\62 \2\4\6\b\n\f"+
-		"\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<\2\13\3\2\3\4\3\2\24"+
-		"\25\4\2\31\31\33\33\4\2\31\34((\3\2\26\30\3\2\35 \4\2!!\'\'\3\2#$\4\2"+
-		"\32\32\34\34\2\u0146\2>\3\2\2\2\4B\3\2\2\2\6D\3\2\2\2\bF\3\2\2\2\nM\3"+
-		"\2\2\2\fO\3\2\2\2\16Q\3\2\2\2\20S\3\2\2\2\22]\3\2\2\2\24f\3\2\2\2\26i"+
-		"\3\2\2\2\30z\3\2\2\2\32\177\3\2\2\2\34\u0083\3\2\2\2\36\u008b\3\2\2\2"+
-		" \u008e\3\2\2\2\"\u0090\3\2\2\2$\u0095\3\2\2\2&\u0097\3\2\2\2(\u00a5\3"+
-		"\2\2\2*\u00d9\3\2\2\2,\u00db\3\2\2\2.\u00df\3\2\2\2\60\u00e3\3\2\2\2\62"+
-		"\u00f5\3\2\2\2\64\u0111\3\2\2\2\66\u011d\3\2\2\28\u0120\3\2\2\2:\u012e"+
-		"\3\2\2\2<\u0130\3\2\2\2>?\7\62\2\2?\3\3\2\2\2@C\5\6\4\2AC\7\17\2\2B@\3"+
-		"\2\2\2BA\3\2\2\2C\5\3\2\2\2DE\t\2\2\2E\7\3\2\2\2FG\t\3\2\2G\t\3\2\2\2"+
-		"HJ\t\4\2\2IH\3\2\2\2IJ\3\2\2\2JK\3\2\2\2KN\7\61\2\2LN\5\b\5\2MI\3\2\2"+
-		"\2ML\3\2\2\2N\13\3\2\2\2OP\7\21\2\2P\r\3\2\2\2QR\5\20\t\2R\17\3\2\2\2"+
-		"SW\7+\2\2TV\5\24\13\2UT\3\2\2\2VY\3\2\2\2WU\3\2\2\2WX\3\2\2\2XZ\3\2\2"+
-		"\2YW\3\2\2\2Z[\7,\2\2[\21\3\2\2\2\\^\5*\26\2]\\\3\2\2\2^_\3\2\2\2_]\3"+
-		"\2\2\2_`\3\2\2\2`\23\3\2\2\2ab\5\26\f\2bc\7/\2\2cg\3\2\2\2dg\5\30\r\2"+
-		"eg\5*\26\2fa\3\2\2\2fd\3\2\2\2fe\3\2\2\2g\25\3\2\2\2hj\5\f\7\2ih\3\2\2"+
-		"\2ij\3\2\2\2jk\3\2\2\2kx\5\6\4\2lq\5\2\2\2mn\7\"\2\2np\5\2\2\2om\3\2\2"+
-		"\2ps\3\2\2\2qo\3\2\2\2qr\3\2\2\2rt\3\2\2\2sq\3\2\2\2tu\7\"\2\2uv\5\62"+
-		"\32\2vy\3\2\2\2wy\5 \21\2xl\3\2\2\2xw\3\2\2\2y\27\3\2\2\2z{\5\4\3\2{|"+
-		"\5\2\2\2|}\5\32\16\2}~\5(\25\2~\31\3\2\2\2\177\u0080\7)\2\2\u0080\u0081"+
-		"\5\34\17\2\u0081\u0082\7*\2\2\u0082\33\3\2\2\2\u0083\u0088\5\36\20\2\u0084"+
-		"\u0085\7\60\2\2\u0085\u0087\5\36\20\2\u0086\u0084\3\2\2\2\u0087\u008a"+
-		"\3\2\2\2\u0088\u0086\3\2\2\2\u0088\u0089\3\2\2\2\u0089\35\3\2\2\2\u008a"+
-		"\u0088\3\2\2\2\u008b\u008c\5\6\4\2\u008c\u008d\5$\23\2\u008d\37\3\2\2"+
-		"\2\u008e\u008f\5\"\22\2\u008f!\3\2\2\2\u0090\u0093\5$\23\2\u0091\u0092"+
-		"\7\"\2\2\u0092\u0094\5&\24\2\u0093\u0091\3\2\2\2\u0093\u0094\3\2\2\2\u0094"+
-		"#\3\2\2\2\u0095\u0096\5\2\2\2\u0096%\3\2\2\2\u0097\u0098\5\62\32\2\u0098"+
-		"\'\3\2\2\2\u0099\u009b\7+\2\2\u009a\u009c\5\22\n\2\u009b\u009a\3\2\2\2"+
-		"\u009b\u009c\3\2\2\2\u009c\u00a1\3\2\2\2\u009d\u009e\7\20\2\2\u009e\u009f"+
-		"\5\62\32\2\u009f\u00a0\7/\2\2\u00a0\u00a2\3\2\2\2\u00a1\u009d\3\2\2\2"+
-		"\u00a1\u00a2\3\2\2\2\u00a2\u00a3\3\2\2\2\u00a3\u00a6\7,\2\2\u00a4\u00a6"+
-		"\7/\2\2\u00a5\u0099\3\2\2\2\u00a5\u00a4\3\2\2\2\u00a6)\3\2\2\2\u00a7\u00da"+
-		"\5\20\t\2\u00a8\u00a9\7\5\2\2\u00a9\u00aa\5.\30\2\u00aa\u00ad\5,\27\2"+
-		"\u00ab\u00ac\7\6\2\2\u00ac\u00ae\5,\27\2\u00ad\u00ab\3\2\2\2\u00ad\u00ae"+
-		"\3\2\2\2\u00ae\u00da\3\2\2\2\u00af\u00b0\7\n\2\2\u00b0\u00b1\7)\2\2\u00b1"+
-		"\u00b2\5\64\33\2\u00b2\u00b3\7*\2\2\u00b3\u00b4\5,\27\2\u00b4\u00da\3"+
-		"\2\2\2\u00b5\u00b6\7\13\2\2\u00b6\u00b7\5.\30\2\u00b7\u00b8\5,\27\2\u00b8"+
-		"\u00da\3\2\2\2\u00b9\u00ba\7\f\2\2\u00ba\u00bb\5,\27\2\u00bb\u00bc\7\13"+
-		"\2\2\u00bc\u00bd\5.\30\2\u00bd\u00be\7/\2\2\u00be\u00da\3\2\2\2\u00bf"+
-		"\u00c0\7\7\2\2\u00c0\u00c1\5.\30\2\u00c1\u00c5\7+\2\2\u00c2\u00c4\58\35"+
-		"\2\u00c3\u00c2\3\2\2\2\u00c4\u00c7\3\2\2\2\u00c5\u00c3\3\2\2\2\u00c5\u00c6"+
-		"\3\2\2\2\u00c6\u00cb\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00ca\5:\36\2\u00c9"+
-		"\u00c8\3\2\2\2\u00ca\u00cd\3\2\2\2\u00cb\u00c9\3\2\2\2\u00cb\u00cc\3\2"+
-		"\2\2\u00cc\u00ce\3\2\2\2\u00cd\u00cb\3\2\2\2\u00ce\u00cf\7,\2\2\u00cf"+
-		"\u00da\3\2\2\2\u00d0\u00d1\7\r\2\2\u00d1\u00d2\5,\27\2\u00d2\u00d3\7\16"+
-		"\2\2\u00d3\u00d4\5.\30\2\u00d4\u00d5\7/\2\2\u00d5\u00da\3\2\2\2\u00d6"+
-		"\u00d7\5\62\32\2\u00d7\u00d8\7/\2\2\u00d8\u00da\3\2\2\2\u00d9\u00a7\3"+
-		"\2\2\2\u00d9\u00a8\3\2\2\2\u00d9\u00af\3\2\2\2\u00d9\u00b5\3\2\2\2\u00d9"+
-		"\u00b9\3\2\2\2\u00d9\u00bf\3\2\2\2\u00d9\u00d0\3\2\2\2\u00d9\u00d6\3\2"+
-		"\2\2\u00da+\3\2\2\2\u00db\u00dc\7+\2\2\u00dc\u00dd\5*\26\2\u00dd\u00de"+
-		"\7,\2\2\u00de-\3\2\2\2\u00df\u00e0\7)\2\2\u00e0\u00e1\5\62\32\2\u00e1"+
-		"\u00e2\7*\2\2\u00e2/\3\2\2\2\u00e3\u00e8\5\62\32\2\u00e4\u00e5\7\60\2"+
-		"\2\u00e5\u00e7\5\62\32\2\u00e6\u00e4\3\2\2\2\u00e7\u00ea\3\2\2\2\u00e8"+
-		"\u00e6\3\2\2\2\u00e8\u00e9\3\2\2\2\u00e9\61\3\2\2\2\u00ea\u00e8\3\2\2"+
-		"\2\u00eb\u00ec\b\32\1\2\u00ec\u00f6\5\n\6\2\u00ed\u00f6\5\2\2\2\u00ee"+
-		"\u00f6\5<\37\2\u00ef\u00f0\t\5\2\2\u00f0\u00f6\5\62\32\n\u00f1\u00f2\7"+
-		")\2\2\u00f2\u00f3\5\62\32\2\u00f3\u00f4\7*\2\2\u00f4\u00f6\3\2\2\2\u00f5"+
-		"\u00eb\3\2\2\2\u00f5\u00ed\3\2\2\2\u00f5\u00ee\3\2\2\2\u00f5\u00ef\3\2"+
-		"\2\2\u00f5\u00f1\3\2\2\2\u00f6\u010d\3\2\2\2\u00f7\u00f8\f\t\2\2\u00f8"+
-		"\u00f9\t\6\2\2\u00f9\u010c\5\62\32\n\u00fa\u00fb\f\b\2\2\u00fb\u00fc\t"+
-		"\4\2\2\u00fc\u010c\5\62\32\t\u00fd\u00fe\f\7\2\2\u00fe\u00ff\t\7\2\2\u00ff"+
-		"\u010c\5\62\32\b\u0100\u0101\f\6\2\2\u0101\u0102\t\b\2\2\u0102\u010c\5"+
-		"\62\32\7\u0103\u0104\f\5\2\2\u0104\u0105\t\t\2\2\u0105\u010c\5\62\32\6"+
-		"\u0106\u0107\f\3\2\2\u0107\u0108\7\"\2\2\u0108\u010c\5\62\32\3\u0109\u010a"+
-		"\f\13\2\2\u010a\u010c\t\n\2\2\u010b\u00f7\3\2\2\2\u010b\u00fa\3\2\2\2"+
-		"\u010b\u00fd\3\2\2\2\u010b\u0100\3\2\2\2\u010b\u0103\3\2\2\2\u010b\u0106"+
-		"\3\2\2\2\u010b\u0109\3\2\2\2\u010c\u010f\3\2\2\2\u010d\u010b\3\2\2\2\u010d"+
-		"\u010e\3\2\2\2\u010e\63\3\2\2\2\u010f\u010d\3\2\2\2\u0110\u0112\5\66\34"+
-		"\2\u0111\u0110\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113\3\2\2\2\u0113\u0115"+
-		"\7/\2\2\u0114\u0116\5\62\32\2\u0115\u0114\3\2\2\2\u0115\u0116\3\2\2\2"+
-		"\u0116\u0117\3\2\2\2\u0117\u0119\7/\2\2\u0118\u011a\5\60\31\2\u0119\u0118"+
-		"\3\2\2\2\u0119\u011a\3\2\2\2\u011a\65\3\2\2\2\u011b\u011e\5\26\f\2\u011c"+
-		"\u011e\5\60\31\2\u011d\u011b\3\2\2\2\u011d\u011c\3\2\2\2\u011e\67\3\2"+
-		"\2\2\u011f\u0121\5:\36\2\u0120\u011f\3\2\2\2\u0121\u0122\3\2\2\2\u0122"+
-		"\u0120\3\2\2\2\u0122\u0123\3\2\2\2\u0123\u0125\3\2\2\2\u0124\u0126\5\24"+
-		"\13\2\u0125\u0124\3\2\2\2\u0126\u0127\3\2\2\2\u0127\u0125\3\2\2\2\u0127"+
-		"\u0128\3\2\2\2\u01289\3\2\2\2\u0129\u012a\7\b\2\2\u012a\u012b\7\61\2\2"+
-		"\u012b\u012f\7&\2\2\u012c\u012d\7\t\2\2\u012d\u012f\7&\2\2\u012e\u0129"+
-		"\3\2\2\2\u012e\u012c\3\2\2\2\u012f;\3\2\2\2\u0130\u0131\5\2\2\2\u0131"+
-		"\u0133\7)\2\2\u0132\u0134\5\60\31\2\u0133\u0132\3\2\2\2\u0133\u0134\3"+
-		"\2\2\2\u0134\u0135\3\2\2\2\u0135\u0136\7*\2\2\u0136=\3\2\2\2 BIMW_fiq"+
-		"x\u0088\u0093\u009b\u00a1\u00a5\u00ad\u00c5\u00cb\u00d9\u00e8\u00f5\u010b"+
-		"\u010d\u0111\u0115\u0119\u011d\u0122\u0127\u012e\u0133";
+		"\u0004\u00012\u013a\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
+		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
+		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
+		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
+		"\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007\u0012"+
+		"\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0002\u0015\u0007\u0015"+
+		"\u0002\u0016\u0007\u0016\u0002\u0017\u0007\u0017\u0002\u0018\u0007\u0018"+
+		"\u0002\u0019\u0007\u0019\u0002\u001a\u0007\u001a\u0002\u001b\u0007\u001b"+
+		"\u0002\u001c\u0007\u001c\u0002\u001d\u0007\u001d\u0001\u0000\u0001\u0000"+
+		"\u0001\u0001\u0001\u0001\u0003\u0001A\b\u0001\u0001\u0002\u0001\u0002"+
+		"\u0001\u0003\u0001\u0003\u0001\u0004\u0003\u0004H\b\u0004\u0001\u0004"+
+		"\u0001\u0004\u0003\u0004L\b\u0004\u0001\u0005\u0001\u0005\u0001\u0006"+
+		"\u0001\u0006\u0001\u0007\u0001\u0007\u0005\u0007T\b\u0007\n\u0007\f\u0007"+
+		"W\t\u0007\u0001\u0007\u0001\u0007\u0001\b\u0004\b\\\b\b\u000b\b\f\b]\u0001"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0003\te\b\t\u0001\n\u0003\nh\b\n\u0001"+
+		"\n\u0001\n\u0001\n\u0001\n\u0005\nn\b\n\n\n\f\nq\t\n\u0001\n\u0001\n\u0001"+
+		"\n\u0001\n\u0001\n\u0001\n\u0003\ny\b\n\u0003\n{\b\n\u0001\u000b\u0001"+
+		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001\f\u0001"+
+		"\f\u0001\r\u0001\r\u0001\r\u0005\r\u0089\b\r\n\r\f\r\u008c\t\r\u0001\u000e"+
+		"\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f\u0001\u0010\u0001\u0010"+
+		"\u0001\u0010\u0003\u0010\u0096\b\u0010\u0001\u0011\u0001\u0011\u0001\u0012"+
+		"\u0001\u0012\u0001\u0013\u0001\u0013\u0003\u0013\u009e\b\u0013\u0001\u0013"+
+		"\u0001\u0013\u0001\u0013\u0001\u0013\u0003\u0013\u00a4\b\u0013\u0001\u0013"+
+		"\u0001\u0013\u0003\u0013\u00a8\b\u0013\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014\u00b0\b\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0005\u0014\u00c6\b\u0014\n\u0014\f\u0014\u00c9\t\u0014\u0001"+
+		"\u0014\u0005\u0014\u00cc\b\u0014\n\u0014\f\u0014\u00cf\t\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014\u00dc\b\u0014"+
+		"\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0016\u0001\u0016"+
+		"\u0001\u0016\u0001\u0016\u0001\u0017\u0001\u0017\u0001\u0017\u0005\u0017"+
+		"\u00e9\b\u0017\n\u0017\f\u0017\u00ec\t\u0017\u0001\u0018\u0001\u0018\u0001"+
+		"\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001"+
+		"\u0018\u0001\u0018\u0003\u0018\u00f8\b\u0018\u0001\u0018\u0001\u0018\u0001"+
+		"\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001"+
+		"\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001"+
+		"\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0005"+
+		"\u0018\u010e\b\u0018\n\u0018\f\u0018\u0111\t\u0018\u0001\u0019\u0003\u0019"+
+		"\u0114\b\u0019\u0001\u0019\u0001\u0019\u0003\u0019\u0118\b\u0019\u0001"+
+		"\u0019\u0001\u0019\u0003\u0019\u011c\b\u0019\u0001\u001a\u0001\u001a\u0003"+
+		"\u001a\u0120\b\u001a\u0001\u001b\u0004\u001b\u0123\b\u001b\u000b\u001b"+
+		"\f\u001b\u0124\u0001\u001b\u0004\u001b\u0128\b\u001b\u000b\u001b\f\u001b"+
+		"\u0129\u0001\u001c\u0001\u001c\u0001\u001c\u0001\u001c\u0001\u001c\u0003"+
+		"\u001c\u0131\b\u001c\u0001\u001d\u0001\u001d\u0001\u001d\u0003\u001d\u0136"+
+		"\b\u001d\u0001\u001d\u0001\u001d\u0001\u001d\u0000\u00010\u001e\u0000"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c"+
+		"\u001e \"$&(*,.02468:\u0000\t\u0001\u0000\u0001\u0002\u0001\u0000\u0012"+
+		"\u0013\u0002\u0000\u0017\u0017\u0019\u0019\u0002\u0000\u0017\u001a&&\u0001"+
+		"\u0000\u0014\u0016\u0001\u0000\u001b\u001e\u0002\u0000\u001f\u001f%%\u0001"+
+		"\u0000!\"\u0002\u0000\u0018\u0018\u001a\u001a\u0149\u0000<\u0001\u0000"+
+		"\u0000\u0000\u0002@\u0001\u0000\u0000\u0000\u0004B\u0001\u0000\u0000\u0000"+
+		"\u0006D\u0001\u0000\u0000\u0000\bK\u0001\u0000\u0000\u0000\nM\u0001\u0000"+
+		"\u0000\u0000\fO\u0001\u0000\u0000\u0000\u000eQ\u0001\u0000\u0000\u0000"+
+		"\u0010[\u0001\u0000\u0000\u0000\u0012d\u0001\u0000\u0000\u0000\u0014g"+
+		"\u0001\u0000\u0000\u0000\u0016|\u0001\u0000\u0000\u0000\u0018\u0081\u0001"+
+		"\u0000\u0000\u0000\u001a\u0085\u0001\u0000\u0000\u0000\u001c\u008d\u0001"+
+		"\u0000\u0000\u0000\u001e\u0090\u0001\u0000\u0000\u0000 \u0092\u0001\u0000"+
+		"\u0000\u0000\"\u0097\u0001\u0000\u0000\u0000$\u0099\u0001\u0000\u0000"+
+		"\u0000&\u00a7\u0001\u0000\u0000\u0000(\u00db\u0001\u0000\u0000\u0000*"+
+		"\u00dd\u0001\u0000\u0000\u0000,\u00e1\u0001\u0000\u0000\u0000.\u00e5\u0001"+
+		"\u0000\u0000\u00000\u00f7\u0001\u0000\u0000\u00002\u0113\u0001\u0000\u0000"+
+		"\u00004\u011f\u0001\u0000\u0000\u00006\u0122\u0001\u0000\u0000\u00008"+
+		"\u0130\u0001\u0000\u0000\u0000:\u0132\u0001\u0000\u0000\u0000<=\u0005"+
+		"0\u0000\u0000=\u0001\u0001\u0000\u0000\u0000>A\u0003\u0004\u0002\u0000"+
+		"?A\u0005\r\u0000\u0000@>\u0001\u0000\u0000\u0000@?\u0001\u0000\u0000\u0000"+
+		"A\u0003\u0001\u0000\u0000\u0000BC\u0007\u0000\u0000\u0000C\u0005\u0001"+
+		"\u0000\u0000\u0000DE\u0007\u0001\u0000\u0000E\u0007\u0001\u0000\u0000"+
+		"\u0000FH\u0007\u0002\u0000\u0000GF\u0001\u0000\u0000\u0000GH\u0001\u0000"+
+		"\u0000\u0000HI\u0001\u0000\u0000\u0000IL\u0005/\u0000\u0000JL\u0003\u0006"+
+		"\u0003\u0000KG\u0001\u0000\u0000\u0000KJ\u0001\u0000\u0000\u0000L\t\u0001"+
+		"\u0000\u0000\u0000MN\u0005\u000f\u0000\u0000N\u000b\u0001\u0000\u0000"+
+		"\u0000OP\u0003\u000e\u0007\u0000P\r\u0001\u0000\u0000\u0000QU\u0005)\u0000"+
+		"\u0000RT\u0003\u0012\t\u0000SR\u0001\u0000\u0000\u0000TW\u0001\u0000\u0000"+
+		"\u0000US\u0001\u0000\u0000\u0000UV\u0001\u0000\u0000\u0000VX\u0001\u0000"+
+		"\u0000\u0000WU\u0001\u0000\u0000\u0000XY\u0005*\u0000\u0000Y\u000f\u0001"+
+		"\u0000\u0000\u0000Z\\\u0003(\u0014\u0000[Z\u0001\u0000\u0000\u0000\\]"+
+		"\u0001\u0000\u0000\u0000][\u0001\u0000\u0000\u0000]^\u0001\u0000\u0000"+
+		"\u0000^\u0011\u0001\u0000\u0000\u0000_`\u0003\u0014\n\u0000`a\u0005-\u0000"+
+		"\u0000ae\u0001\u0000\u0000\u0000be\u0003\u0016\u000b\u0000ce\u0003(\u0014"+
+		"\u0000d_\u0001\u0000\u0000\u0000db\u0001\u0000\u0000\u0000dc\u0001\u0000"+
+		"\u0000\u0000e\u0013\u0001\u0000\u0000\u0000fh\u0003\n\u0005\u0000gf\u0001"+
+		"\u0000\u0000\u0000gh\u0001\u0000\u0000\u0000hi\u0001\u0000\u0000\u0000"+
+		"iz\u0003\u0004\u0002\u0000jo\u0003\u0000\u0000\u0000kl\u0005 \u0000\u0000"+
+		"ln\u0003\u0000\u0000\u0000mk\u0001\u0000\u0000\u0000nq\u0001\u0000\u0000"+
+		"\u0000om\u0001\u0000\u0000\u0000op\u0001\u0000\u0000\u0000pr\u0001\u0000"+
+		"\u0000\u0000qo\u0001\u0000\u0000\u0000rs\u0005 \u0000\u0000st\u00030\u0018"+
+		"\u0000t{\u0001\u0000\u0000\u0000ux\u0003\u0000\u0000\u0000vw\u0005 \u0000"+
+		"\u0000wy\u00030\u0018\u0000xv\u0001\u0000\u0000\u0000xy\u0001\u0000\u0000"+
+		"\u0000y{\u0001\u0000\u0000\u0000zj\u0001\u0000\u0000\u0000zu\u0001\u0000"+
+		"\u0000\u0000{\u0015\u0001\u0000\u0000\u0000|}\u0003\u0002\u0001\u0000"+
+		"}~\u0003\u0000\u0000\u0000~\u007f\u0003\u0018\f\u0000\u007f\u0080\u0003"+
+		"&\u0013\u0000\u0080\u0017\u0001\u0000\u0000\u0000\u0081\u0082\u0005\'"+
+		"\u0000\u0000\u0082\u0083\u0003\u001a\r\u0000\u0083\u0084\u0005(\u0000"+
+		"\u0000\u0084\u0019\u0001\u0000\u0000\u0000\u0085\u008a\u0003\u001c\u000e"+
+		"\u0000\u0086\u0087\u0005.\u0000\u0000\u0087\u0089\u0003\u001c\u000e\u0000"+
+		"\u0088\u0086\u0001\u0000\u0000\u0000\u0089\u008c\u0001\u0000\u0000\u0000"+
+		"\u008a\u0088\u0001\u0000\u0000\u0000\u008a\u008b\u0001\u0000\u0000\u0000"+
+		"\u008b\u001b\u0001\u0000\u0000\u0000\u008c\u008a\u0001\u0000\u0000\u0000"+
+		"\u008d\u008e\u0003\u0004\u0002\u0000\u008e\u008f\u0003\"\u0011\u0000\u008f"+
+		"\u001d\u0001\u0000\u0000\u0000\u0090\u0091\u0003 \u0010\u0000\u0091\u001f"+
+		"\u0001\u0000\u0000\u0000\u0092\u0095\u0003\"\u0011\u0000\u0093\u0094\u0005"+
+		" \u0000\u0000\u0094\u0096\u0003$\u0012\u0000\u0095\u0093\u0001\u0000\u0000"+
+		"\u0000\u0095\u0096\u0001\u0000\u0000\u0000\u0096!\u0001\u0000\u0000\u0000"+
+		"\u0097\u0098\u0003\u0000\u0000\u0000\u0098#\u0001\u0000\u0000\u0000\u0099"+
+		"\u009a\u00030\u0018\u0000\u009a%\u0001\u0000\u0000\u0000\u009b\u009d\u0005"+
+		")\u0000\u0000\u009c\u009e\u0003\u0010\b\u0000\u009d\u009c\u0001\u0000"+
+		"\u0000\u0000\u009d\u009e\u0001\u0000\u0000\u0000\u009e\u00a3\u0001\u0000"+
+		"\u0000\u0000\u009f\u00a0\u0005\u000e\u0000\u0000\u00a0\u00a1\u00030\u0018"+
+		"\u0000\u00a1\u00a2\u0005-\u0000\u0000\u00a2\u00a4\u0001\u0000\u0000\u0000"+
+		"\u00a3\u009f\u0001\u0000\u0000\u0000\u00a3\u00a4\u0001\u0000\u0000\u0000"+
+		"\u00a4\u00a5\u0001\u0000\u0000\u0000\u00a5\u00a8\u0005*\u0000\u0000\u00a6"+
+		"\u00a8\u0005-\u0000\u0000\u00a7\u009b\u0001\u0000\u0000\u0000\u00a7\u00a6"+
+		"\u0001\u0000\u0000\u0000\u00a8\'\u0001\u0000\u0000\u0000\u00a9\u00dc\u0003"+
+		"\u000e\u0007\u0000\u00aa\u00ab\u0005\u0003\u0000\u0000\u00ab\u00ac\u0003"+
+		",\u0016\u0000\u00ac\u00af\u0003*\u0015\u0000\u00ad\u00ae\u0005\u0004\u0000"+
+		"\u0000\u00ae\u00b0\u0003*\u0015\u0000\u00af\u00ad\u0001\u0000\u0000\u0000"+
+		"\u00af\u00b0\u0001\u0000\u0000\u0000\u00b0\u00dc\u0001\u0000\u0000\u0000"+
+		"\u00b1\u00b2\u0005\b\u0000\u0000\u00b2\u00b3\u0005\'\u0000\u0000\u00b3"+
+		"\u00b4\u00032\u0019\u0000\u00b4\u00b5\u0005(\u0000\u0000\u00b5\u00b6\u0003"+
+		"*\u0015\u0000\u00b6\u00dc\u0001\u0000\u0000\u0000\u00b7\u00b8\u0005\t"+
+		"\u0000\u0000\u00b8\u00b9\u0003,\u0016\u0000\u00b9\u00ba\u0003*\u0015\u0000"+
+		"\u00ba\u00dc\u0001\u0000\u0000\u0000\u00bb\u00bc\u0005\n\u0000\u0000\u00bc"+
+		"\u00bd\u0003*\u0015\u0000\u00bd\u00be\u0005\t\u0000\u0000\u00be\u00bf"+
+		"\u0003,\u0016\u0000\u00bf\u00c0\u0005-\u0000\u0000\u00c0\u00dc\u0001\u0000"+
+		"\u0000\u0000\u00c1\u00c2\u0005\u0005\u0000\u0000\u00c2\u00c3\u0003,\u0016"+
+		"\u0000\u00c3\u00c7\u0005)\u0000\u0000\u00c4\u00c6\u00036\u001b\u0000\u00c5"+
+		"\u00c4\u0001\u0000\u0000\u0000\u00c6\u00c9\u0001\u0000\u0000\u0000\u00c7"+
+		"\u00c5\u0001\u0000\u0000\u0000\u00c7\u00c8\u0001\u0000\u0000\u0000\u00c8"+
+		"\u00cd\u0001\u0000\u0000\u0000\u00c9\u00c7\u0001\u0000\u0000\u0000\u00ca"+
+		"\u00cc\u00038\u001c\u0000\u00cb\u00ca\u0001\u0000\u0000\u0000\u00cc\u00cf"+
+		"\u0001\u0000\u0000\u0000\u00cd\u00cb\u0001\u0000\u0000\u0000\u00cd\u00ce"+
+		"\u0001\u0000\u0000\u0000\u00ce\u00d0\u0001\u0000\u0000\u0000\u00cf\u00cd"+
+		"\u0001\u0000\u0000\u0000\u00d0\u00d1\u0005*\u0000\u0000\u00d1\u00dc\u0001"+
+		"\u0000\u0000\u0000\u00d2\u00d3\u0005\u000b\u0000\u0000\u00d3\u00d4\u0003"+
+		"*\u0015\u0000\u00d4\u00d5\u0005\f\u0000\u0000\u00d5\u00d6\u0003,\u0016"+
+		"\u0000\u00d6\u00d7\u0005-\u0000\u0000\u00d7\u00dc\u0001\u0000\u0000\u0000"+
+		"\u00d8\u00d9\u00030\u0018\u0000\u00d9\u00da\u0005-\u0000\u0000\u00da\u00dc"+
+		"\u0001\u0000\u0000\u0000\u00db\u00a9\u0001\u0000\u0000\u0000\u00db\u00aa"+
+		"\u0001\u0000\u0000\u0000\u00db\u00b1\u0001\u0000\u0000\u0000\u00db\u00b7"+
+		"\u0001\u0000\u0000\u0000\u00db\u00bb\u0001\u0000\u0000\u0000\u00db\u00c1"+
+		"\u0001\u0000\u0000\u0000\u00db\u00d2\u0001\u0000\u0000\u0000\u00db\u00d8"+
+		"\u0001\u0000\u0000\u0000\u00dc)\u0001\u0000\u0000\u0000\u00dd\u00de\u0005"+
+		")\u0000\u0000\u00de\u00df\u0003(\u0014\u0000\u00df\u00e0\u0005*\u0000"+
+		"\u0000\u00e0+\u0001\u0000\u0000\u0000\u00e1\u00e2\u0005\'\u0000\u0000"+
+		"\u00e2\u00e3\u00030\u0018\u0000\u00e3\u00e4\u0005(\u0000\u0000\u00e4-"+
+		"\u0001\u0000\u0000\u0000\u00e5\u00ea\u00030\u0018\u0000\u00e6\u00e7\u0005"+
+		".\u0000\u0000\u00e7\u00e9\u00030\u0018\u0000\u00e8\u00e6\u0001\u0000\u0000"+
+		"\u0000\u00e9\u00ec\u0001\u0000\u0000\u0000\u00ea\u00e8\u0001\u0000\u0000"+
+		"\u0000\u00ea\u00eb\u0001\u0000\u0000\u0000\u00eb/\u0001\u0000\u0000\u0000"+
+		"\u00ec\u00ea\u0001\u0000\u0000\u0000\u00ed\u00ee\u0006\u0018\uffff\uffff"+
+		"\u0000\u00ee\u00f8\u0003\b\u0004\u0000\u00ef\u00f8\u0003\u0000\u0000\u0000"+
+		"\u00f0\u00f8\u0003:\u001d\u0000\u00f1\u00f2\u0007\u0003\u0000\u0000\u00f2"+
+		"\u00f8\u00030\u0018\b\u00f3\u00f4\u0005\'\u0000\u0000\u00f4\u00f5\u0003"+
+		"0\u0018\u0000\u00f5\u00f6\u0005(\u0000\u0000\u00f6\u00f8\u0001\u0000\u0000"+
+		"\u0000\u00f7\u00ed\u0001\u0000\u0000\u0000\u00f7\u00ef\u0001\u0000\u0000"+
+		"\u0000\u00f7\u00f0\u0001\u0000\u0000\u0000\u00f7\u00f1\u0001\u0000\u0000"+
+		"\u0000\u00f7\u00f3\u0001\u0000\u0000\u0000\u00f8\u010f\u0001\u0000\u0000"+
+		"\u0000\u00f9\u00fa\n\u0007\u0000\u0000\u00fa\u00fb\u0007\u0004\u0000\u0000"+
+		"\u00fb\u010e\u00030\u0018\b\u00fc\u00fd\n\u0006\u0000\u0000\u00fd\u00fe"+
+		"\u0007\u0002\u0000\u0000\u00fe\u010e\u00030\u0018\u0007\u00ff\u0100\n"+
+		"\u0005\u0000\u0000\u0100\u0101\u0007\u0005\u0000\u0000\u0101\u010e\u0003"+
+		"0\u0018\u0006\u0102\u0103\n\u0004\u0000\u0000\u0103\u0104\u0007\u0006"+
+		"\u0000\u0000\u0104\u010e\u00030\u0018\u0005\u0105\u0106\n\u0003\u0000"+
+		"\u0000\u0106\u0107\u0007\u0007\u0000\u0000\u0107\u010e\u00030\u0018\u0004"+
+		"\u0108\u0109\n\u0001\u0000\u0000\u0109\u010a\u0005 \u0000\u0000\u010a"+
+		"\u010e\u00030\u0018\u0001\u010b\u010c\n\t\u0000\u0000\u010c\u010e\u0007"+
+		"\b\u0000\u0000\u010d\u00f9\u0001\u0000\u0000\u0000\u010d\u00fc\u0001\u0000"+
+		"\u0000\u0000\u010d\u00ff\u0001\u0000\u0000\u0000\u010d\u0102\u0001\u0000"+
+		"\u0000\u0000\u010d\u0105\u0001\u0000\u0000\u0000\u010d\u0108\u0001\u0000"+
+		"\u0000\u0000\u010d\u010b\u0001\u0000\u0000\u0000\u010e\u0111\u0001\u0000"+
+		"\u0000\u0000\u010f\u010d\u0001\u0000\u0000\u0000\u010f\u0110\u0001\u0000"+
+		"\u0000\u0000\u01101\u0001\u0000\u0000\u0000\u0111\u010f\u0001\u0000\u0000"+
+		"\u0000\u0112\u0114\u00034\u001a\u0000\u0113\u0112\u0001\u0000\u0000\u0000"+
+		"\u0113\u0114\u0001\u0000\u0000\u0000\u0114\u0115\u0001\u0000\u0000\u0000"+
+		"\u0115\u0117\u0005-\u0000\u0000\u0116\u0118\u00030\u0018\u0000\u0117\u0116"+
+		"\u0001\u0000\u0000\u0000\u0117\u0118\u0001\u0000\u0000\u0000\u0118\u0119"+
+		"\u0001\u0000\u0000\u0000\u0119\u011b\u0005-\u0000\u0000\u011a\u011c\u0003"+
+		".\u0017\u0000\u011b\u011a\u0001\u0000\u0000\u0000\u011b\u011c\u0001\u0000"+
+		"\u0000\u0000\u011c3\u0001\u0000\u0000\u0000\u011d\u0120\u0003\u0014\n"+
+		"\u0000\u011e\u0120\u0003.\u0017\u0000\u011f\u011d\u0001\u0000\u0000\u0000"+
+		"\u011f\u011e\u0001\u0000\u0000\u0000\u01205\u0001\u0000\u0000\u0000\u0121"+
+		"\u0123\u00038\u001c\u0000\u0122\u0121\u0001\u0000\u0000\u0000\u0123\u0124"+
+		"\u0001\u0000\u0000\u0000\u0124\u0122\u0001\u0000\u0000\u0000\u0124\u0125"+
+		"\u0001\u0000\u0000\u0000\u0125\u0127\u0001\u0000\u0000\u0000\u0126\u0128"+
+		"\u0003\u0012\t\u0000\u0127\u0126\u0001\u0000\u0000\u0000\u0128\u0129\u0001"+
+		"\u0000\u0000\u0000\u0129\u0127\u0001\u0000\u0000\u0000\u0129\u012a\u0001"+
+		"\u0000\u0000\u0000\u012a7\u0001\u0000\u0000\u0000\u012b\u012c\u0005\u0006"+
+		"\u0000\u0000\u012c\u012d\u0005/\u0000\u0000\u012d\u0131\u0005$\u0000\u0000"+
+		"\u012e\u012f\u0005\u0007\u0000\u0000\u012f\u0131\u0005$\u0000\u0000\u0130"+
+		"\u012b\u0001\u0000\u0000\u0000\u0130\u012e\u0001\u0000\u0000\u0000\u0131"+
+		"9\u0001\u0000\u0000\u0000\u0132\u0133\u0003\u0000\u0000\u0000\u0133\u0135"+
+		"\u0005\'\u0000\u0000\u0134\u0136\u0003.\u0017\u0000\u0135\u0134\u0001"+
+		"\u0000\u0000\u0000\u0135\u0136\u0001\u0000\u0000\u0000\u0136\u0137\u0001"+
+		"\u0000\u0000\u0000\u0137\u0138\u0005(\u0000\u0000\u0138;\u0001\u0000\u0000"+
+		"\u0000\u001f@GKU]dgoxz\u008a\u0095\u009d\u00a3\u00a7\u00af\u00c7\u00cd"+
+		"\u00db\u00ea\u00f7\u010d\u010f\u0113\u0117\u011b\u011f\u0124\u0129\u0130"+
+		"\u0135";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

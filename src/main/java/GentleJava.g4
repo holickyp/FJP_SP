@@ -126,7 +126,7 @@ blockStatement
     ;
 
 localVariableDeclaration
-    : variableModifier? typeType (identifier (ASSIGN identifier)* ASSIGN expression | variableDeclarators)
+    : variableModifier? typeType (identifier (ASSIGN identifier)* ASSIGN expression | identifier (ASSIGN expression)?)
     ;
 
 methodDeclaration

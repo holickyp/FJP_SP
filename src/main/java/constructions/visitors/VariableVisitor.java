@@ -13,14 +13,45 @@ public class VariableVisitor extends GentleJavaBaseVisitor<Variable> {
     //TODO parallel array suppose other mehods are needed VariableModifierContext VariableDeclaratorsContext
     @Override
     public Variable visitLocalVariableDeclaration(GentleJavaParser.LocalVariableDeclarationContext ctx) {
-        return new Variable(ctx.typeType().getText().toUpperCase().equals("CONST"),
+
+       //ctx.variableModifier().CONST().getText().toUpperCase()
+        if(ctx.variableModifier() != null ) {
+            return new Variable(true,
+                    VariableType.valueOf(ctx.typeType().getText().toUpperCase()),
+                    ctx.identifier(0).getText(),
+                    // ctx.identifier(),
+                    getParallel(ctx.identifier()),
+                    new ExpressionVisitor().visit(ctx.expression()));
+        }
+        return new Variable(false,
                 VariableType.valueOf(ctx.typeType().getText().toUpperCase()),
                 ctx.identifier(0).getText(),
-               // ctx.identifier(),
-                null,
+                // ctx.identifier(),
+                getParallel(ctx.identifier()),
                 new ExpressionVisitor().visit(ctx.expression()));
     }
 
+    public String getIdentifier(GentleJavaParser.VariableDeclaratorIdContext ctx) {
+        return ctx.identifier().getText();
+    }
 
+
+    /**
+     * Processes parallel declaration
+     * @param ctx ParalelDeclaration context
+     * @return
+     */
+    private List<String> getParallel(List<GentleJavaParser.IdentifierContext> ctx)
+    {
+        List<String> parallel = new ArrayList<>();
+
+        for (int i = 0 ; i < ctx.size() ; i++)
+        {
+            String identifier = ctx.get(i).getText();
+            parallel.add(identifier);
+        }
+
+        return parallel;
+    }
 
 }
