@@ -174,6 +174,7 @@ statement
     | DO braceStatement WHILE parExpression SEMICOLON                                       #doWhileStatement
     | SWITCH parExpression LEFT_BRACE switchBlockStatementGroup* switchLabel* RIGHT_BRACE   #switchStatement
     | REPEAT braceStatement UNTIL parExpression SEMICOLON                                   #repeatStatement
+    | statementExpression=expression SEMICOLON                                              #expressionStatement
     ;
 
 braceStatement
@@ -200,6 +201,7 @@ expression
     | expression bop=(EQUALS | NOT_EQUALS) expression                                               #compareExpression
     | expression bop=(AND | OR) expression                                                          #logicalExpression
     | LEFT_PARENTHESES expression RIGHT_PARENTHESES                                                 #parenthesesExpression
+    | <assoc=right> expression bop=ASSIGN expression                                                #assignExpression
     ;
 
 forControl

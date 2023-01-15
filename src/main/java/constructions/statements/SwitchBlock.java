@@ -1,19 +1,17 @@
 package constructions.statements;
 
-import constructions.BlockStatement;
-
-public class SwitchBlock {
+public class SwitchBlock{
 
     private int identifier;
-    private BlockStatement blockStatement;
+    private BlockLabelStatement blockStatement;
     private int line;
 
-    public SwitchBlock(BlockStatement blockStatement, int line) {
+    public SwitchBlock(BlockLabelStatement blockStatement, int line) {
         this.blockStatement = blockStatement;
         this.line = line;
     }
 
-    public SwitchBlock(int identifier, BlockStatement blockStatement) {
+    public SwitchBlock(int identifier, BlockLabelStatement blockStatement) {
         this.identifier = identifier;
         this.blockStatement = blockStatement;
     }
@@ -22,7 +20,7 @@ public class SwitchBlock {
         return identifier;
     }
 
-    public BlockStatement getBlockStatement() {
+    public BlockLabelStatement getSwitchBlockStatement() {
         return blockStatement;
     }
 

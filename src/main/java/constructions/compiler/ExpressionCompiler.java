@@ -1,9 +1,6 @@
 package constructions.compiler;
 
-import constructions.enums.Operator;
-import constructions.enums.PL0Instructions;
-import constructions.enums.ReturnType;
-import constructions.enums.VariableType;
+import constructions.enums.*;
 import constructions.expressions.*;
 import constructions.symbolTable.SymbolTableItem;
 
@@ -55,6 +52,7 @@ public class ExpressionCompiler extends BaseCompiler {
             case COMPARE: type = compareInstructions((CompareExpression) expression);break;
             case LOGICAL: type = logicalInstructions((LogicalExpression) expression);break;
             case PARENTHESES: type = parenthesesInstructions((ParenthesesExpression) expression);break;
+            case ASSIGN: type = assignInstructions((AssignExpression) expression);break;
         }
         return type;
     }
@@ -181,5 +179,39 @@ public class ExpressionCompiler extends BaseCompiler {
 
     private VariableType parenthesesInstructions(ParenthesesExpression parenthesesExpression) {
         return processExpression(parenthesesExpression.getExpression());
+    }
+
+    private VariableType assignInstructions(AssignExpression assignExpression) {
+        Expression left = assignExpression.getLeft();
+        if(left.getType() == ExpressionType.IDENTIFIER) {
+            IdentifierExpression identifierExpression = (IdentifierExpression) left;
+            String identifier = identifierExpression.getValue().toString();
+            if(isInSymbolTable(identifier)) {
+                SymbolTableItem symbolTableItem = getSymbolTable().getItem(identifier);
+                if(symbolTableItem.isConstant()) {
+                    //TODO error
+                }
+                addInstruction(PL0Instructions.LOD, level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
+
+                Expression right = assignExpression.getRight();
+                if(right.getType() == ExpressionType.METHOD_CALL) {
+                    MethodCallExpression methodCallExpression = (MethodCallExpression) right;
+                    ReturnType type = symbolTableItem.getVariableType() == VariableType.INT ? ReturnType.INT : ReturnType.BOOLEAN;
+                    methodCallExpression.getMethodCall().setReturnType(type);
+                    new ExpressionCompiler(methodCallExpression, symbolTableItem.getVariableType(), level).run();
+                }
+                else {
+                    right.setReturnType(symbolTableItem.getVariableType());
+                    new ExpressionCompiler(right, symbolTableItem.getVariableType(), level).run();
+
+                }
+                addInstruction(PL0Instructions.STO, level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
+                return symbolTableItem.getVariableType();
+            }
+            else {
+                //TODO error
+            }
+        }
+        return null;
     }
 }

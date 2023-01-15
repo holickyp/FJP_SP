@@ -13,4 +13,12 @@ public class InitFor {
         this.variable = variable;
         this.expressions = expressions;
     }
+
+    public Variable getVariable() {
+        return variable;
+    }
+
+    public List<Expression> getExpressions() {
+        return expressions;
+    }
 }

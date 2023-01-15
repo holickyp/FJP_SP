@@ -11,5 +11,6 @@ public enum ExpressionType {
     RELATIONAL,
     COMPARE,
     LOGICAL,
-    PARENTHESES
+    PARENTHESES,
+    ASSIGN
 }

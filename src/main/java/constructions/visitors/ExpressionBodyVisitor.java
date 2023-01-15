@@ -1,18 +1,11 @@
 package constructions.visitors;
 
-
-import com.sun.tools.javac.jvm.Gen;
-import com.sun.tools.javac.resources.ct;
-import constructions.enums.Operator;
-import constructions.enums.PostfixType;
-import constructions.enums.PrefixType;
-import constructions.enums.VariableType;
+import constructions.enums.*;
 import constructions.expressions.*;
 import constructions.method.MethodCall;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
-import java.util.List;
 
 
 public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
@@ -20,8 +13,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
 
     @Override
     public Expression visitCompareExpression(GentleJavaParser.CompareExpressionContext ctx) {
-        Expression left = this.visit(ctx.expression(0));
-        Expression right = this.visit(ctx.expression(1));
+        Expression left = visit(ctx.expression(0));
+        Expression right = visit(ctx.expression(1));
         Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new CompareExpression(ctx.start.getLine(), left, operator, right);
@@ -35,8 +28,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     @Override
     public Expression visitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx)
     {
-        Expression left = this.visit(ctx.expression(0));
-        Expression right = this.visit(ctx.expression(1));
+        Expression left = visit(ctx.expression(0));
+        Expression right = visit(ctx.expression(1));
         Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new PlusMinusExpression(ctx.start.getLine(),left, operator, right);
@@ -61,8 +54,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     @Override
     public Expression visitRelationalExpression(GentleJavaParser.RelationalExpressionContext ctx)
     {
-        Expression left = this.visit(ctx.expression(0));
-        Expression right = this.visit(ctx.expression(1));
+        Expression left = visit(ctx.expression(0));
+        Expression right = visit(ctx.expression(1));
         Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new RelationalExpression(ctx.start.getLine(), left, operator, right);
@@ -120,8 +113,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     @Override
     public Expression visitLogicalExpression(GentleJavaParser.LogicalExpressionContext ctx)
     {
-        Expression left = this.visit(ctx.expression(0));
-        Expression right = this.visit(ctx.expression(1));
+        Expression left = visit(ctx.expression(0));
+        Expression right = visit(ctx.expression(1));
         Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new LogicalExpression( ctx.start.getLine(),left, operator,right);
@@ -135,8 +128,8 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
     @Override
     public Expression visitMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx)
     {
-        Expression left = this.visit(ctx.expression(0));
-        Expression right = this.visit(ctx.expression(1));
+        Expression left = visit(ctx.expression(0));
+        Expression right = visit(ctx.expression(1));
         Operator operator = Operator.getOp(ctx.bop.getText());
 
         return new MulDivModExpression(ctx.start.getLine(), left,  operator, right);
@@ -156,7 +149,6 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
         return new MethodCallExpression( ctx.start.getLine(), methodCall);
     }
 
-
     @Override
     public Expression visitPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) {
 
@@ -173,7 +165,11 @@ public class ExpressionBodyVisitor extends GentleJavaBaseVisitor<Expression>
        return new PrefixExpression(ctx.start.getLine(), type, ex);
     }
 
+    @Override
+    public Expression visitAssignExpression(GentleJavaParser.AssignExpressionContext ctx) {
+        Expression left = visit(ctx.expression(0));
+        Expression right = visit(ctx.expression(1));
 
-
-
+        return new AssignExpression(ctx.start.getLine(), left, right);
+    }
 }

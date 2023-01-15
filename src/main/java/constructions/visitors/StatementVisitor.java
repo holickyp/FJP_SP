@@ -1,15 +1,9 @@
 package constructions.visitors;
 
-
-import constructions.Block;
 import constructions.BlockStatement;
-import constructions.ErrorHandler;
-import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
 import constructions.expressions.Expression;
 import constructions.forControl.ControlFor;
-import constructions.method.MethodCall;
-
 import constructions.statements.*;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
@@ -105,10 +99,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
             for(int i = 0; i<switchBlockStatement.switchLabel().size(); i++) {
                 // case block
                 if(switchBlockStatement.switchLabel(i).CASE() != null) {
-                    int idetifier = Integer.parseInt(switchBlockStatement.switchLabel(i).getText());
+                    int identifier = Integer.parseInt(switchBlockStatement.switchLabel(i).getText());
                     BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
-                    SwitchBlock switchBlock = new SwitchBlock(idetifier, body);
-                    switchBlockHashMap.put(idetifier, switchBlock);
+                    BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);
+                    SwitchBlock switchBlock = new SwitchBlock(identifier, blockLabelStatement);
+                    switchBlockHashMap.put(identifier, switchBlock);
                 }
                 // default block
                 else {
@@ -119,7 +114,8 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
                         //ErrorHandler.getInstance().throwError(new ErrorSwitchMultipleDefaultBlock(switchBlockStatement.start.getLine()));
                     }
                     BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
-                    defaultBlock = new SwitchBlock(body, switchBlockStatement.blockStatement(i).statement().start.getLine());
+                    BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);
+                    defaultBlock = new SwitchBlock(blockLabelStatement, switchBlockStatement.blockStatement(i).statement().start.getLine());
 
                 }
 
@@ -149,4 +145,10 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new BlockLabelStatement(ctx.start.getLine(), body);
     }
 
+    @Override
+    public ExpressionStatement visitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx) {
+        Expression expression = new ExpressionVisitor().visit(ctx.expression());
+
+        return new ExpressionStatement(ctx.start.getLine(), expression);
+    }
 }

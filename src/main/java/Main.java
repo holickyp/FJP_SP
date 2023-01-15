@@ -5,6 +5,7 @@ import generated.GentleJavaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,17 +16,20 @@ public class Main {
         try {
             inputStream = CharStreams.fromFileName(input);
             GentleJavaLexer lexer = new GentleJavaLexer(inputStream);
-            GentleJavaParser parser = new GentleJavaParser(new CommonTokenStream(lexer));
+            //lexer.removeErrorListeners();
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
-            ProgramVisitor programVisitor = new ProgramVisitor();
-            Program program = programVisitor.visitProgram(parser.program());
+            GentleJavaParser parser = new GentleJavaParser(new CommonTokenStream(lexer));
+            parser.setBuildParseTree(true);
+            //parser.removeErrorListeners();
+
+            Program program = new ProgramVisitor().visit(parser.program());
 
             InstructionGenerator instructionGenerator = new InstructionGenerator(program);
-            instructionGenerator.generate();
+            instructionGenerator.generate(output);
 
         } catch (Exception e) {
-            System.out.println("File not found " + input);
-
+            System.err.println(e);
         }
     }
 }

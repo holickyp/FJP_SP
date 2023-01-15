@@ -8,5 +8,5 @@ public enum StatementType {
     DO_WHILE,
     SWITCH,
     REPEAT,
-    METHOD_CALL
+    EXPRESSION
 }
