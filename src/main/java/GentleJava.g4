@@ -108,8 +108,8 @@ variableModifier
     ;
 
 program
-  : block
-  ;
+    : block
+    ;
 
 block
     : LEFT_BRACE blockStatement* RIGHT_BRACE
@@ -145,20 +145,8 @@ formalParameter
     : typeType variableDeclaratorId
     ;
 
-variableDeclarators
-    : variableDeclarator
-    ;
-
-variableDeclarator
-    : variableDeclaratorId (ASSIGN variableInitializer)?
-    ;
-
 variableDeclaratorId
     : identifier
-    ;
-
-variableInitializer
-    : expression
     ;
 
 methodBody

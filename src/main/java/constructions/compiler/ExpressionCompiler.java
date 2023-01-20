@@ -1,6 +1,7 @@
 package constructions.compiler;
 
 import constructions.enums.*;
+import constructions.error.*;
 import constructions.expressions.*;
 import constructions.symbolTable.SymbolTableItem;
 
@@ -31,7 +32,7 @@ public class ExpressionCompiler extends BaseCompiler {
         VariableType type = processExpression(expression);
         if(variableType != null && type != null) {
             if(type != variableType) {
-                //TODO error
+                getErrorHandler().throwError(new ErrorMismatchExpressionResult(variableType.toString(), type.toString(), this.expression.getLine()));
             }
         }
         return type;
@@ -79,19 +80,19 @@ public class ExpressionCompiler extends BaseCompiler {
             return symbolTableItem.getVariableType();
         }
         else {
-            //TODO error
+            getErrorHandler().throwError(new ErrorVariableNotExists(identifier, identifierExpression.getLine()));
         }
         return null;
     }
 
     private VariableType methodCallInstructions(MethodCallExpression methodCallExpression) {
         if(methodCallExpression.getMethodCall().getReturnType() == ReturnType.VOID) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorVoidMethodExpression(methodCallExpression.getMethodCall().getIdentifier(), methodCallExpression.getLine()));
         }
         //TODO method prototype???
 
         methodCallExpression.getMethodCall().setReturnType(getMethodReturnTypes().get(methodCallExpression.getMethodCall().getIdentifier()));
-        //TODO MethodCallCompiler
+        new MethodCallCompiler(methodCallExpression.getMethodCall(), level).run();
         switch (getMethodReturnTypes().get(methodCallExpression.getMethodCall().getIdentifier())) {
             case INT: return VariableType.INT;
             case BOOLEAN: return VariableType.BOOLEAN;
@@ -108,7 +109,7 @@ public class ExpressionCompiler extends BaseCompiler {
         VariableType right = processExpression(mulDivModExpression.getRightExpression());
 
         if(left != VariableType.INT || right != VariableType.INT) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMismatchTypesExpression(VariableType.INT.toString(), left.toString(), right.toString(), mulDivModExpression.getLine()));
         }
 
         addInstruction(PL0Instructions.OPR, 0, mulDivModExpression.getOperatorCode());
@@ -121,7 +122,7 @@ public class ExpressionCompiler extends BaseCompiler {
         VariableType right = processExpression(plusMinusExpression.getRightExpression());
 
         if(left != VariableType.INT || right != VariableType.INT) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMismatchTypesExpression(VariableType.INT.toString(), left.toString(), right.toString(), plusMinusExpression.getLine()));
         }
 
         addInstruction(PL0Instructions.OPR, 0, plusMinusExpression.getOperatorCode());
@@ -134,7 +135,7 @@ public class ExpressionCompiler extends BaseCompiler {
         VariableType right = processExpression(relationalExpression.getRightExpression());
 
         if(left != VariableType.INT || right != VariableType.INT) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMismatchTypesExpression(VariableType.INT.toString(), left.toString(), right.toString(), relationalExpression.getLine()));
         }
 
         addInstruction(PL0Instructions.OPR, 0, relationalExpression.getOperatorCode());
@@ -147,7 +148,7 @@ public class ExpressionCompiler extends BaseCompiler {
         VariableType right = processExpression(compareExpression.getRightExpression());
 
         if(left != VariableType.INT || right != VariableType.INT) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMismatchTypesExpression(VariableType.INT.toString(), left.toString(), right.toString(), compareExpression.getLine()));
         }
 
         addInstruction(PL0Instructions.OPR, 0, compareExpression.getOperatorCode());
@@ -160,7 +161,7 @@ public class ExpressionCompiler extends BaseCompiler {
         VariableType right = processExpression(logicalExpression.getRightExpression());
 
         if(left != VariableType.BOOLEAN || right != VariableType.BOOLEAN) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMismatchTypesExpression(VariableType.BOOLEAN.toString(), left.toString(), right.toString(), logicalExpression.getLine()));
         }
 
         if (logicalExpression.getOperator() == Operator.AND) {
@@ -189,9 +190,9 @@ public class ExpressionCompiler extends BaseCompiler {
             if(isInSymbolTable(identifier)) {
                 SymbolTableItem symbolTableItem = getSymbolTable().getItem(identifier);
                 if(symbolTableItem.isConstant()) {
-                    //TODO error
+                    getErrorHandler().throwError(new ErrorConstantAssigment(symbolTableItem.getName(), assignExpression.getLine()));
                 }
-                addInstruction(PL0Instructions.LOD, level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
+                //addInstruction(PL0Instructions.LOD, level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
 
                 Expression right = assignExpression.getRight();
                 if(right.getType() == ExpressionType.METHOD_CALL) {
@@ -209,7 +210,7 @@ public class ExpressionCompiler extends BaseCompiler {
                 return symbolTableItem.getVariableType();
             }
             else {
-                //TODO error
+                getErrorHandler().throwError(new ErrorVariableNotExists(identifier, assignExpression.getLine()));
             }
         }
         return null;

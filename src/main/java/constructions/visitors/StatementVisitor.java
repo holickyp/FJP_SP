@@ -1,7 +1,9 @@
 package constructions.visitors;
 
 import constructions.BlockStatement;
+import constructions.ErrorHandler;
 import constructions.enums.VariableType;
+import constructions.error.ErrorSwitchMultipleDefaultBlock;
 import constructions.expressions.Expression;
 import constructions.forControl.ControlFor;
 import constructions.statements.*;
@@ -108,10 +110,8 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
                 // default block
                 else {
 
-                    if (defaultBlock != null)
-                    {
-                        //TODO: throw error
-                        //ErrorHandler.getInstance().throwError(new ErrorSwitchMultipleDefaultBlock(switchBlockStatement.start.getLine()));
+                    if (defaultBlock != null) {
+                        ErrorHandler.getInstance().throwError(new ErrorSwitchMultipleDefaultBlock(switchBlockStatement.start.getLine()));
                     }
                     BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
                     BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);

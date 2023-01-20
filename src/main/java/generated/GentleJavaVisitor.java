@@ -1,4 +1,5 @@
-package generated;// Generated from java-escape by ANTLR 4.11.1
+package generated;
+// Generated from GentleJava.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -100,29 +101,11 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFormalParameter(GentleJavaParser.FormalParameterContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#variableDeclarators}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableDeclarators(GentleJavaParser.VariableDeclaratorsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#variableDeclarator}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableDeclarator(GentleJavaParser.VariableDeclaratorContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#variableDeclaratorId}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariableDeclaratorId(GentleJavaParser.VariableDeclaratorIdContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#variableInitializer}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableInitializer(GentleJavaParser.VariableInitializerContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#methodBody}.
 	 * @param ctx the parse tree

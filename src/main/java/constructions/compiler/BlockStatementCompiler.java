@@ -2,10 +2,12 @@ package constructions.compiler;
 
 import constructions.BlockStatement;
 import constructions.PL0.Instruction;
+import constructions.Variable;
 import constructions.enums.Operator;
 import constructions.enums.PL0Instructions;
 import constructions.enums.StatementType;
 import constructions.enums.VariableType;
+import constructions.error.*;
 import constructions.method.Method;
 import constructions.method.MethodCall;
 import constructions.statements.*;
@@ -19,7 +21,7 @@ public class BlockStatementCompiler extends BaseCompiler {
     private int level;
     private boolean generateMethods = true;
     private boolean increaseStack = true;
-    private boolean generateReturn = true;
+    private boolean generateReturn = false;
     private boolean deleteVariables = false;
     private boolean createSpaceForVariables = false;
 
@@ -33,13 +35,20 @@ public class BlockStatementCompiler extends BaseCompiler {
             return;
         }
         incrementStackForVariables();
-        statementInstructions();
+        if(blockStatement.getStatement() != null) {
+            statementInstructions();
+        }
+        if(blockStatement.getVariable() != null) {
+            variableInstructions();
+        }
         if(generateReturn) {
             addInstruction(PL0Instructions.RET, 0, 0);
         }
         if(generateMethods) {
-            methodInstructions();
-            initializeMethods();
+            if(blockStatement.getMethod() != null) {
+                methodInstructions();
+                initializeMethods();
+            }
         }
         if(deleteVariables) {
             deleteVariables();
@@ -50,17 +59,56 @@ public class BlockStatementCompiler extends BaseCompiler {
         int add_variable = blockStatement.getVariable() == null ? 0 : 1;
         int add_for = blockStatement.getStatement() == null ? 0 : (blockStatement.getStatement().getType() == StatementType.FOR ? 1 : 0);
 
-        if(increaseStack) {
-            addInstruction(PL0Instructions.INT, 0, DEFAULT_METHOD_SIZE + add_variable + add_for);
-        }
         if(createSpaceForVariables && add_variable != 0) {
-            addInstruction(PL0Instructions.INT, 0, add_variable);
+            addInstruction(PL0Instructions.INT, 0, add_variable + add_for);
         }
     }
 
     private void methodInstructions() {
        Method method = blockStatement.getMethod();
        new MethodCompiler(method).run();
+    }
+
+    private void variableInstructions() {
+        Variable variable = blockStatement.getVariable();
+        if (this.isInSymbolTable(variable.getName())) {
+            this.getErrorHandler().throwError(new ErrorVariableAlreadyExists(variable.getName(), variable.getExpression().getLine()));
+        }
+
+
+        new ExpressionCompiler(variable.getExpression(), variable.getType(), 0).run();
+        SymbolTableItem symbolTableItem = this.addVariable(variable.getName(), variable);
+        //TODO parallel
+        /*if (variable.existsParallel())
+        {
+            for(String variableName : variable.getParallelArray())
+            {
+                this.addInstruction(PL0Instructions.LOD, this.level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
+                this.addVariable(variableName, variable);
+            }
+        }*/
+    }
+
+    private SymbolTableItem addVariable(String name, Variable variable)
+    {
+        SymbolTableItem symbolTableItem = new SymbolTableItem(name, this.level, this.getStackPointer(), 0);
+        increaseStackPointer();
+        symbolTableItem.setIsVariable(true);
+        symbolTableItem.setConstant(variable.isConstant());
+        symbolTableItem.setVariableType(variable.getType());
+
+        this.getSymbolTable().addItem(symbolTableItem);
+
+        // TODO negation
+        /*if (variable.i())
+        {
+            this.addInstruction(EInstruction.LIT, 0, -1);
+            this.addInstruction(EInstruction.OPR, 0, EInstructionOperation.MULTIPLY.getCode());
+        }*/
+
+        this.addInstruction(PL0Instructions.STO, 0, symbolTableItem.getAddress());
+
+        return symbolTableItem;
     }
 
     private void statementInstructions() {
@@ -88,7 +136,7 @@ public class BlockStatementCompiler extends BaseCompiler {
         int jmcElse = getInstructionCounter();
         addInstruction(PL0Instructions.JMC, 0, -1);
         if(ifStatement.getIfStatement().getType() != StatementType.BLOCK) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMismatchTypesStatement(StatementType.BLOCK.toString(), ifStatement.getIfStatement().getType().toString(), ifStatement.getLine()));
         }
         blockInstructions((BlockLabelStatement) ifStatement.getIfStatement());
         int jmpToEndIf = getInstructionCounter();
@@ -98,7 +146,7 @@ public class BlockStatementCompiler extends BaseCompiler {
         getInstructions().get(jmcElse).setAddress(getInstructionCounter());
         if(ifStatement.getElseStatement() != null) {
             if(ifStatement.getElseStatement().getType() != StatementType.BLOCK) {
-                //TODO error
+                getErrorHandler().throwError(new ErrorMismatchTypesStatement(StatementType.BLOCK.toString(), ifStatement.getIfStatement().getType().toString(), ifStatement.getLine()));
             }
             blockInstructions((BlockLabelStatement) ifStatement.getElseStatement());
             getInstructions().get(jmpToEndIf).setAddress(getInstructionCounter());
@@ -107,7 +155,7 @@ public class BlockStatementCompiler extends BaseCompiler {
 
     private void forInstructions(ForStatement forStatement) {
         if(isInSymbolTable(forStatement.getControlFor().getInitFor().getVariable().getName())) {
-            //TODO Error
+            this.getErrorHandler().throwError(new ErrorVariableAlreadyExists(forStatement.getControlFor().getInitFor().getVariable().getName(), forStatement.getLine()));
         }
         new ExpressionCompiler(forStatement.getControlFor().getExpression(), VariableType.INT, level).run();
         SymbolTableItem symbolTableItem = new SymbolTableItem(forStatement.getControlFor().getInitFor().getVariable().getName(), level, getStackPointer(), 0);
@@ -209,28 +257,28 @@ public class BlockStatementCompiler extends BaseCompiler {
                 if(isInSymbolTable(methodCall.getIdentifier())) {
                     SymbolTableItem symbolTableItem = getSymbolTable().getItem(methodCall.getIdentifier());
                     if(methodCall.getReturnType() != symbolTableItem.getMethodReturnType()) {
-                        //TODO error
+                        getErrorHandler().throwError(new ErrorMismatchMethodCallReturnType(methodCall.getIdentifier(), methodCall.getReturnType(), symbolTableItem.getMethodReturnType(), methodCall.getLine()));
                     }
                     if(methodCall.getParameters().size() != symbolTableItem.getMethodDeclarationParameters().size()) {
-                        //TODO error
+                        getErrorHandler().throwError(new ErrorInvalidParametersCount(symbolTableItem.getName(), symbolTableItem.getMethodDeclarationParameters().size(), methodCall.getLine()));
                     }
                     for(int i = 0; i<methodCall.getParameters().size(); i++) {
                         VariableType callType = methodCall.getParameters().get(i).getVariableType();
                         VariableType methodType = symbolTableItem.getMethodDeclarationParameters().get(i).getType();
                         if(callType != methodType) {
-                            //TODO error
+                            getErrorHandler().throwError(new ErrorMismatchMethodAndCallParameterTypes(methodCall.getIdentifier(), methodType, callType, i + 1, methodCall.getLine()));
                         }
                     }
                     instruction.setAddress(symbolTableItem.getAddress());
                 }
                 else {
-                    //TODO error
+                    getErrorHandler().throwError(new ErrorMethodNotExists(methodCall.getIdentifier(), methodCall.getLine()));
                 }
             }
         }
     }
 
-    private void deleteVariables() {
+    public void deleteVariables() {
         if(blockStatement != null) {
             getSymbolTable().getTable().remove(blockStatement.getVariable().getName());
             if(createSpaceForVariables && blockStatement.getVariable() != null) {

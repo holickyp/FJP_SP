@@ -20,8 +20,7 @@ public class BlockVisitor extends GentleJavaBaseVisitor<Block> {
         List<BlockStatement> blockStatements = new ArrayList<>();
         BlockStatement blockStatement;
 
-        for (GentleJavaParser.BlockStatementContext blockStatementContext : blockStatementContextList)
-        {
+        for (GentleJavaParser.BlockStatementContext blockStatementContext : blockStatementContextList) {
             blockStatement = new BlockStatementVisitor().visit(blockStatementContext);
             blockStatements.add(blockStatement);
         }

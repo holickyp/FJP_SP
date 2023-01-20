@@ -1,6 +1,9 @@
 package constructions.compiler;
 
+import constructions.BlockStatement;
 import constructions.enums.PL0Instructions;
+import constructions.error.ErrorMethodAlreadyExists;
+import constructions.error.ErrorVariableAlreadyExists;
 import constructions.method.Method;
 import constructions.method.MethodCallParameter;
 import constructions.method.MethodParameters;
@@ -24,7 +27,7 @@ public class MethodCompiler extends BaseCompiler {
 
     private void processMethod() {
         if(isInSymbolTable(method.getName())) {
-            //TODO error
+            getErrorHandler().throwError(new ErrorMethodAlreadyExists(method.getName(), method.getLine()));
         }
         setStackPointer(DEFAULT_STACK_POINTER);
         int methodSize = 0;
@@ -34,13 +37,22 @@ public class MethodCompiler extends BaseCompiler {
         int baseMethodSize = method.getMethodParameters().size() + DEFAULT_METHOD_SIZE;
         addMethodToSymbolTable(methodSize, baseMethodSize);
         loadParametersFromStack();
-        //TODO BlockStatementCompiler
+
+        BlockStatementCompiler blockStatementCompiler = null;
+        for(BlockStatement blockStatement : method.getBlock().getBlockStatements()) {
+            blockStatementCompiler = new BlockStatementCompiler(blockStatement, 1);
+            blockStatementCompiler.setUpInnerBodySettings();
+            blockStatementCompiler.setDeleteVariables(false);
+            blockStatementCompiler.run();
+        }
 
         if(method.getReturnValue() != null) {
-            //TODO ExpressionCompiler
+            new ExpressionCompiler(method.getReturnValue(), method.getReturnType(), 1).run();
             addInstruction(PL0Instructions.STO, 0, -(method.getMethodParameters().size() +1));
         }
-        //TODO deleteLocalVariables
+
+        blockStatementCompiler.deleteVariables();
+        deleteParametersFromSymbolTable();
 
         addInstruction(PL0Instructions.RET, 0, 0);
     }
@@ -66,7 +78,7 @@ public class MethodCompiler extends BaseCompiler {
         SymbolTableItem symbolTableItem;
         for(int i = 0; i<parameters.size(); i++) {
             if(isInSymbolTable(parameters.get(i).getName())) {
-                //TODO Error
+                getErrorHandler().throwError(new ErrorVariableAlreadyExists(parameters.get(i).getName(), method.getLine()));
             }
             addInstruction(PL0Instructions.LOD, 0, i-parameters.size());
             symbolTableItem = new SymbolTableItem(parameters.get(i).getName(), 1, getStackPointer(), 0);

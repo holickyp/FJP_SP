@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BaseCompiler {
-    ArrayList<Instruction> instructions = new ArrayList<>();
-    SymbolTable symbolTable = new SymbolTable();
-    int instructionCounter = 0;
-    final int DEFAULT_METHOD_SIZE = 3;
-    int stackPointer = 3;
-    final int DEFAULT_STACK_POINTER = 3;
+    protected static ArrayList<Instruction> instructions = new ArrayList<>();
+    protected static SymbolTable symbolTable = new SymbolTable();
+    private static int instructionCounter = 0;
+    protected final int DEFAULT_METHOD_SIZE = 3;
+    private static int stackPointer = 3;
+    public final int DEFAULT_STACK_POINTER = 3;
     //method prototype?
-    private HashMap<String, ReturnType> methodReturnTypes;
+    private static HashMap<String, ReturnType> methodReturnTypes = new HashMap<>();;
     //errors
-    ErrorHandler errorHandler = ErrorHandler.getInstance();
+    protected static ErrorHandler errorHandler = ErrorHandler.getInstance();
 
     public void addInstruction(PL0Instructions instruction, int level, int address) {
         instructions.add(new Instruction(instruction, instructionCounter, level, address));

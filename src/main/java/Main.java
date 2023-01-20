@@ -19,11 +19,19 @@ public class Main {
             //lexer.removeErrorListeners();
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
-            GentleJavaParser parser = new GentleJavaParser(new CommonTokenStream(lexer));
+            GentleJavaParser parser = new GentleJavaParser(tokenStream);
             parser.setBuildParseTree(true);
             //parser.removeErrorListeners();
 
-            Program program = new ProgramVisitor().visit(parser.program());
+            ParseTree parseTree = parser.program();
+
+            Program program = null;
+            try {
+                program = new ProgramVisitor().visit(parseTree);
+            }
+            catch (Exception e) {
+                System.err.println("Something goes wrong while parsing tree. " + e);
+            }
 
             InstructionGenerator instructionGenerator = new InstructionGenerator(program);
             instructionGenerator.generate(output);

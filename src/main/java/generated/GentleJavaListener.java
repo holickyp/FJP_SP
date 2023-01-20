@@ -1,4 +1,5 @@
-package generated;// Generated from java-escape by ANTLR 4.11.1
+package generated;
+// Generated from GentleJava.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -157,26 +158,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitFormalParameter(GentleJavaParser.FormalParameterContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#variableDeclarators}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableDeclarators(GentleJavaParser.VariableDeclaratorsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#variableDeclarators}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableDeclarators(GentleJavaParser.VariableDeclaratorsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#variableDeclarator}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableDeclarator(GentleJavaParser.VariableDeclaratorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#variableDeclarator}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableDeclarator(GentleJavaParser.VariableDeclaratorContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#variableDeclaratorId}.
 	 * @param ctx the parse tree
 	 */
@@ -186,16 +167,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVariableDeclaratorId(GentleJavaParser.VariableDeclaratorIdContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#variableInitializer}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableInitializer(GentleJavaParser.VariableInitializerContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#variableInitializer}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableInitializer(GentleJavaParser.VariableInitializerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#methodBody}.
 	 * @param ctx the parse tree

@@ -2,12 +2,10 @@ package constructions.visitors;
 
 
 import constructions.Variable;
-import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
 import constructions.expressions.Expression;
 import constructions.forControl.ControlFor;
 import constructions.forControl.InitFor;
-import constructions.method.MethodCallParameter;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
@@ -31,7 +29,7 @@ public class ForControlVisitor extends GentleJavaBaseVisitor<ControlFor>
         InitFor initFor = new InitFor(variable, initEx);
 
 
-        Expression expression = new ExpressionBodyVisitor().visit(ctx.expression());
+        Expression expression = new ExpressionVisitor().visit(ctx.expression());
         expression.setReturnType(VariableType.INT);
 
         List<Expression> updateFor = parseExpressions(ctx.expressionList().expression());

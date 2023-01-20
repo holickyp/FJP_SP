@@ -12,4 +12,14 @@ public class Block {
     public List<BlockStatement> getBlockStatements() {
         return blockStatements;
     }
+
+    public int getVariableDeclarationCount() {
+        int i = 0;
+        for(BlockStatement blockStatement : blockStatements) {
+            if(blockStatement.getVariable() != null) {
+                i++;
+            }
+        }
+        return i;
+    }
 }

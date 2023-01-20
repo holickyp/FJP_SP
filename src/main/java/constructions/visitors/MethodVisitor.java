@@ -2,7 +2,6 @@ package constructions.visitors;
 
 
 import constructions.Block;
-import constructions.BlockStatement;
 import constructions.enums.ReturnType;
 import constructions.enums.VariableType;
 import constructions.expressions.Expression;
@@ -42,7 +41,7 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 
        if (ctx.methodBody().expression() != null)
         {
-            returnValue = new ExpressionBodyVisitor().visit(ctx.methodBody().expression());
+            returnValue = new ExpressionVisitor().visit(ctx.methodBody().expression());
             returnValue.setReturnType(returnType == ReturnType.INT ? VariableType.INT : VariableType.BOOLEAN);
         }
 

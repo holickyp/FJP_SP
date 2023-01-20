@@ -27,6 +27,11 @@ public class Instruction {
         this.laterInitialization = true;
     }
 
+    @Override
+    public String toString() {
+        return row + "\t" + instruction + "\t" + level + "\t" + address + "\n";
+    }
+
     public PL0Instructions getInstruction() {
         return instruction;
     }

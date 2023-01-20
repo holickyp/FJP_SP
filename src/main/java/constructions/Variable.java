@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Variable {
     private boolean isConstant;
+
+    private boolean isNegative = false;
     private VariableType type;
     private String name;
     private List<String> parallelArray;
