@@ -3,8 +3,8 @@ package constructions.statements;
 import constructions.enums.StatementType;
 
 public class Statement {
-    private StatementType type;
-    private int line;
+    private final StatementType type;
+    private final int line;
 
     public Statement(StatementType type, int line) {
         this.type = type;

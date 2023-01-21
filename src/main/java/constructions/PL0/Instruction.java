@@ -4,9 +4,9 @@ import constructions.enums.PL0Instructions;
 import constructions.method.MethodCall;
 
 public class Instruction {
-    private PL0Instructions instruction;
-    private int row;
-    private int level;
+    private final PL0Instructions instruction;
+    private final int row;
+    private final int level;
     private int address;
     private MethodCall methodCall = null;
     private boolean laterInitialization = false;

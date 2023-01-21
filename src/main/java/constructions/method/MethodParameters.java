@@ -2,11 +2,9 @@ package constructions.method;
 
 import constructions.enums.VariableType;
 
-import java.util.List;
-
 public class MethodParameters {
-    private VariableType type;
-    private String name;
+    private final VariableType type;
+    private final String name;
 
     public MethodParameters(VariableType type, String name) {
         this.type = type;

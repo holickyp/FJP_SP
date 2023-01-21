@@ -1,7 +1,7 @@
 package constructions;
 
 public class Program {
-    private Block block;
+    private final Block block;
 
     public Program(Block block) {
         this.block = block;

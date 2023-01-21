@@ -5,8 +5,8 @@ import constructions.enums.StatementType;
 import constructions.expressions.Expression;
 
 public class DoWhileStatement extends Statement {
-    private Block body;
-    private Expression expression;
+    private final Block body;
+    private final Expression expression;
 
     public DoWhileStatement(int line, Block statement, Expression expression) {
         super(StatementType.DO_WHILE, line);

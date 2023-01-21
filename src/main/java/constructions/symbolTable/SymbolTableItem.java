@@ -12,62 +12,37 @@ import java.util.List;
  */
 public class SymbolTableItem
 {
-    /**
-     * identifier
-     */
+    /** identifier */
     private String name;
 
-    /**
-     * level
-     */
+    /** level */
     private int level;
 
-    /**
-     * address
-     */
+    /** address */
     private int address;
 
-    /**
-     * size
-     */
+    /** size */
     private int size;
 
-    // additional info - variable
-    /**
-     * indication if record belongs to variable
-     */
+    /** je zaznam promenna? */
     private boolean isVariable = false;
 
-    /**
-     * indication if record is constant
-     */
+    /** je zaznam konstantni? */
     private boolean isConstant = false;
 
-    /**
-     * indication of variable type
-     */
+    /** variable Type */
     private VariableType variableType = null;
 
-
-    // additional info - method
-    /**
-     * indication if record belongs to method
-     */
+    /** je zaznam metoda? */
     private boolean isMethod = false;
 
-    /**
-     * indication of method identifier
-     */
+    /** method identifier */
     private String methodIdentifier = null;
 
-    /**
-     * method return value
-     */
+    /** method return value */
     private ReturnType methodReturnType = null;
 
-    /**
-     * method parameters - for later check
-     */
+    /** method parameters */
     private List<MethodParameters> methodDeclarationParameters = null;
 
     public SymbolTableItem(String name, int level, int address, int size)

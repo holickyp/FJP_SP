@@ -4,8 +4,8 @@ import constructions.enums.ExpressionType;
 import constructions.enums.PrefixType;
 
 public class PrefixExpression extends Expression {
-    private PrefixType type;
-    private Expression expression;
+    private final PrefixType type;
+    private final Expression expression;
 
     public PrefixExpression(int line, PrefixType type1, Expression expression) {
         super(ExpressionType.PREFIX, line);

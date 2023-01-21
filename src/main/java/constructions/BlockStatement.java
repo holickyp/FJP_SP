@@ -4,9 +4,9 @@ import constructions.method.Method;
 import constructions.statements.Statement;
 
 public class BlockStatement {
-    private Statement statement;
-    private Variable variable;
-    private Method method;
+    private final Statement statement;
+    private final Variable variable;
+    private final Method method;
 
     public BlockStatement(Statement statement, Variable variable, Method methods) {
         this.statement = statement;

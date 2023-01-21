@@ -7,15 +7,15 @@ import constructions.expressions.Expression;
 import java.util.List;
 
 public class Method {
-    private ReturnType returnType;
-    private String name;
-    private List<MethodParameters> methodParameters;
-    private Block body;
+    private final ReturnType returnType;
+    private final String name;
+    private final List<MethodParameters> methodParameters;
+    private final Block body;
 
     private final Expression returnValue;
 
     /** line of method head */
-    private int line;
+    private final int line;
 
     public Method(ReturnType returnType, String name, List<MethodParameters> methodParameters, Block body, Expression returnValue, int line) {
         this.returnType = returnType;

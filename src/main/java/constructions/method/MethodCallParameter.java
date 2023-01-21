@@ -1,20 +1,12 @@
 package constructions.method;
 
-
-import constructions.Variable;
 import constructions.enums.VariableType;
 import constructions.expressions.Expression;
 
 public class MethodCallParameter
 {
-    /**
-     * Parameter value
-     */
     private Expression expression;
 
-    /**
-     * Type of parameter
-     */
     private VariableType variableType;
 
     public MethodCallParameter(Expression expression)

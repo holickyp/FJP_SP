@@ -5,8 +5,8 @@ import constructions.enums.StatementType;
 import constructions.expressions.Expression;
 
 public class WhileStatement extends Statement {
-    private Expression expression;
-    private Block body;
+    private final Expression expression;
+    private final Block body;
 
     public WhileStatement(int line, Expression expression, Block body) {
         super(StatementType.WHILE, line);

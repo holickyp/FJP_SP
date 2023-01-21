@@ -4,9 +4,9 @@ import constructions.enums.ExpressionType;
 import constructions.enums.Operator;
 
 public class LogicalExpression extends Expression {
-    private Expression leftExpression;
-    private Operator operator;
-    private Expression rightExpression;
+    private final Expression leftExpression;
+    private final Operator operator;
+    private final Expression rightExpression;
 
     public LogicalExpression(int line, Expression leftExpression, Operator operator, Expression rightExpression) {
         super(ExpressionType.LOGICAL, line);

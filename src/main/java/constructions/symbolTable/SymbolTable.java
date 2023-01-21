@@ -7,10 +7,8 @@ import java.util.HashMap;
  */
 public class SymbolTable
 {
-    /**
-     * Symbol table
-     */
-    private HashMap<String, SymbolTableItem> table = new HashMap<>();
+    /** Symbol table */
+    private final HashMap<String, SymbolTableItem> table = new HashMap<>();
 
     public HashMap<String, SymbolTableItem> getTable()
     {

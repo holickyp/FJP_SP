@@ -5,10 +5,10 @@ import constructions.enums.ReturnType;
 import java.util.List;
 
 public class MethodCall {
-    private String identifier;
-    private List<MethodCallParameter> parameters;
+    private final String identifier;
+    private final List<MethodCallParameter> parameters;
     private ReturnType returnType;
-    private int line;
+    private final int line;
 
     public MethodCall(String identifier, List<MethodCallParameter> parameters, int line) {
         this.identifier = identifier;

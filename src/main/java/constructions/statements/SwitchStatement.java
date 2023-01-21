@@ -6,9 +6,9 @@ import constructions.expressions.Expression;
 import java.util.HashMap;
 
 public class SwitchStatement extends Statement {
-    private Expression expression;
-    private HashMap<Integer, SwitchBlock> cases;
-    private SwitchBlock defaultCase;
+    private final Expression expression;
+    private final HashMap<Integer, SwitchBlock> cases;
+    private final SwitchBlock defaultCase;
 
     public SwitchStatement(int line, Expression expression, HashMap<Integer, SwitchBlock> cases, SwitchBlock defaultCase) {
         super(StatementType.SWITCH, line);

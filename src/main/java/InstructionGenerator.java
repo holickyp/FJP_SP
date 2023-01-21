@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class InstructionGenerator {
-    private Program program;
+    private final Program program;
 
     public InstructionGenerator(Program program) {
         this.program = program;
@@ -23,7 +23,7 @@ public class InstructionGenerator {
     }
 
     private void writeInstructions(String output, List<Instruction> instructionList) {
-        PrintWriter printWriter = null;
+        PrintWriter printWriter;
         try {
             printWriter = new PrintWriter(output, "UTF-8");
 

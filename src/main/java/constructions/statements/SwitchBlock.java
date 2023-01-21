@@ -7,7 +7,7 @@ import java.util.List;
 public class SwitchBlock{
 
     private int identifier;
-    private List<BlockStatement> blockStatements;
+    private final List<BlockStatement> blockStatements;
     private int line;
 
     public SwitchBlock(List<BlockStatement> blockStatements, int line) {
