@@ -2,6 +2,7 @@ package constructions.visitors;
 
 import constructions.BlockStatement;
 import constructions.ErrorHandler;
+import constructions.Variable;
 import constructions.enums.VariableType;
 import constructions.error.ErrorSwitchMultipleDefaultBlock;
 import constructions.expressions.Expression;
@@ -23,10 +24,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     @Override
     public IfStatement visitIfStatement(GentleJavaParser.IfStatementContext ctx)
     {
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
-        // Exception exception = new E
 
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
+        // Exception exception = new E
         expression.setReturnType(VariableType.BOOLEAN);
+
 
         Statement statementIf = ctx.braceStatement(0).statement() != null ? new StatementVisitor().visit(ctx.braceStatement(0).statement()) : null;
 
@@ -37,7 +39,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         {
             statementElse =ctx.braceStatement(1).statement() != null ? new StatementVisitor().visit(ctx.braceStatement(1).statement()) : null;
         }
-
+        System.out.println("A");
         return new IfStatement(expression, statementIf, statementElse, ctx.start.getLine());
     }
 
@@ -73,7 +75,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     @Override
     public WhileStatement visitWhileStatement(GentleJavaParser.WhileStatementContext ctx)
     {
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
         Statement body = ctx.braceStatement().statement() != null ? new StatementVisitor().visit(ctx.braceStatement().statement()) : null;
 
         return new WhileStatement(ctx.start.getLine(), expression, body);
@@ -82,7 +84,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     @Override
     public DoWhileStatement visitDoWhileStatement(GentleJavaParser.DoWhileStatementContext ctx)
     {
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
         Statement body = ctx.braceStatement().statement() != null ? new StatementVisitor().visit(ctx.braceStatement().statement()) : null;
 
         return new DoWhileStatement(ctx.start.getLine(), body, expression);
@@ -95,7 +97,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         List<GentleJavaParser.SwitchBlockStatementGroupContext> switchBlocks = ctx.switchBlockStatementGroup();
         HashMap<Integer, SwitchBlock> switchBlockHashMap = new HashMap<>();
         SwitchBlock defaultBlock = null;
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
         for (GentleJavaParser.SwitchBlockStatementGroupContext switchBlockStatement : switchBlocks)
         {
             for(int i = 0; i<switchBlockStatement.switchLabel().size(); i++) {
@@ -151,4 +153,10 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
 
         return new ExpressionStatement(ctx.start.getLine(), expression);
     }
+
+   /* @Override
+    public Statement visitVariableDeclarationStatement(GentleJavaParser.VariableDeclarationStatementContext ctx) {
+        Variable variable = new VariableVisitor().visit(ctx.localVariableDeclaration());
+        return new DeclarationStatement(variable, ctx.start.getLine());
+    }*/
 }
