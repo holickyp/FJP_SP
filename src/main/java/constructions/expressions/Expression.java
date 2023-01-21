@@ -4,8 +4,8 @@ import constructions.enums.ExpressionType;
 import constructions.enums.VariableType;
 
 public class Expression {
-    private ExpressionType type;
-    private int line;
+    private final ExpressionType type;
+    private final int line;
     private VariableType returnType;
 
     public Expression(ExpressionType type, int line) {

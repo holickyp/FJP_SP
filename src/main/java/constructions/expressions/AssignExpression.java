@@ -3,8 +3,8 @@ package constructions.expressions;
 import constructions.enums.ExpressionType;
 
 public class AssignExpression extends Expression {
-    private Expression right;
-    private Expression left;
+    private final Expression left;
+    private final Expression right;
 
     public AssignExpression(int line, Expression left, Expression right) {
         super(ExpressionType.ASSIGN, line);

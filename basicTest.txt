@@ -1,17 +1,13 @@
 {
     int a = 0;
-    int b = 3;
+    boolean b = correct;
 
-    switch(b) {
-        case 0 : b = 1 * 2;
-        case 1 : {
-            b = 130 % 12;
+    perform {
+        a = a + 1;
+
+        consider (a == 5) {
+            b = incorrect;
         }
-        case 3 : {
-            b = (10 - 3) * 5;
-        }
-        default : {
-            b = 333;
-        }
-    }
+
+    } whilst(b);
 }

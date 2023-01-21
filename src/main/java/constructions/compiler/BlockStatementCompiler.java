@@ -4,11 +4,11 @@ import constructions.Block;
 import constructions.BlockStatement;
 import constructions.PL0.Instruction;
 import constructions.Variable;
-import constructions.enums.Operator;
-import constructions.enums.PL0Instructions;
-import constructions.enums.StatementType;
-import constructions.enums.VariableType;
+import constructions.enums.*;
 import constructions.error.*;
+import constructions.expressions.AssignExpression;
+import constructions.expressions.Expression;
+import constructions.expressions.IdentifierExpression;
 import constructions.method.Method;
 import constructions.method.MethodCall;
 import constructions.statements.*;
@@ -254,7 +254,19 @@ public class BlockStatementCompiler extends BaseCompiler {
     }
 
     private void expressionInstructions(ExpressionStatement expressionStatement) {
-        new ExpressionCompiler(expressionStatement.getExpression(), VariableType.INT, level).run();
+        if(expressionStatement.getExpression().getType().equals(ExpressionType.ASSIGN)) {
+            AssignExpression expression = (AssignExpression) expressionStatement.getExpression();
+            if(expression.getLeft().getType().equals(ExpressionType.IDENTIFIER)) {
+                IdentifierExpression identifierExpression = (IdentifierExpression) expression.getLeft();
+                SymbolTableItem symbolTableItem = getSymbolTable().getItem(identifierExpression.getValue().toString());
+                new ExpressionCompiler(expressionStatement.getExpression(), symbolTableItem.getVariableType(), level).run();
+            } else {
+                new ExpressionCompiler(expressionStatement.getExpression(), VariableType.INT, level).run();
+            }
+        } else {
+            new ExpressionCompiler(expressionStatement.getExpression(), VariableType.INT, level).run();
+        }
+
     }
 
     private void initializeMethods() {
