@@ -2,6 +2,10 @@ package constructions;
 
 import java.util.List;
 
+
+/**
+ * Reprezentuje blok  v interni strukture
+ */
 public class Block {
     private List<BlockStatement> blockStatements;
 
@@ -13,6 +17,10 @@ public class Block {
         return blockStatements;
     }
 
+    /**
+     * Deklrace variable
+     * @return
+     */
     public int getVariableDeclarationCount() {
         int i = 0;
         for(BlockStatement blockStatement : blockStatements) {

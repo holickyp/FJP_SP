@@ -1,8 +1,20 @@
 package constructions.error;
 
+/**
+ * Struktura pro erorove hlasky
+ */
 public class Error {
+    /**
+     * Zprava erroru
+     */
     private String message;
+    /**
+     * Radka
+     */
     private int line;
+    /**
+     * Kod erroru
+     */
     private ErrorTypes errorCode;
 
     public Error(String message, int line, ErrorTypes errorCode) {

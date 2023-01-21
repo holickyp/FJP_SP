@@ -16,6 +16,12 @@ import java.util.List;
 
 public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
 
+
+    /**
+     * Visitor pro statement if
+     * @param ctx context
+     * @return
+     */
     @Override
     public IfStatement visitIfStatement(GentleJavaParser.IfStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
@@ -28,6 +34,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new IfStatement(expression, statementIf, statementElse, ctx.start.getLine());
     }
 
+    /**
+     * Visitor pro statement while
+     * @param ctx context
+     * @return
+     */
     @Override
     public WhileStatement visitWhileStatement(GentleJavaParser.WhileStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
@@ -36,6 +47,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new WhileStatement(ctx.start.getLine(), expression, body);
     }
 
+    /**
+     * visitor pro statement do while
+     * @param ctx context
+     * @return
+     */
     @Override
     public DoWhileStatement visitDoWhileStatement(GentleJavaParser.DoWhileStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
@@ -45,6 +61,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     }
 
 
+    /**
+     * Visitor pro statement switch
+     * @param ctx context
+     * @return
+     */
     @Override
     public SwitchStatement visitSwitchStatement(GentleJavaParser.SwitchStatementContext ctx) {
         List<GentleJavaParser.SwitchBlockStatementGroupContext> switchBlocks = ctx.switchBlockStatementGroup();
@@ -80,6 +101,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new SwitchStatement(ctx.start.getLine(), expression, switchBlockHashMap, defaultBlock);
     }
 
+    /**
+     * Visitor pro statement repeat
+     * @param ctx context
+     * @return
+     */
     @Override
     public RepeatStatement visitRepeatStatement(GentleJavaParser.RepeatStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
@@ -88,6 +114,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new RepeatStatement(ctx.start.getLine(), body, expression);
     }
 
+    /**
+     * Visitor pro statement block label
+     * @param ctx context
+     * @return
+     */
     @Override
     public BlockLabelStatement visitBlockLabelStatement(GentleJavaParser.BlockLabelStatementContext ctx) {
         Block body = new BlockVisitor().visit(ctx.block());
@@ -95,6 +126,11 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         return new BlockLabelStatement(ctx.start.getLine(), body);
     }
 
+    /**
+     * Visitor pro statement Expression
+     * @param ctx context
+     * @return
+     */
     @Override
     public ExpressionStatement visitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.expression());

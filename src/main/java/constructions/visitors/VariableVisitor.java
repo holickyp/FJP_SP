@@ -10,7 +10,11 @@ import java.util.List;
 
 public class VariableVisitor extends GentleJavaBaseVisitor<Variable> {
 
-    //TODO parallel array suppose other mehods are needed VariableModifierContext VariableDeclaratorsContext
+    /**
+     * Visitor pro variable
+     * @param ctx context
+     * @return
+     */
     @Override
     public Variable visitLocalVariableDeclaration(GentleJavaParser.LocalVariableDeclarationContext ctx) {
         Variable variable = new Variable(ctx.variableModifier() != null,
@@ -29,8 +33,8 @@ public class VariableVisitor extends GentleJavaBaseVisitor<Variable> {
 
 
     /**
-     * Processes parallel declaration
-     * @param ctx ParalelDeclaration context
+     * Zpracovava parallel declaration
+     * @param ctx  context
      * @return
      */
     private List<String> getParallel(List<GentleJavaParser.IdentifierContext> ctx) {

@@ -12,8 +12,14 @@ import java.util.List;
 
 public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall> {
 
+    /**
+     * Visitor pro MethodCall()
+     * @param ctx MethodCall context
+     * @return
+     */
     @Override
     public MethodCall visitMethodCall(GentleJavaParser.MethodCallContext ctx) {
+        //symbol indikujici metodu
         String METHOD_SYMBOL = "()";
         String identifier = ctx.identifier().getText() + METHOD_SYMBOL;
         List<MethodCallParameter> methodCallParameters = new ArrayList<>();
@@ -24,6 +30,10 @@ public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall> {
         return new MethodCall(identifier, methodCallParameters, ctx.start.getLine());
     }
 
+    /**
+     * Zpracovava parametry method call  do interni struktury
+     * @return
+     */
     private List<MethodCallParameter> parseMethodCallParameters(List<GentleJavaParser.ExpressionContext> methodCallParameterContextsList) {
         List<MethodCallParameter> methodCallParameters = new ArrayList<>();
         MethodCallParameter methodCallParameter;

@@ -17,11 +17,17 @@ import java.util.List;
 public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 {
 
+    /**
+     * Visitor pro deklaraci metod
+     * @param ctx context
+     * @return
+     */
     @Override
     public Method visitMethodDeclaration(GentleJavaParser.MethodDeclarationContext ctx) {
 
         ReturnType returnType = ReturnType.valueOf(ctx.typeTypeOrVoid().getText().toUpperCase());
 
+        // symbol indikujici metodu
         String METHOD_SYMBOL = "()";
         String identifier = ctx.identifier().getText() + METHOD_SYMBOL;
 
@@ -47,6 +53,11 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
         return new Method(returnType, identifier, parameters, body, returnValue, ctx.start.getLine());
     }
 
+    /**
+     * Zpracovava parametry metody
+     * @param methodParameterContext
+     * @return
+     */
     private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.FormalParameterContext> methodParameterContext) {
         List<MethodParameters> methodDeclarationParameters = new ArrayList<>();
         MethodParameters methodDeclarationParameter;
