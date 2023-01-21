@@ -21,15 +21,15 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 
         ReturnType returnType = ReturnType.valueOf(ctx.typeTypeOrVoid().getText().toUpperCase());
 
-        /**
-         * Indication of method
-         */
         String METHOD_SYMBOL = "()";
         String identifier = ctx.identifier().getText() + METHOD_SYMBOL;
 
-        List<MethodParameters> parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
+        List<MethodParameters> parameters = new ArrayList<>();
+        if(ctx.formalParameters().formalParameterList() != null) {
+            parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
+        }
 
-        Block body = ctx.methodBody().methodBlock() != null ? new BlockVisitor().visit(ctx.methodBody().methodBlock()) : null;
+        Block body = ctx.methodBody() != null ? new BlockVisitor().visit(ctx.methodBody()) : null;
 
         Expression returnValue =  null;
 

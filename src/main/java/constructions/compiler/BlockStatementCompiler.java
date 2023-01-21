@@ -9,6 +9,8 @@ import constructions.error.*;
 import constructions.expressions.AssignExpression;
 import constructions.expressions.Expression;
 import constructions.expressions.IdentifierExpression;
+import constructions.expressions.RelationalExpression;
+import constructions.forControl.InitFor;
 import constructions.method.Method;
 import constructions.method.MethodCall;
 import constructions.statements.*;
@@ -20,11 +22,6 @@ import java.util.Map;
 public class BlockStatementCompiler extends BaseCompiler {
     private final BlockStatement blockStatement;
     private final int level;
-    private boolean generateMethods = true;
-    private boolean increaseStack = true;
-    private boolean generateReturn = false;
-    private boolean deleteVariables = false;
-    private boolean createSpaceForVariables = false;
 
     public BlockStatementCompiler(BlockStatement blockStatement, int level) {
         this.blockStatement = blockStatement;
@@ -35,34 +32,17 @@ public class BlockStatementCompiler extends BaseCompiler {
         if(blockStatement == null) {
             return;
         }
-        incrementStackForVariables();
         if(blockStatement.getStatement() != null) {
             statementInstructions();
         }
         if(blockStatement.getVariable() != null) {
             variableInstructions();
         }
-        if(generateReturn) {
-            addInstruction(PL0Instructions.RET, 0, 0);
+        if(blockStatement.getMethod() != null) {
+            methodInstructions();
+            initializeMethods();
         }
-        if(generateMethods) {
-            if(blockStatement.getMethod() != null) {
-                methodInstructions();
-                initializeMethods();
-            }
-        }
-        if(deleteVariables) {
-            deleteVariables();
-        }
-    }
 
-    private void incrementStackForVariables() {
-        int add_variable = blockStatement.getVariable() == null ? 0 : 1;
-        int add_for = blockStatement.getStatement() == null ? 0 : (blockStatement.getStatement().getType() == StatementType.FOR ? 1 : 0);
-
-        if(createSpaceForVariables && add_variable != 0) {
-            addInstruction(PL0Instructions.INT, 0, add_variable + add_for);
-        }
     }
 
     private void methodInstructions() {
@@ -128,6 +108,7 @@ public class BlockStatementCompiler extends BaseCompiler {
 
     private void blockInstructions(Block block) {
         BlockCompiler blockCompiler = new BlockCompiler(block, false);
+        blockCompiler.setInnerBodySettings();
         blockCompiler.run();
     }
 
@@ -154,10 +135,22 @@ public class BlockStatementCompiler extends BaseCompiler {
     }
 
     private void forInstructions(ForStatement forStatement) {
-        if(isInSymbolTable(forStatement.getControlFor().getInitFor().getVariable().getName())) {
+        InitFor initFor = forStatement.getControlFor().getInitFor();
+        if(initFor.getVariable() != null && isInSymbolTable(initFor.getVariable().getName())) {
             this.getErrorHandler().throwError(new ErrorVariableAlreadyExists(forStatement.getControlFor().getInitFor().getVariable().getName(), forStatement.getLine()));
         }
-        new ExpressionCompiler(forStatement.getControlFor().getExpression(), VariableType.INT, level).run();
+
+        if(initFor.getVariable() != null) {
+            new ExpressionCompiler(initFor.getVariable().getExpression(), initFor.getVariable().getType(), 0).run();
+            SymbolTableItem symbolTableItem = this.addVariable(initFor.getVariable().getName(), initFor.getVariable());
+            addVariable(initFor.getVariable().getName(), initFor.getVariable());
+        }
+        else if(initFor.getExpressions() != null) {
+            for(Expression expression : initFor.getExpressions()) {
+                new ExpressionCompiler(expression, VariableType.INT, level).run();
+            }
+        }
+
         SymbolTableItem symbolTableItem = new SymbolTableItem(forStatement.getControlFor().getInitFor().getVariable().getName(), level, getStackPointer(), 0);
         increaseStackPointer();
         symbolTableItem.setIsVariable(true);
@@ -167,17 +160,28 @@ public class BlockStatementCompiler extends BaseCompiler {
         addInstruction(PL0Instructions.STO, 0, symbolTableItem.getAddress());
         int startIndex = getInstructionCounter();
         addInstruction(PL0Instructions.LOD, 0, symbolTableItem.getAddress());
-        new ExpressionCompiler(forStatement.getControlFor().getExpression(), VariableType.INT, level).run();
-        //TODO jenom <= ???
-        addInstruction(PL0Instructions.OPR, 0, Operator.LOWER_EQUAL_THAN.getCode());
+        new ExpressionCompiler(forStatement.getControlFor().getExpression(), VariableType.BOOLEAN, level).run();
+
+        if(forStatement.getControlFor().getExpression().getType().equals(ExpressionType.RELATIONAL)) {
+            RelationalExpression relationalExpression = (RelationalExpression) forStatement.getControlFor().getExpression();
+            addInstruction(PL0Instructions.OPR, 0, relationalExpression.getOperator().getCode());
+        }
+        //TODO ELSE ERROR
+
         int jmcEnd = getInstructionCounter();
         addInstruction(PL0Instructions.JMC, 0, -1);
         blockInstructions(forStatement.getBody());
 
+         if(forStatement.getControlFor().getUpdateFor() != null) {
+            for(Expression expression : forStatement.getControlFor().getUpdateFor()) {
+                new ExpressionCompiler(expression, VariableType.INT, level).run();
+            }
+        }
+        /*
         this.addInstruction(PL0Instructions.LOD, 0, symbolTableItem.getAddress());
         this.addInstruction(PL0Instructions.LIT, 0, 1);
         this.addInstruction(PL0Instructions.OPR, 0, Operator.PLUS.getCode());
-        this.addInstruction(PL0Instructions.STO, 0, symbolTableItem.getAddress());
+        this.addInstruction(PL0Instructions.STO, 0, symbolTableItem.getAddress());*/
         this.addInstruction(PL0Instructions.JMP, 0, startIndex);
 
         getInstructions().get(jmcEnd).setAddress(getInstructionCounter());
@@ -221,7 +225,6 @@ public class BlockStatementCompiler extends BaseCompiler {
 
             for(BlockStatement blockStatement1 : body.getSwitchBlockStatements()) {
                 BlockStatementCompiler blockStatementCompiler = new BlockStatementCompiler(blockStatement1,  level);
-                blockStatementCompiler.setUpInnerBodySettings();
                 blockStatementCompiler.run();
             }
 
@@ -234,7 +237,6 @@ public class BlockStatementCompiler extends BaseCompiler {
         if(switchStatement.getDefaultCase() != null) {
             for(BlockStatement blockStatement1 : switchStatement.getDefaultCase().getSwitchBlockStatements()) {
                 BlockStatementCompiler blockStatementCompiler = new BlockStatementCompiler(blockStatement1,  level);
-                blockStatementCompiler.setUpInnerBodySettings();
                 blockStatementCompiler.run();
             }
         }
@@ -296,45 +298,5 @@ public class BlockStatementCompiler extends BaseCompiler {
                 }
             }
         }
-    }
-
-    public void deleteVariables() {
-        if(blockStatement != null) {
-            if(blockStatement.getVariable() != null) {
-                getSymbolTable().getTable().remove(blockStatement.getVariable().getName());
-            }
-            if(createSpaceForVariables && blockStatement.getVariable() != null) {
-                addInstruction(PL0Instructions.INT, 0, -1);
-            }
-        }
-    }
-
-    public void setUpInnerBodySettings() {
-        this.setGenerateMethods(false);
-        this.setIncreaseStack(false);
-        this.setGenerateReturn(false);
-        this.setDeleteVariables(true);
-        this.setCreateLocalSpaceForLocalVariables(true);
-    }
-
-    public void setGenerateMethods(boolean generateMethods) {
-        this.generateMethods = generateMethods;
-    }
-
-
-    public void setIncreaseStack(boolean increaseStack) {
-        this.increaseStack = increaseStack;
-    }
-
-    public void setGenerateReturn(boolean generateReturn) {
-        this.generateReturn = generateReturn;
-    }
-
-    public void setDeleteVariables(boolean deleteVariables) {
-        this.deleteVariables = deleteVariables;
-    }
-
-    public void setCreateLocalSpaceForLocalVariables(boolean createSpaceForVariables) {
-        this.createSpaceForVariables = createSpaceForVariables;
     }
 }

@@ -134,7 +134,7 @@ methodDeclaration
     ;
 
 formalParameters
-    : LEFT_PARENTHESES formalParameterList RIGHT_PARENTHESES
+    : LEFT_PARENTHESES formalParameterList? RIGHT_PARENTHESES
     ;
 
 formalParameterList

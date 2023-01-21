@@ -48,31 +48,27 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitIdentifierExpression(GentleJavaParser.IdentifierExpressionContext ctx)
-    {
+    public Expression visitIdentifierExpression(GentleJavaParser.IdentifierExpressionContext ctx) {
         Object o = ctx.identifier().getText();
         return new IdentifierExpression(ctx.start.getLine(), o);
     }
 
     @Override
-    public Expression visitPossibleValueExpression(GentleJavaParser.PossibleValueExpressionContext ctx)
-    {
+    public Expression visitPossibleValueExpression(GentleJavaParser.PossibleValueExpressionContext ctx) {
         VariableType type = null;
         Object value = null;
 
         if (ctx.possibleValues().NUMBER() != null) {
             int dimension = 1;
             // TODO not sure if this gonna work
-            if (ctx.possibleValues().NUMBER() != null && ctx.possibleValues().MINUS() != null && ctx.possibleValues().MINUS().getText().equals("-"))
-            {
+            if (ctx.possibleValues().NUMBER() != null && ctx.possibleValues().MINUS() != null && ctx.possibleValues().MINUS().getText().equals("-")) {
                 dimension = -1;
             }
             int val = Integer.parseInt(ctx.possibleValues().NUMBER().getText());
             value = val * dimension;
             type = VariableType.INT;
         }
-        else if (ctx.possibleValues().booleanValue() != null)
-        {
+        else if (ctx.possibleValues().booleanValue() != null) {
             value = ctx.possibleValues().booleanValue().getText();
             type = VariableType.BOOLEAN;
         }
@@ -90,8 +86,7 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx)
-    {
+    public Expression visitMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx) {
         Expression left = visit(ctx.expression(0));
         Expression right = visit(ctx.expression(1));
         Operator operator = Operator.getOp(ctx.bop.getText());
@@ -100,9 +95,7 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitMethodCallExpression(GentleJavaParser.MethodCallExpressionContext ctx)
-    {
-
+    public Expression visitMethodCallExpression(GentleJavaParser.MethodCallExpressionContext ctx) {
         MethodCall methodCall = new MethodCallVisitor().visit(ctx.methodCall());
 
         return new MethodCallExpression( ctx.start.getLine(), methodCall);
@@ -110,7 +103,6 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
 
     @Override
     public Expression visitPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) {
-
         Expression ex = this.visit(ctx.expression());
         PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
         return new PostfixExpression(ctx.start.getLine(), ex, type);
@@ -118,7 +110,6 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
 
     @Override
     public Expression visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) {
-
        Expression ex = this.visit(ctx.expression());
        PrefixType type = PrefixType.valueOf(ctx.prefix.getText());
        return new PrefixExpression(ctx.start.getLine(), type, ex);

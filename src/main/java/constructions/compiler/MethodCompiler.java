@@ -41,8 +41,6 @@ public class MethodCompiler extends BaseCompiler {
         BlockStatementCompiler blockStatementCompiler = null;
         for(BlockStatement blockStatement : method.getBlock().getBlockStatements()) {
             blockStatementCompiler = new BlockStatementCompiler(blockStatement, 1);
-            blockStatementCompiler.setUpInnerBodySettings();
-            blockStatementCompiler.setDeleteVariables(false);
             blockStatementCompiler.run();
         }
 
@@ -51,7 +49,6 @@ public class MethodCompiler extends BaseCompiler {
             addInstruction(PL0Instructions.STO, 0, -(method.getMethodParameters().size() +1));
         }
 
-        blockStatementCompiler.deleteVariables();
         deleteParametersFromSymbolTable();
 
         addInstruction(PL0Instructions.RET, 0, 0);
