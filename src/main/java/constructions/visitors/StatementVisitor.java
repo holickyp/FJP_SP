@@ -68,7 +68,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
         for (GentleJavaParser.SwitchBlockStatementGroupContext switchBlockStatement : switchBlocks) {
             // case block
             if(switchBlockStatement.switchLabel().CASE() != null) {
-                int identifier = Integer.parseInt(switchBlockStatement.switchLabel().getText());
+                int identifier = Integer.parseInt(switchBlockStatement.switchLabel().NUMBER().getText());
                 List<BlockStatement> caseBody = new ArrayList<>();
                 for(GentleJavaParser.BlockStatementContext blockStatementContext : switchBlockStatement.blockStatement()) {
                     caseBody.add(new BlockStatementVisitor().visit(blockStatementContext));
