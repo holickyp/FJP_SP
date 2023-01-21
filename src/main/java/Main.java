@@ -38,6 +38,7 @@ public class Main {
 
             InstructionGenerator instructionGenerator = new InstructionGenerator(program);
             instructionGenerator.generate(output);
+            System.out.println("PL0 instruction generation was successful");
 
         } catch (Exception ex) {
             System.err.println(ex);
