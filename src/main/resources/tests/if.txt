@@ -1,0 +1,11 @@
+{
+
+    final int a = 1;
+    final int b = 2;
+    int c = 0;
+
+    consider (a < b) {
+        c = b;
+    }
+
+}

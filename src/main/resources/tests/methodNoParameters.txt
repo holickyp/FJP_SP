@@ -1,0 +1,10 @@
+{
+    int a = 0;
+
+    methodNoParameters();
+
+    please void methodNoParameters() {
+        a = 10 / 2;
+    }
+
+}

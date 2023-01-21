@@ -1,0 +1,10 @@
+{
+    int a = 0;
+    boolean b = incorrect;
+    consider (correct && b) {
+        a = 1;
+    }
+    nevertheless {
+        a = 2;
+    }
+}

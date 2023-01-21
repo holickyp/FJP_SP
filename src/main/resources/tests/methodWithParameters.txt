@@ -1,0 +1,16 @@
+{
+    int a = methodWithParameters1(4,6);
+
+    please int methodWithParameters1(int b, int c) {
+        return b + methodWithParameters2(b, c);
+    }
+
+    please int methodWithParameters2(int b, int c) {
+        return b * c;
+    }
+}
+
+
+
+
+

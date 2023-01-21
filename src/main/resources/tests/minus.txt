@@ -1,0 +1,11 @@
+{
+    int a = -10;
+    int b = -a;
+    int c = -(2 - a);
+    int d = -minusTest(-(2 - a));
+
+    please int minusTest(int x) {
+        thanks -x;
+    }
+
+}

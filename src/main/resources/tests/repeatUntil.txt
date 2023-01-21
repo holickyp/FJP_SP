@@ -1,0 +1,9 @@
+{
+    int a = 0;
+
+    reiterate {
+        int b = 10;
+        a = a + 1;
+        b = a + b;
+    } till(a >= 10);
+}

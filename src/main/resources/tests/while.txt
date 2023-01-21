@@ -1,0 +1,12 @@
+{
+    int a = 0;
+    boolean b = correct;
+
+    whilst(b) {
+        a = a + 1;
+
+        consider (a == 5) {
+            b = incorrect;
+        }
+    }
+}
