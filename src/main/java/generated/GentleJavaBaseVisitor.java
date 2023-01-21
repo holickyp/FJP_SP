@@ -192,13 +192,6 @@ public class GentleJavaBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBraceStatement(GentleJavaParser.BraceStatementContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitParExpression(GentleJavaParser.ParExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

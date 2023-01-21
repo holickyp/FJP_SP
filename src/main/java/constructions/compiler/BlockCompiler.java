@@ -9,10 +9,13 @@ import constructions.method.Method;
 import java.util.List;
 
 public class BlockCompiler extends BaseCompiler {
-    private Block block;
+    private final Block block;
 
-    public BlockCompiler(Block block) {
+    private final boolean generateReturn;
+
+    public BlockCompiler(Block block, boolean generateReturn) {
         this.block = block;
+        this.generateReturn = generateReturn;
     }
 
     public void run() {
@@ -23,7 +26,9 @@ public class BlockCompiler extends BaseCompiler {
             }
             new BlockStatementCompiler(blockStatement, 0).run();
         }
-        addInstruction(PL0Instructions.RET, 0, 0);
+        if(generateReturn) {
+            addInstruction(PL0Instructions.RET, 0, 0);
+        }
     }
 
     private void incrementStackForVariables() {

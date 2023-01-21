@@ -1,23 +1,24 @@
 package constructions.statements;
 
+import constructions.Block;
 import constructions.enums.StatementType;
 import constructions.forControl.ControlFor;
 
 public class ForStatement extends Statement {
     private ControlFor controlFor;
-    private Statement statement;
+    private Block body;
 
-    public ForStatement(int line, ControlFor controlFor, Statement statement) {
+    public ForStatement(int line, ControlFor controlFor, Block body) {
         super(StatementType.FOR, line);
         this.controlFor = controlFor;
-        this.statement = statement;
+        this.body = body;
     }
 
     public ControlFor getControlFor() {
         return controlFor;
     }
 
-    public Statement getStatement() {
-        return statement;
+    public Block getBody() {
+        return body;
     }
 }

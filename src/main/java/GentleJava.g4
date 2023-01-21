@@ -130,7 +130,7 @@ localVariableDeclaration
     ;
 
 methodDeclaration
-    : typeTypeOrVoid identifier formalParameters methodBody
+    : FUNCTION_KEYWORD typeTypeOrVoid identifier formalParameters methodBody
     ;
 
 formalParameters
@@ -156,17 +156,13 @@ methodBody
 
 statement
     : blockLabel=block                                                                      #blockLabelStatement
-    | IF parExpression braceStatement (ELSE braceStatement)?                                #ifStatement
-    | FOR LEFT_PARENTHESES forControl RIGHT_PARENTHESES braceStatement                      #forStatement
-    | WHILE parExpression braceStatement                                                    #whileStatement
-    | DO braceStatement WHILE parExpression SEMICOLON                                       #doWhileStatement
+    | IF parExpression block (ELSE block)?                                                  #ifStatement
+    | FOR LEFT_PARENTHESES forControl RIGHT_PARENTHESES block                               #forStatement
+    | WHILE parExpression block                                                             #whileStatement
+    | DO block WHILE parExpression SEMICOLON                                                #doWhileStatement
     | SWITCH parExpression LEFT_BRACE switchBlockStatementGroup* switchLabel* RIGHT_BRACE   #switchStatement
-    | REPEAT braceStatement UNTIL parExpression SEMICOLON                                   #repeatStatement
+    | REPEAT block UNTIL parExpression SEMICOLON                                            #repeatStatement
     | statementExpression=expression SEMICOLON                                              #expressionStatement
-    ;
-
-braceStatement
-    : LEFT_BRACE statement RIGHT_BRACE
     ;
 
 parExpression
@@ -202,7 +198,7 @@ forInit
     ;
 
 switchBlockStatementGroup
-    : switchLabel+ blockStatement+
+    : switchLabel blockStatement+
     ;
 
 switchLabel

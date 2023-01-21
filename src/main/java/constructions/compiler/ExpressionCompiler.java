@@ -66,7 +66,8 @@ public class ExpressionCompiler extends BaseCompiler {
             return VariableType.INT;
         }
         else if(valueExpression.getVariableType() == VariableType.BOOLEAN) {
-            addInstruction(PL0Instructions.LIT, 0, Boolean.parseBoolean(value.toString()) ? 1 : 0);
+            //TODO enum pro boolean value
+            addInstruction(PL0Instructions.LIT, 0, value.toString().equals("correct") ? 1 : 0);
             return VariableType.BOOLEAN;
         }
         return null;

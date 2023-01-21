@@ -12,6 +12,6 @@ public class ProgramCompiler extends BaseCompiler {
 
     public void run() {
         this.addInstruction(PL0Instructions.JMP, 0, 1);
-        new BlockCompiler(program.getBlock()).run();
+        new BlockCompiler(program.getBlock(), true).run();
     }
 }

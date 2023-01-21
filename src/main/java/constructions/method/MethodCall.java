@@ -1,8 +1,6 @@
 package constructions.method;
 
 import constructions.enums.ReturnType;
-import constructions.expressions.Expression;
-import constructions.statements.Statement;
 
 import java.util.List;
 

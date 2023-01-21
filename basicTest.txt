@@ -1,9 +1,17 @@
 {
-    int a = -2;
-    int b = +3;
+    int a = 0;
+    int b = 3;
 
-    int c = a * b; // -6
-    c = (2*3) + (36/(2*3*b)); // 8
-    a = b - a;
-
+    switch(b) {
+        case 0 : b = 1 * 2;
+        case 1 : {
+            b = 130 % 12;
+        }
+        case 3 : {
+            b = (10 - 3) * 5;
+        }
+        default : {
+            b = 333;
+        }
+    }
 }

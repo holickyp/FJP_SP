@@ -14,11 +14,6 @@ import java.util.List;
 
 public class ForControlVisitor extends GentleJavaBaseVisitor<ControlFor>
 {
-    /**
-     * Visitor for ForControl()
-     * @param ctx forControl context
-     * @return
-     */
     //TODO check forControl
     @Override
     public ControlFor visitForControl(GentleJavaParser.ForControlContext ctx)

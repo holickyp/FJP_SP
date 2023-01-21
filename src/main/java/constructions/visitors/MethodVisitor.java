@@ -16,11 +16,6 @@ import java.util.List;
 public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 {
 
-    /**
-     * Visitor for MethodDeclaration()
-     * @param ctx MethodDeclarationContext()
-     * @return
-     */
     @Override
     public Method visitMethodDeclaration(GentleJavaParser.MethodDeclarationContext ctx) {
 
@@ -38,9 +33,7 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
 
         Expression returnValue =  null;
 
-
-       if (ctx.methodBody().expression() != null)
-        {
+        if (ctx.methodBody().expression() != null) {
             returnValue = new ExpressionVisitor().visit(ctx.methodBody().expression());
             returnValue.setReturnType(returnType == ReturnType.INT ? VariableType.INT : VariableType.BOOLEAN);
         }
@@ -48,11 +41,6 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
         return new Method(returnType, identifier, parameters, body, returnValue, ctx.start.getLine());
     }
 
-    /**
-     * Processes method parameters
-     * @param methodParameterContext list of parameters context
-     * @return
-     */
     private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.FormalParameterContext> methodParameterContext) {
         List<MethodParameters> methodDeclarationParameters = new ArrayList<>();
         MethodParameters methodDeclarationParameter;

@@ -1,27 +1,31 @@
 package constructions.statements;
 
+import constructions.BlockStatement;
+
+import java.util.List;
+
 public class SwitchBlock{
 
     private int identifier;
-    private BlockLabelStatement blockStatement;
+    private List<BlockStatement> blockStatements;
     private int line;
 
-    public SwitchBlock(BlockLabelStatement blockStatement, int line) {
-        this.blockStatement = blockStatement;
+    public SwitchBlock(List<BlockStatement> blockStatements, int line) {
+        this.blockStatements = blockStatements;
         this.line = line;
     }
 
-    public SwitchBlock(int identifier, BlockLabelStatement blockStatement) {
+    public SwitchBlock(int identifier, List<BlockStatement> blockStatements) {
         this.identifier = identifier;
-        this.blockStatement = blockStatement;
+        this.blockStatements = blockStatements;
     }
 
     public int getIdentifier() {
         return identifier;
     }
 
-    public BlockLabelStatement getSwitchBlockStatement() {
-        return blockStatement;
+    public List<BlockStatement> getSwitchBlockStatements() {
+        return blockStatements;
     }
 
     public int getLine() {

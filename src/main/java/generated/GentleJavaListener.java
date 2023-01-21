@@ -274,16 +274,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#braceStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterBraceStatement(GentleJavaParser.BraceStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#braceStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitBraceStatement(GentleJavaParser.BraceStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#parExpression}.
 	 * @param ctx the parse tree
 	 */

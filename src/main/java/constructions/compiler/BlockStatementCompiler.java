@@ -1,5 +1,6 @@
 package constructions.compiler;
 
+import constructions.Block;
 import constructions.BlockStatement;
 import constructions.PL0.Instruction;
 import constructions.Variable;
@@ -114,7 +115,7 @@ public class BlockStatementCompiler extends BaseCompiler {
     private void statementInstructions() {
         Statement statement = blockStatement.getStatement();
         switch (statement.getType()) {
-            case BLOCK: blockInstructions((BlockLabelStatement) statement);break;
+            case BLOCK: blockLabelInstructions((BlockLabelStatement) statement);break;
             case IF: ifInstructions((IfStatement) statement);break;
             case FOR: forInstructions((ForStatement) statement);break;
             case WHILE: whileInstructions((WhileStatement) statement);break;
@@ -125,30 +126,29 @@ public class BlockStatementCompiler extends BaseCompiler {
         }
     }
 
-    private void blockInstructions(BlockLabelStatement blockLabelStatement) {
-        BlockStatementCompiler blockStatementCompiler = new BlockStatementCompiler(blockLabelStatement.getBlock(), level);
-        blockStatementCompiler.setUpInnerBodySettings();
-        blockStatementCompiler.run();
+    private void blockInstructions(Block block) {
+        BlockCompiler blockCompiler = new BlockCompiler(block, false);
+        blockCompiler.run();
+    }
+
+    private void blockLabelInstructions(BlockLabelStatement blockLabelStatement) {
+        blockInstructions(blockLabelStatement.getBlock());
     }
 
     private void ifInstructions(IfStatement ifStatement) {
         new ExpressionCompiler(ifStatement.getExpression(), VariableType.BOOLEAN, level).run();
         int jmcElse = getInstructionCounter();
         addInstruction(PL0Instructions.JMC, 0, -1);
-        if(ifStatement.getIfStatement().getType() != StatementType.BLOCK) {
-            getErrorHandler().throwError(new ErrorMismatchTypesStatement(StatementType.BLOCK.toString(), ifStatement.getIfStatement().getType().toString(), ifStatement.getLine()));
-        }
-        blockInstructions((BlockLabelStatement) ifStatement.getIfStatement());
+
+        blockInstructions(ifStatement.getIfBody());
         int jmpToEndIf = getInstructionCounter();
-        if(ifStatement.getElseStatement() != null) {
+        if(ifStatement.getElseBody() != null) {
             addInstruction(PL0Instructions.JMP, 0, -1);
         }
+
         getInstructions().get(jmcElse).setAddress(getInstructionCounter());
-        if(ifStatement.getElseStatement() != null) {
-            if(ifStatement.getElseStatement().getType() != StatementType.BLOCK) {
-                getErrorHandler().throwError(new ErrorMismatchTypesStatement(StatementType.BLOCK.toString(), ifStatement.getIfStatement().getType().toString(), ifStatement.getLine()));
-            }
-            blockInstructions((BlockLabelStatement) ifStatement.getElseStatement());
+        if(ifStatement.getElseBody() != null) {
+            blockInstructions(ifStatement.getElseBody());
             getInstructions().get(jmpToEndIf).setAddress(getInstructionCounter());
         }
     }
@@ -172,7 +172,7 @@ public class BlockStatementCompiler extends BaseCompiler {
         addInstruction(PL0Instructions.OPR, 0, Operator.LOWER_EQUAL_THAN.getCode());
         int jmcEnd = getInstructionCounter();
         addInstruction(PL0Instructions.JMC, 0, -1);
-        blockInstructions((BlockLabelStatement) forStatement.getStatement());
+        blockInstructions(forStatement.getBody());
 
         this.addInstruction(PL0Instructions.LOD, 0, symbolTableItem.getAddress());
         this.addInstruction(PL0Instructions.LIT, 0, 1);
@@ -189,7 +189,7 @@ public class BlockStatementCompiler extends BaseCompiler {
         int jmcIndex = getInstructionCounter();
         addInstruction(PL0Instructions.JMC, 0, -1);
 
-        blockInstructions((BlockLabelStatement) whileStatement.getStatement());
+        blockInstructions(whileStatement.getBody());
 
         addInstruction(PL0Instructions.JMP, 0, startIndex);
         getInstructions().get(jmcIndex).setAddress(getInstructionCounter());
@@ -197,7 +197,7 @@ public class BlockStatementCompiler extends BaseCompiler {
 
     private void doWhileInstructions(DoWhileStatement doWhileStatement) {
         int startIndex = getInstructionCounter();
-        blockInstructions((BlockLabelStatement) doWhileStatement.getStatement());
+        blockInstructions(doWhileStatement.getBody());
 
         new ExpressionCompiler(doWhileStatement.getExpression(), VariableType.BOOLEAN, level).run();
 
@@ -219,7 +219,12 @@ public class BlockStatementCompiler extends BaseCompiler {
             int jmcIndex = getInstructionCounter();
             addInstruction(PL0Instructions.JMC, 0, -1);
 
-            blockInstructions(body.getSwitchBlockStatement());
+            for(BlockStatement blockStatement1 : body.getSwitchBlockStatements()) {
+                BlockStatementCompiler blockStatementCompiler = new BlockStatementCompiler(blockStatement1,  level);
+                blockStatementCompiler.setUpInnerBodySettings();
+                blockStatementCompiler.run();
+            }
+
             int jmpEnd = getInstructionCounter();
             jmpIndexes.add(jmpEnd);
             this.addInstruction(PL0Instructions.JMP, 0, -1);
@@ -227,7 +232,11 @@ public class BlockStatementCompiler extends BaseCompiler {
         }
 
         if(switchStatement.getDefaultCase() != null) {
-            blockInstructions(switchStatement.getDefaultCase().getSwitchBlockStatement());
+            for(BlockStatement blockStatement1 : switchStatement.getDefaultCase().getSwitchBlockStatements()) {
+                BlockStatementCompiler blockStatementCompiler = new BlockStatementCompiler(blockStatement1,  level);
+                blockStatementCompiler.setUpInnerBodySettings();
+                blockStatementCompiler.run();
+            }
         }
         int currCounter = getInstructionCounter();
         for(int index : jmpIndexes) {
@@ -238,7 +247,7 @@ public class BlockStatementCompiler extends BaseCompiler {
     private void repeatInstructions(RepeatStatement repeatStatement) {
         int startAddress = getInstructionCounter();
 
-        blockInstructions((BlockLabelStatement) repeatStatement.getStatement());
+        blockInstructions(repeatStatement.getBody());
 
         new ExpressionCompiler(repeatStatement.getExpression(), VariableType.BOOLEAN, level).run();
         addInstruction(PL0Instructions.JMC, 0, startAddress);

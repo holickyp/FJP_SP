@@ -316,18 +316,6 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBraceStatement(GentleJavaParser.BraceStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBraceStatement(GentleJavaParser.BraceStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterParExpression(GentleJavaParser.ParExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

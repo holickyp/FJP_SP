@@ -13,11 +13,6 @@ import java.util.List;
 public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
 {
 
-    /**
-     * Visitor for MethodCall()
-     * @param ctx MethodCall context
-     * @return
-     */
     @Override
     public MethodCall visitMethodCall(GentleJavaParser.MethodCallContext ctx) {
         /**
@@ -30,11 +25,6 @@ public class MethodCallVisitor extends GentleJavaBaseVisitor<MethodCall>
         return new MethodCall(identifier, methodCallParameters, ctx.start.getLine());
     }
 
-    /**
-     * Processes method call parameters into internal structure
-     * @param methodCallParameterContextsList methodCallParameterContext
-     * @return
-     */
     private List<MethodCallParameter> parseMethodCallParameters(List<GentleJavaParser.ExpressionContext> methodCallParameterContextsList) {
         List<MethodCallParameter> methodCallParameters = new ArrayList<>();
         MethodCallParameter methodCallParameter;

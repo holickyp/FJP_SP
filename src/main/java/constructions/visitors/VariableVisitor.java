@@ -13,24 +13,14 @@ public class VariableVisitor extends GentleJavaBaseVisitor<Variable> {
     //TODO parallel array suppose other mehods are needed VariableModifierContext VariableDeclaratorsContext
     @Override
     public Variable visitLocalVariableDeclaration(GentleJavaParser.LocalVariableDeclarationContext ctx) {
-
-        if (ctx.variableModifier() != null) {
-
-
-            return new Variable(true,
-                    VariableType.valueOf(ctx.typeType().getText().toUpperCase()),
-                    ctx.identifier(0).getText(),
-                    // ctx.identifier(),
-                    getParallel(ctx.identifier()),
-                    new ExpressionVisitor().visit(ctx.expression()));
-        }
-        return new Variable(false,
+        Variable variable = new Variable(ctx.variableModifier() != null,
                 VariableType.valueOf(ctx.typeType().getText().toUpperCase()),
                 ctx.identifier(0).getText(),
                 // ctx.identifier(),
                 getParallel(ctx.identifier()),
                 new ExpressionVisitor().visit(ctx.expression()));
 
+        return variable;
     }
 
     public String getIdentifier(GentleJavaParser.VariableDeclaratorIdContext ctx) {
@@ -47,8 +37,9 @@ public class VariableVisitor extends GentleJavaBaseVisitor<Variable> {
     {
         List<String> parallel = new ArrayList<>();
 
-        for (GentleJavaParser.IdentifierContext identifierContext : ctx) {
-            String identifier = identifierContext.getText();
+        for (int i = 0 ; i < ctx.size() ; i++)
+        {
+            String identifier = ctx.get(i).getText();
             parallel.add(identifier);
         }
 

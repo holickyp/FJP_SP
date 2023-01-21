@@ -34,6 +34,11 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
     }
 
     @Override
+    public Expression visitParExpression(GentleJavaParser.ParExpressionContext ctx) {
+        return new ParenthesesExpression(ctx.start.getLine(), this.visit(ctx.expression()));
+    }
+
+    @Override
     public Expression visitRelationalExpression(GentleJavaParser.RelationalExpressionContext ctx) {
         Expression left = visit(ctx.expression(0));
         Expression right = visit(ctx.expression(1));

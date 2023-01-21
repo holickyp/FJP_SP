@@ -169,12 +169,6 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpressionStatement(GentleJavaParser.ExpressionStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#braceStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBraceStatement(GentleJavaParser.BraceStatementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#parExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

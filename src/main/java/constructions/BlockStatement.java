@@ -3,8 +3,6 @@ package constructions;
 import constructions.method.Method;
 import constructions.statements.Statement;
 
-import java.util.List;
-
 public class BlockStatement {
     private Statement statement;
     private Variable variable;

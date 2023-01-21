@@ -1,8 +1,8 @@
 package constructions.visitors;
 
+import constructions.Block;
 import constructions.BlockStatement;
 import constructions.ErrorHandler;
-import constructions.Variable;
 import constructions.enums.VariableType;
 import constructions.error.ErrorSwitchMultipleDefaultBlock;
 import constructions.expressions.Expression;
@@ -11,72 +11,40 @@ import constructions.statements.*;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
 
-    /**
-     * Visitor for StatementIf()
-     * @param ctx StatementIf context
-     * @return
-     */
     @Override
     public IfStatement visitIfStatement(GentleJavaParser.IfStatementContext ctx)
     {
-
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
-        // Exception exception = new E
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
         expression.setReturnType(VariableType.BOOLEAN);
 
+        Block statementIf = ctx.block().size() > 0 ? new BlockVisitor().visit(ctx.block(0)) : null;
 
-        Statement statementIf = ctx.braceStatement(0).statement() != null ? new StatementVisitor().visit(ctx.braceStatement(0).statement()) : null;
+        Block statementElse = ctx.block().size() > 1 ? new BlockVisitor().visit(ctx.block(1)) : null;
 
-        Statement statementElse = null;
-
-        // else part
-        if (ctx.braceStatement(1) != null)
-        {
-            statementElse =ctx.braceStatement(1).statement() != null ? new StatementVisitor().visit(ctx.braceStatement(1).statement()) : null;
-        }
-        System.out.println("A");
         return new IfStatement(expression, statementIf, statementElse, ctx.start.getLine());
     }
 
-    /**
-     * visitor for StatementFor()
-     * @param ctx StatementFor context
-     * @return
-     */
     @Override
     public ForStatement visitForStatement(GentleJavaParser.ForStatementContext ctx)
     {
         ControlFor controlFor = new ForControlVisitor().visit(ctx.forControl());
 
-        Statement body;
-
-        if (ctx.braceStatement().statement() == null)
-        {
-            body = null;
-        }
-        else
-        {
-            body = new StatementVisitor().visit(ctx.braceStatement().statement());
-        }
+        Block body = ctx.block() == null ? null : new BlockVisitor().visit(ctx.block());
 
         return new ForStatement( ctx.start.getLine(), controlFor, body);
     }
 
-    /**
-     * Visitor for StatementWhile()
-     * @param ctx StatementWhile context
-     * @return
-     */
     @Override
     public WhileStatement visitWhileStatement(GentleJavaParser.WhileStatementContext ctx)
     {
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
-        Statement body = ctx.braceStatement().statement() != null ? new StatementVisitor().visit(ctx.braceStatement().statement()) : null;
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
+        Block body = ctx.block() != null ? new BlockVisitor().visit(ctx.block()) : null;
 
         return new WhileStatement(ctx.start.getLine(), expression, body);
     }
@@ -84,65 +52,60 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     @Override
     public DoWhileStatement visitDoWhileStatement(GentleJavaParser.DoWhileStatementContext ctx)
     {
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
-        Statement body = ctx.braceStatement().statement() != null ? new StatementVisitor().visit(ctx.braceStatement().statement()) : null;
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
+        Block body = ctx.block() != null ? new BlockVisitor().visit(ctx.block()) : null;
 
         return new DoWhileStatement(ctx.start.getLine(), body, expression);
     }
 
 
     @Override
-    public SwitchStatement visitSwitchStatement(GentleJavaParser.SwitchStatementContext ctx)
-    {
+    public SwitchStatement visitSwitchStatement(GentleJavaParser.SwitchStatementContext ctx) {
         List<GentleJavaParser.SwitchBlockStatementGroupContext> switchBlocks = ctx.switchBlockStatementGroup();
         HashMap<Integer, SwitchBlock> switchBlockHashMap = new HashMap<>();
         SwitchBlock defaultBlock = null;
-        Expression expression = new ExpressionVisitor().visit(ctx.parExpression().expression());
-        for (GentleJavaParser.SwitchBlockStatementGroupContext switchBlockStatement : switchBlocks)
-        {
-            for(int i = 0; i<switchBlockStatement.switchLabel().size(); i++) {
-                // case block
-                if(switchBlockStatement.switchLabel(i).CASE() != null) {
-                    int identifier = Integer.parseInt(switchBlockStatement.switchLabel(i).getText());
-                    BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
-                    BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);
-                    SwitchBlock switchBlock = new SwitchBlock(identifier, blockLabelStatement);
-                    switchBlockHashMap.put(identifier, switchBlock);
+        Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
+        for (GentleJavaParser.SwitchBlockStatementGroupContext switchBlockStatement : switchBlocks) {
+            // case block
+            if(switchBlockStatement.switchLabel().CASE() != null) {
+                int identifier = Integer.parseInt(switchBlockStatement.switchLabel().getText());
+                List<BlockStatement> caseBody = new ArrayList<>();
+                for(GentleJavaParser.BlockStatementContext blockStatementContext : switchBlockStatement.blockStatement()) {
+                    caseBody.add(new BlockStatementVisitor().visit(blockStatementContext));
                 }
-                // default block
-                else {
-
-                    if (defaultBlock != null) {
-                        ErrorHandler.getInstance().throwError(new ErrorSwitchMultipleDefaultBlock(switchBlockStatement.start.getLine()));
-                    }
-                    BlockStatement body = switchBlockStatement.blockStatement(i) != null ? new BlockStatementVisitor().visit(switchBlockStatement.blockStatement(i)) : null;
-                    BlockLabelStatement blockLabelStatement= new BlockLabelStatement(ctx.start.getLine(), body);
-                    defaultBlock = new SwitchBlock(blockLabelStatement, switchBlockStatement.blockStatement(i).statement().start.getLine());
-
+                SwitchBlock switchBlock = new SwitchBlock(identifier, caseBody);
+                switchBlockHashMap.put(identifier, switchBlock);
+            }
+            // default block
+            else {
+                if (defaultBlock != null) {
+                    ErrorHandler.getInstance().throwError(new ErrorSwitchMultipleDefaultBlock(switchBlockStatement.start.getLine()));
                 }
+                List<BlockStatement> defaultCaseBody = new ArrayList<>();
+                int line = -1;
+                for(GentleJavaParser.BlockStatementContext blockStatementContext : switchBlockStatement.blockStatement()) {
+                    defaultCaseBody.add(new BlockStatementVisitor().visit(blockStatementContext));
+                    line = blockStatementContext.statement().start.getLine();
+                }
+                defaultBlock = new SwitchBlock(defaultCaseBody, line);
 
             }
         }
         return new SwitchStatement(ctx.start.getLine(), expression, switchBlockHashMap, defaultBlock);
     }
 
-    /**
-     * Visitor for StatementRepeat()
-     * @param ctx StatementRepeat context
-     * @return
-     */
     @Override
     public RepeatStatement visitRepeatStatement(GentleJavaParser.RepeatStatementContext ctx)
     {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
-        Statement body = ctx.braceStatement().statement() != null ? new StatementVisitor().visit(ctx.braceStatement().statement()) : null;
+        Block body = ctx.block() != null ? new BlockVisitor().visit(ctx.block()) : null;
 
         return new RepeatStatement(ctx.start.getLine(), body, expression);
     }
 
     @Override
     public BlockLabelStatement visitBlockLabelStatement(GentleJavaParser.BlockLabelStatementContext ctx) {
-        BlockStatement body = new BlockStatementVisitor().visit(ctx.block());
+        Block body = new BlockVisitor().visit(ctx.block());
 
         return new BlockLabelStatement(ctx.start.getLine(), body);
     }
@@ -153,10 +116,4 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
 
         return new ExpressionStatement(ctx.start.getLine(), expression);
     }
-
-   /* @Override
-    public Statement visitVariableDeclarationStatement(GentleJavaParser.VariableDeclarationStatementContext ctx) {
-        Variable variable = new VariableVisitor().visit(ctx.localVariableDeclaration());
-        return new DeclarationStatement(variable, ctx.start.getLine());
-    }*/
 }

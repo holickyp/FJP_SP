@@ -1,29 +1,30 @@
 package constructions.statements;
 
+import constructions.Block;
 import constructions.enums.StatementType;
 import constructions.expressions.Expression;
 
-public class IfStatement extends Statement{
+public class IfStatement extends Statement {
     private Expression expression;
-    private Statement ifStatement;
-    private Statement elseStatement;
+    private Block ifBody;
+    private Block elseBody;
 
-    public IfStatement(Expression expression, Statement ifStatement, Statement elseStatement, int line) {
+    public IfStatement(Expression expression, Block ifBody, Block elseBody, int line) {
         super(StatementType.IF, line);
         this.expression = expression;
-        this.ifStatement = ifStatement;
-        this.elseStatement = elseStatement;
+        this.ifBody = ifBody;
+        this.elseBody = elseBody;
     }
 
     public Expression getExpression() {
         return expression;
     }
 
-    public Statement getIfStatement() {
-        return ifStatement;
+    public Block getIfBody() {
+        return ifBody;
     }
 
-    public Statement getElseStatement() {
-        return elseStatement;
+    public Block getElseBody() {
+        return elseBody;
     }
 }
