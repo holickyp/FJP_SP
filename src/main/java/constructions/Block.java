@@ -18,6 +18,9 @@ public class Block {
         for(BlockStatement blockStatement : blockStatements) {
             if(blockStatement.getVariable() != null) {
                 i++;
+                if(blockStatement.getVariable().getParallelArray().size() > 0) {
+                    i += blockStatement.getVariable().getParallelArray().size();
+                }
             }
         }
         return i;

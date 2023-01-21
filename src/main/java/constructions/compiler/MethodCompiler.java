@@ -20,8 +20,7 @@ public class MethodCompiler extends BaseCompiler {
         this.method = method;
     }
 
-    public void run()
-    {
+    public void run() {
         this.processMethod();
     }
 
@@ -31,17 +30,19 @@ public class MethodCompiler extends BaseCompiler {
         }
         setStackPointer(DEFAULT_STACK_POINTER);
         int methodSize = 0;
-        if(method.getBlock() != null) {
-            methodSize = method.getBlock().getBlockStatements().size();
+        if(method.getBody() != null) {
+            methodSize = method.getBody().getBlockStatements().size();
         }
         int baseMethodSize = method.getMethodParameters().size() + DEFAULT_METHOD_SIZE;
         addMethodToSymbolTable(methodSize, baseMethodSize);
         loadParametersFromStack();
 
         BlockStatementCompiler blockStatementCompiler = null;
-        for(BlockStatement blockStatement : method.getBlock().getBlockStatements()) {
-            blockStatementCompiler = new BlockStatementCompiler(blockStatement, 1);
-            blockStatementCompiler.run();
+        if(method.getBody() != null) {
+            for(BlockStatement blockStatement : method.getBody().getBlockStatements()) {
+                blockStatementCompiler = new BlockStatementCompiler(blockStatement, 1);
+                blockStatementCompiler.run();
+            }
         }
 
         if(method.getReturnValue() != null) {
@@ -51,7 +52,7 @@ public class MethodCompiler extends BaseCompiler {
 
         deleteParametersFromSymbolTable();
 
-        addInstruction(PL0Instructions.RET, 0, 0);
+        //addInstruction(PL0Instructions.RET, 0, 0);
     }
 
     private void addMethodToSymbolTable(int methodSize, int baseMethodSize) {

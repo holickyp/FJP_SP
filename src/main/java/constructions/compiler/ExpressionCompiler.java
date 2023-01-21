@@ -46,7 +46,7 @@ public class ExpressionCompiler extends BaseCompiler {
             case IDENTIFIER: type = identifierInstructions((IdentifierExpression) expression);break;
             case METHOD_CALL: type = methodCallInstructions((MethodCallExpression) expression);break;
             case POSTFIX:break;//TODO
-            case PREFIX:break;//TODO
+            case PREFIX: type = prefixInstructions((PrefixExpression) expression);break;
             case MUL_DIV_MOD: type = mulDivModInstructions((MulDivModExpression) expression);break;
             case PLUS_MINUS: type = plusMinusInstructions((PlusMinusExpression) expression);break;
             case RELATIONAL: type = relationalInstructions((RelationalExpression) expression);break;
@@ -54,6 +54,7 @@ public class ExpressionCompiler extends BaseCompiler {
             case LOGICAL: type = logicalInstructions((LogicalExpression) expression);break;
             case PARENTHESES: type = parenthesesInstructions((ParenthesesExpression) expression);break;
             case ASSIGN: type = assignInstructions((AssignExpression) expression);break;
+            case TERNARY: type = ternaryInstructions((TernaryExpression) expression);break;
         }
         return type;
     }
@@ -90,7 +91,6 @@ public class ExpressionCompiler extends BaseCompiler {
         if(methodCallExpression.getMethodCall().getReturnType() == ReturnType.VOID) {
             getErrorHandler().throwError(new ErrorVoidMethodExpression(methodCallExpression.getMethodCall().getIdentifier(), methodCallExpression.getLine()));
         }
-        //TODO method prototype???
 
         methodCallExpression.getMethodCall().setReturnType(getMethodReturnTypes().get(methodCallExpression.getMethodCall().getIdentifier()));
         new MethodCallCompiler(methodCallExpression.getMethodCall(), level).run();
@@ -103,7 +103,46 @@ public class ExpressionCompiler extends BaseCompiler {
 
     //TODO postfix
 
-    //TODO prefix - includes negation
+    private VariableType prefixInstructions(PrefixExpression prefixExpression) {
+        VariableType type = null;
+        switch(prefixExpression.getPrefixType()) {
+            case NEGATION: type = negationInstructions(prefixExpression);break;
+            case PLUS: type = VariableType.INT;break;
+            case MINUS: type = minusInstructions(prefixExpression);break;
+        }
+        return type;
+    }
+
+    private VariableType negationInstructions(PrefixExpression prefixExpression) {
+        // multiple logical negation
+        if (prefixExpression.getType() == prefixExpression.getExpression().getType()) {
+            this.getErrorHandler().throwError(new ErrorArithmetic(PrefixType.NEGATION.toString(), prefixExpression.getExpression().getLine()));
+        }
+        VariableType expressionType = processExpression(prefixExpression.getExpression());
+
+        if (expressionType != VariableType.BOOLEAN) {
+            this.getErrorHandler().throwError(new ErrorMismatchExpressionResult( VariableType.BOOLEAN.toString(), expressionType.toString(), this.expression.getLine()));
+        }
+
+        addInstruction(PL0Instructions.LIT, 0,0);
+        addInstruction(PL0Instructions.OPR, 0, Operator.EQUALS.getCode());
+
+        return VariableType.BOOLEAN;
+    }
+
+    private VariableType minusInstructions(PrefixExpression prefixExpression)
+    {
+        VariableType expressionType = this.processExpression(prefixExpression.getExpression());
+
+        if (expressionType != VariableType.INT) {
+            this.getErrorHandler().throwError(new ErrorMismatchExpressionResult( VariableType.INT.toString(), expressionType.toString(), this.expression.getLine()));
+        }
+
+        this.addInstruction(PL0Instructions.LIT, 0,-1);
+        this.addInstruction(PL0Instructions.OPR, 0, Operator.MULTIPLICATION.getCode());
+
+        return VariableType.INT;
+    }
 
     private VariableType mulDivModInstructions(MulDivModExpression mulDivModExpression) {
         VariableType left = processExpression(mulDivModExpression.getLeftExpression());
@@ -193,7 +232,6 @@ public class ExpressionCompiler extends BaseCompiler {
                 if(symbolTableItem.isConstant()) {
                     getErrorHandler().throwError(new ErrorConstantAssigment(symbolTableItem.getName(), assignExpression.getLine()));
                 }
-                //addInstruction(PL0Instructions.LOD, level - symbolTableItem.getLevel(), symbolTableItem.getAddress());
 
                 Expression right = assignExpression.getRight();
                 if(right.getType() == ExpressionType.METHOD_CALL) {
@@ -215,5 +253,22 @@ public class ExpressionCompiler extends BaseCompiler {
             }
         }
         return null;
+    }
+
+    private VariableType ternaryInstructions(TernaryExpression ternaryExpression) {
+        new ExpressionCompiler(ternaryExpression.getQuestion(), VariableType.BOOLEAN, level).run();
+        int jmcElse = getInstructionCounter();
+        addInstruction(PL0Instructions.JMC, 0, -1);
+
+        new ExpressionCompiler(ternaryExpression.getTrueExpression(), VariableType.INT, level).run();
+        int jmpToEndIf = getInstructionCounter();
+        addInstruction(PL0Instructions.JMP, 0, -1);
+
+
+        getInstructions().get(jmcElse).setAddress(getInstructionCounter());
+        new ExpressionCompiler(ternaryExpression.getFalseExpression(), VariableType.INT, level).run();
+        getInstructions().get(jmpToEndIf).setAddress(getInstructionCounter());
+
+        return VariableType.INT;
     }
 }

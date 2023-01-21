@@ -33,12 +33,10 @@ public class VariableVisitor extends GentleJavaBaseVisitor<Variable> {
      * @param ctx ParalelDeclaration context
      * @return
      */
-    private List<String> getParallel(List<GentleJavaParser.IdentifierContext> ctx)
-    {
+    private List<String> getParallel(List<GentleJavaParser.IdentifierContext> ctx) {
         List<String> parallel = new ArrayList<>();
 
-        for (int i = 0 ; i < ctx.size() ; i++)
-        {
+        for (int i = 1 ; i < ctx.size() ; i++) {
             String identifier = ctx.get(i).getText();
             parallel.add(identifier);
         }

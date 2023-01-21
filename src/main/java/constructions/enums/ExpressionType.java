@@ -12,5 +12,6 @@ public enum ExpressionType {
     COMPARE,
     LOGICAL,
     PARENTHESES,
-    ASSIGN
+    ASSIGN,
+    TERNARY
 }

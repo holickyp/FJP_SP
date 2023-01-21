@@ -4,6 +4,7 @@ import constructions.enums.*;
 import constructions.expressions.*;
 import constructions.method.MethodCall;
 import generated.GentleJavaBaseVisitor;
+import generated.GentleJavaListener;
 import generated.GentleJavaParser;
 
 
@@ -104,14 +105,14 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
     @Override
     public Expression visitPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) {
         Expression ex = this.visit(ctx.expression());
-        PostfixType type = PostfixType.valueOf(ctx.postfix.getText());
+        PostfixType type = PostfixType.getType(ctx.postfix.getText());
         return new PostfixExpression(ctx.start.getLine(), ex, type);
     }
 
     @Override
     public Expression visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) {
        Expression ex = this.visit(ctx.expression());
-       PrefixType type = PrefixType.valueOf(ctx.prefix.getText());
+       PrefixType type = PrefixType.getType(ctx.prefix.getText());
        return new PrefixExpression(ctx.start.getLine(), type, ex);
     }
 
@@ -121,5 +122,14 @@ public class ExpressionVisitor extends GentleJavaBaseVisitor<Expression> {
         Expression right = visit(ctx.expression(1));
 
         return new AssignExpression(ctx.start.getLine(), left, right);
+    }
+
+    @Override
+    public Expression visitTernaryExpression(GentleJavaParser.TernaryExpressionContext ctx) {
+        Expression question = visit(ctx.expression(0));
+        Expression trueExpression = visit(ctx.expression(1));
+        Expression falseExpression = visit(ctx.expression(2));
+
+        return new TernaryExpression(ctx.start.getLine(), question, trueExpression, falseExpression);
     }
 }

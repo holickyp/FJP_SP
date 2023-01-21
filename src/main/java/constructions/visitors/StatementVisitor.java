@@ -6,7 +6,6 @@ import constructions.ErrorHandler;
 import constructions.enums.VariableType;
 import constructions.error.ErrorSwitchMultipleDefaultBlock;
 import constructions.expressions.Expression;
-import constructions.forControl.ControlFor;
 import constructions.statements.*;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
@@ -18,8 +17,7 @@ import java.util.List;
 public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
 
     @Override
-    public IfStatement visitIfStatement(GentleJavaParser.IfStatementContext ctx)
-    {
+    public IfStatement visitIfStatement(GentleJavaParser.IfStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
         expression.setReturnType(VariableType.BOOLEAN);
 
@@ -31,18 +29,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     }
 
     @Override
-    public ForStatement visitForStatement(GentleJavaParser.ForStatementContext ctx)
-    {
-        ControlFor controlFor = new ForControlVisitor().visit(ctx.forControl());
-
-        Block body = ctx.block() == null ? null : new BlockVisitor().visit(ctx.block());
-
-        return new ForStatement( ctx.start.getLine(), controlFor, body);
-    }
-
-    @Override
-    public WhileStatement visitWhileStatement(GentleJavaParser.WhileStatementContext ctx)
-    {
+    public WhileStatement visitWhileStatement(GentleJavaParser.WhileStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
         Block body = ctx.block() != null ? new BlockVisitor().visit(ctx.block()) : null;
 
@@ -50,8 +37,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     }
 
     @Override
-    public DoWhileStatement visitDoWhileStatement(GentleJavaParser.DoWhileStatementContext ctx)
-    {
+    public DoWhileStatement visitDoWhileStatement(GentleJavaParser.DoWhileStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
         Block body = ctx.block() != null ? new BlockVisitor().visit(ctx.block()) : null;
 
@@ -95,8 +81,7 @@ public class StatementVisitor extends GentleJavaBaseVisitor<Statement> {
     }
 
     @Override
-    public RepeatStatement visitRepeatStatement(GentleJavaParser.RepeatStatementContext ctx)
-    {
+    public RepeatStatement visitRepeatStatement(GentleJavaParser.RepeatStatementContext ctx) {
         Expression expression = new ExpressionVisitor().visit(ctx.parExpression());
         Block body = ctx.block() != null ? new BlockVisitor().visit(ctx.block()) : null;
 

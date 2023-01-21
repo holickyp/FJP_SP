@@ -2,6 +2,7 @@ package constructions.visitors;
 
 import constructions.Block;
 import constructions.BlockStatement;
+import constructions.statements.Statement;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
@@ -14,6 +15,22 @@ public class BlockVisitor extends GentleJavaBaseVisitor<Block> {
         List<BlockStatement> blockStatements = this.getBlockStatements(ctx.blockStatement());
 
         return new Block(blockStatements);
+    }
+
+    @Override
+    public Block visitMethodBlock(GentleJavaParser.MethodBlockContext ctx) {
+        if (ctx == null) {
+            return null;
+        }
+
+        List<BlockStatement> blockStatements = new ArrayList<>();
+        for (GentleJavaParser.StatementContext statementContext : ctx.statement()) {
+            Statement statement = new StatementVisitor().visit(statementContext);
+            blockStatements.add(new BlockStatement(statement, null, null));
+        }
+
+        return new Block(blockStatements);
+
     }
 
     private List<BlockStatement> getBlockStatements(List<GentleJavaParser.BlockStatementContext> blockStatementContextList) {

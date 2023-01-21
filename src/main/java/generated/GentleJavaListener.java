@@ -88,16 +88,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitBlock(GentleJavaParser.BlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#methodBlock}.
-	 * @param ctx the parse tree
-	 */
-	void enterMethodBlock(GentleJavaParser.MethodBlockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#methodBlock}.
-	 * @param ctx the parse tree
-	 */
-	void exitMethodBlock(GentleJavaParser.MethodBlockContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#blockStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -178,6 +168,16 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitMethodBody(GentleJavaParser.MethodBodyContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GentleJavaParser#methodBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodBlock(GentleJavaParser.MethodBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GentleJavaParser#methodBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodBlock(GentleJavaParser.MethodBlockContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code blockLabelStatement}
 	 * labeled alternative in {@link GentleJavaParser#statement}.
 	 * @param ctx the parse tree
@@ -201,18 +201,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfStatement(GentleJavaParser.IfStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link GentleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterForStatement(GentleJavaParser.ForStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link GentleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitForStatement(GentleJavaParser.ForStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code whileStatement}
 	 * labeled alternative in {@link GentleJavaParser#statement}.
@@ -294,18 +282,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitExpressionList(GentleJavaParser.ExpressionListContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code compareExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterCompareExpression(GentleJavaParser.CompareExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code compareExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitCompareExpression(GentleJavaParser.CompareExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code mulDivModExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.
 	 * @param ctx the parse tree
@@ -317,42 +293,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenthesesExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenthesesExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code prefixExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code prefixExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code plusMinusExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code plusMinusExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code relationalExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.
@@ -414,6 +354,66 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 */
 	void exitLogicalExpression(GentleJavaParser.LogicalExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code compareExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompareExpression(GentleJavaParser.CompareExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code compareExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompareExpression(GentleJavaParser.CompareExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parenthesesExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parenthesesExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code plusMinusExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code plusMinusExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ternaryExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTernaryExpression(GentleJavaParser.TernaryExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ternaryExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTernaryExpression(GentleJavaParser.TernaryExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code postfixExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.
 	 * @param ctx the parse tree
@@ -437,26 +437,6 @@ public interface GentleJavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPossibleValueExpression(GentleJavaParser.PossibleValueExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#forControl}.
-	 * @param ctx the parse tree
-	 */
-	void enterForControl(GentleJavaParser.ForControlContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#forControl}.
-	 * @param ctx the parse tree
-	 */
-	void exitForControl(GentleJavaParser.ForControlContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GentleJavaParser#forInit}.
-	 * @param ctx the parse tree
-	 */
-	void enterForInit(GentleJavaParser.ForInitContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GentleJavaParser#forInit}.
-	 * @param ctx the parse tree
-	 */
-	void exitForInit(GentleJavaParser.ForInitContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GentleJavaParser#switchBlockStatementGroup}.
 	 * @param ctx the parse tree

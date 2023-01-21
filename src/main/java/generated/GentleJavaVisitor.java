@@ -59,12 +59,6 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlock(GentleJavaParser.BlockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#methodBlock}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMethodBlock(GentleJavaParser.MethodBlockContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#blockStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -113,6 +107,12 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMethodBody(GentleJavaParser.MethodBodyContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GentleJavaParser#methodBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethodBlock(GentleJavaParser.MethodBlockContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code blockLabelStatement}
 	 * labeled alternative in {@link GentleJavaParser#statement}.
 	 * @param ctx the parse tree
@@ -126,13 +126,6 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIfStatement(GentleJavaParser.IfStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link GentleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForStatement(GentleJavaParser.ForStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code whileStatement}
 	 * labeled alternative in {@link GentleJavaParser#statement}.
@@ -181,40 +174,12 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpressionList(GentleJavaParser.ExpressionListContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code compareExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCompareExpression(GentleJavaParser.CompareExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code mulDivModExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code parenthesesExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code prefixExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code plusMinusExpression}
-	 * labeled alternative in {@link GentleJavaParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code relationalExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.
@@ -251,6 +216,41 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogicalExpression(GentleJavaParser.LogicalExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code compareExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCompareExpression(GentleJavaParser.CompareExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code parenthesesExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code plusMinusExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ternaryExpression}
+	 * labeled alternative in {@link GentleJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTernaryExpression(GentleJavaParser.TernaryExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code postfixExpression}
 	 * labeled alternative in {@link GentleJavaParser#expression}.
 	 * @param ctx the parse tree
@@ -264,18 +264,6 @@ public interface GentleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPossibleValueExpression(GentleJavaParser.PossibleValueExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#forControl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForControl(GentleJavaParser.ForControlContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GentleJavaParser#forInit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForInit(GentleJavaParser.ForInitContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GentleJavaParser#switchBlockStatementGroup}.
 	 * @param ctx the parse tree

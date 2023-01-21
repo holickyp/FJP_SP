@@ -15,7 +15,7 @@ public enum Operator {
     AND("&&", 2),
     OR("||", 4);
 
-    private String op;
+    private final String op;
     private int code;
 
     Operator(String op)
@@ -25,8 +25,7 @@ public enum Operator {
 
     public static Operator getOp(String op) {
         for(Operator e: Operator.values()) {
-            if(e.op.equals(op))
-            {
+            if(e.op.equals(op)) {
                 return e;
             }
         }

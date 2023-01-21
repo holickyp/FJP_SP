@@ -10,18 +10,18 @@ public class Method {
     private ReturnType returnType;
     private String name;
     private List<MethodParameters> methodParameters;
-    private Block block;
+    private Block body;
 
     private final Expression returnValue;
 
     /** line of method head */
     private int line;
 
-    public Method(ReturnType returnType, String name, List<MethodParameters> methodParameters, Block block, Expression returnValue, int line) {
+    public Method(ReturnType returnType, String name, List<MethodParameters> methodParameters, Block body, Expression returnValue, int line) {
         this.returnType = returnType;
         this.name = name;
         this.methodParameters = methodParameters;
-        this.block = block;
+        this.body = body;
         this.returnValue = returnValue;
         this.line = line;
     }
@@ -38,8 +38,8 @@ public class Method {
         return methodParameters;
     }
 
-    public Block getBlock() {
-        return block;
+    public Block getBody() {
+        return body;
     }
 
     public Expression getReturnValue() {

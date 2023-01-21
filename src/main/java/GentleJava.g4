@@ -115,10 +115,6 @@ block
     : LEFT_BRACE blockStatement* RIGHT_BRACE
     ;
 
-methodBlock
-    : (statement)+
-    ;
-
 blockStatement
     : localVariableDeclaration SEMICOLON
     | methodDeclaration
@@ -154,10 +150,13 @@ methodBody
     | SEMICOLON
     ;
 
+methodBlock
+    : (statement)+
+    ;
+
 statement
     : blockLabel=block                                                                      #blockLabelStatement
     | IF parExpression block (ELSE block)?                                                  #ifStatement
-    | FOR LEFT_PARENTHESES forControl RIGHT_PARENTHESES block                               #forStatement
     | WHILE parExpression block                                                             #whileStatement
     | DO block WHILE parExpression SEMICOLON                                                #doWhileStatement
     | SWITCH parExpression LEFT_BRACE switchBlockStatementGroup* switchLabel* RIGHT_BRACE   #switchStatement
@@ -186,15 +185,7 @@ expression
     | expression bop=(AND | OR) expression                                                          #logicalExpression
     | LEFT_PARENTHESES expression RIGHT_PARENTHESES                                                 #parenthesesExpression
     | <assoc=right> expression bop=ASSIGN expression                                                #assignExpression
-    ;
-
-forControl
-    : forInit? SEMICOLON expression? SEMICOLON forUpdate=expressionList?
-    ;
-
-forInit
-    : localVariableDeclaration
-    | expressionList
+    | <assoc=right> expression bop=QUESTION expression COLON expression                             #ternaryExpression
     ;
 
 switchBlockStatementGroup

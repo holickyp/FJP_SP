@@ -112,18 +112,6 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMethodBlock(GentleJavaParser.MethodBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMethodBlock(GentleJavaParser.MethodBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBlockStatement(GentleJavaParser.BlockStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -220,6 +208,18 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMethodBlock(GentleJavaParser.MethodBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodBlock(GentleJavaParser.MethodBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlockLabelStatement(GentleJavaParser.BlockLabelStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -239,18 +239,6 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfStatement(GentleJavaParser.IfStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterForStatement(GentleJavaParser.ForStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForStatement(GentleJavaParser.ForStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -340,18 +328,6 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCompareExpression(GentleJavaParser.CompareExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCompareExpression(GentleJavaParser.CompareExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -359,42 +335,6 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMulDivModExpression(GentleJavaParser.MulDivModExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -460,6 +400,66 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCompareExpression(GentleJavaParser.CompareExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompareExpression(GentleJavaParser.CompareExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParenthesesExpression(GentleJavaParser.ParenthesesExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrefixExpression(GentleJavaParser.PrefixExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlusMinusExpression(GentleJavaParser.PlusMinusExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTernaryExpression(GentleJavaParser.TernaryExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTernaryExpression(GentleJavaParser.TernaryExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPostfixExpression(GentleJavaParser.PostfixExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -479,30 +479,6 @@ public class GentleJavaBaseListener implements GentleJavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPossibleValueExpression(GentleJavaParser.PossibleValueExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterForControl(GentleJavaParser.ForControlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForControl(GentleJavaParser.ForControlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterForInit(GentleJavaParser.ForInitContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForInit(GentleJavaParser.ForInitContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -7,6 +7,7 @@ import constructions.enums.VariableType;
 import constructions.expressions.Expression;
 import constructions.method.Method;
 import constructions.method.MethodParameters;
+import constructions.symbolTable.SymbolTableItem;
 import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
@@ -29,10 +30,15 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
             parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
         }
 
-        Block body = ctx.methodBody() != null ? new BlockVisitor().visit(ctx.methodBody()) : null;
+        if(ctx.methodBody() != null) {
+            System.out.println("bruh");
+            if(ctx.methodBody().methodBlock() != null) {
+                System.out.println("bruh");
+            }
+        }
+        Block body = ctx.methodBody().methodBlock() != null ? new BlockVisitor().visit(ctx.methodBody().methodBlock()) : null;
 
         Expression returnValue =  null;
-
         if (ctx.methodBody().expression() != null) {
             returnValue = new ExpressionVisitor().visit(ctx.methodBody().expression());
             returnValue.setReturnType(returnType == ReturnType.INT ? VariableType.INT : VariableType.BOOLEAN);
