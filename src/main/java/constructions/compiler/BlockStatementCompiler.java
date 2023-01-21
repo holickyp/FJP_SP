@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class BlockStatementCompiler extends BaseCompiler {
-    private BlockStatement blockStatement;
-    private int level;
+    private final BlockStatement blockStatement;
+    private final int level;
     private boolean generateMethods = true;
     private boolean increaseStack = true;
     private boolean generateReturn = false;
@@ -255,7 +255,6 @@ public class BlockStatementCompiler extends BaseCompiler {
 
     private void expressionInstructions(ExpressionStatement expressionStatement) {
         new ExpressionCompiler(expressionStatement.getExpression(), VariableType.INT, level).run();
-
     }
 
     private void initializeMethods() {
@@ -289,7 +288,9 @@ public class BlockStatementCompiler extends BaseCompiler {
 
     public void deleteVariables() {
         if(blockStatement != null) {
-            getSymbolTable().getTable().remove(blockStatement.getVariable().getName());
+            if(blockStatement.getVariable() != null) {
+                getSymbolTable().getTable().remove(blockStatement.getVariable().getName());
+            }
             if(createSpaceForVariables && blockStatement.getVariable() != null) {
                 addInstruction(PL0Instructions.INT, 0, -1);
             }
