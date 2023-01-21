@@ -1,5 +1,0 @@
-{
-    boolean a = incorrect;
-    int b = a ? 10 : 20;
-    int c = b + 1;
-}
