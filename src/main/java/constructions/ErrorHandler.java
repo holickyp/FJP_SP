@@ -14,8 +14,8 @@ public class ErrorHandler
     }
 
     /**
-     * Print error message and ends program
-     * @param error instance of Error
+     * Vypise errovou hlasku a ukonci program
+     * @param error error
      */
     public void throwError(Error error)
     {

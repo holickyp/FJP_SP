@@ -9,6 +9,11 @@ import generated.GentleJavaParser;
 
 public class BlockStatementVisitor extends GentleJavaBaseVisitor<BlockStatement> {
 
+    /**
+     * Visitor pro BlockStatement
+     * @param ctx BlockStatement context
+     * @return interni strukturu BlockStatement
+     */
     @Override
     public BlockStatement visitBlockStatement(GentleJavaParser.BlockStatementContext ctx) {
         Statement statement = null;

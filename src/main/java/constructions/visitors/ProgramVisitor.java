@@ -5,6 +5,11 @@ import generated.GentleJavaBaseVisitor;
 import generated.GentleJavaParser;
 
 public class ProgramVisitor extends GentleJavaBaseVisitor<Program> {
+    /**
+     * Visitor pro Program
+     * @param ctx context
+     * @return Program
+     */
     @Override
     public Program visitProgram(GentleJavaParser.ProgramContext ctx) {
         return new Program(new BlockVisitor().visit(ctx.block()));

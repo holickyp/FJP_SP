@@ -14,9 +14,12 @@ import generated.GentleJavaParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodVisitor extends GentleJavaBaseVisitor<Method>
-{
-
+public class MethodVisitor extends GentleJavaBaseVisitor<Method> {
+    /**
+     * Visitor pro deklaraci metod
+     * @param ctx context
+     * @return Method
+     */
     @Override
     public Method visitMethodDeclaration(GentleJavaParser.MethodDeclarationContext ctx) {
 
@@ -30,12 +33,6 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
             parameters = this.parseMethodParameters(ctx.formalParameters().formalParameterList().formalParameter());
         }
 
-        if(ctx.methodBody() != null) {
-            System.out.println("bruh");
-            if(ctx.methodBody().methodBlock() != null) {
-                System.out.println("bruh");
-            }
-        }
         Block body = ctx.methodBody().methodBlock() != null ? new BlockVisitor().visit(ctx.methodBody().methodBlock()) : null;
 
         Expression returnValue =  null;
@@ -47,6 +44,11 @@ public class MethodVisitor extends GentleJavaBaseVisitor<Method>
         return new Method(returnType, identifier, parameters, body, returnValue, ctx.start.getLine());
     }
 
+    /**
+     * Zpracovava parametry metody
+     * @param methodParameterContext methodParameterContext
+     * @return List<MethodParameters>
+     */
     private List<MethodParameters> parseMethodParameters(List<GentleJavaParser.FormalParameterContext> methodParameterContext) {
         List<MethodParameters> methodDeclarationParameters = new ArrayList<>();
         MethodParameters methodDeclarationParameter;

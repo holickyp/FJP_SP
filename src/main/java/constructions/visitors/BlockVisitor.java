@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockVisitor extends GentleJavaBaseVisitor<Block> {
+    /**
+     * Visitor pro Block
+     * @param ctx Block context
+     * @return interni Block strukturu
+     */
     @Override
     public Block visitBlock(GentleJavaParser.BlockContext ctx) {
         List<BlockStatement> blockStatements = this.getBlockStatements(ctx.blockStatement());
@@ -17,6 +22,11 @@ public class BlockVisitor extends GentleJavaBaseVisitor<Block> {
         return new Block(blockStatements);
     }
 
+    /**
+     * Visitor pro MethodBlock
+     * @param ctx MethodBlockContext
+     * @return interni Block strukturu
+     */
     @Override
     public Block visitMethodBlock(GentleJavaParser.MethodBlockContext ctx) {
         if (ctx == null) {
